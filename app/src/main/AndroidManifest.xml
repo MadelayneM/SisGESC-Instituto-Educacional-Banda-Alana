@@ -11,16 +11,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SisGESC">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".LoginAluno"
+            android:exported="false" />
+        <activity
+            android:name=".dashboardaluno"
+            android:exported="false" />
+        <activity
+            android:name=".minha_frequencia"
+            android:exported="false" />
+        <activity
+            android:name=".minha_turma"
+            android:exported="false" />
+        <activity
+            android:name=".perfil_aluno"
+            android:exported="false" />
+
     </application>
 
 </manifest>

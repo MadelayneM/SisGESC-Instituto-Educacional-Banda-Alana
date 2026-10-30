@@ -1,0 +1,33 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.SisGESC\">\r\n\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\"\r\n            android:windowSoftInputMode=\"adjustResize\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n\r\n        <activity\r\n            android:name=\".LoginAluno\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".dashboardaluno\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".minha_frequencia\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".minha_turma\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".perfil_aluno\"\r\n            android:exported=\"false\" />\r\n\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision d00619ca81398b06e0de25e69b71b2330cfdb02c)
++++ b/app/src/main/AndroidManifest.xml	(date 1793397050797)
+@@ -22,21 +22,7 @@
+             </intent-filter>
+         </activity>
+ 
+-        <activity
+-            android:name=".LoginAluno"
+-            android:exported="false" />
+-        <activity
+-            android:name=".dashboardaluno"
+-            android:exported="false" />
+-        <activity
+-            android:name=".minha_frequencia"
+-            android:exported="false" />
+-        <activity
+-            android:name=".minha_turma"
+-            android:exported="false" />
+-        <activity
+-            android:name=".perfil_aluno"
+-            android:exported="false" />
++       
+ 
+     </application>
+ 

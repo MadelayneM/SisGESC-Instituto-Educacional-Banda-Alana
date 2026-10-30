@@ -22,21 +22,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".LoginAluno"
-            android:exported="false" />
-        <activity
-            android:name=".dashboardaluno"
-            android:exported="false" />
-        <activity
-            android:name=".minha_frequencia"
-            android:exported="false" />
-        <activity
-            android:name=".minha_turma"
-            android:exported="false" />
-        <activity
-            android:name=".perfil_aluno"
-            android:exported="false" />
 
     </application>
 

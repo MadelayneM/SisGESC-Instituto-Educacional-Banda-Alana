@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA"
+    android:padding="18dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="Alunos"
+            android:textSize="25sp"
+            android:textColor="#333333"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="🔒 Somente leitura"
+            android:textSize="11sp"
+            android:textColor="#999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/pesquisarAluno"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="⌕  Pesquisar aluno..."
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:padding="12dp"
+        android:background="@drawable/card_background"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:text="Você pode visualizar os dados dos alunos, mas não pode editá-los."
+        android:textSize="13sp"
+        android:textColor="#999999"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/listaAlunos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="5dp">
+
+            <TextView
+                android:text="👩 Ana Costa                         ›\n      Musicalização 01 • Flauta"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👨 Bruno Ferreira                  ›\n      Musicalização 01 • Violão"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👩 Carla Mendes                    ›\n      Musicalização 01 • Teclado"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👦 Diego Alves                       ›\n      Musicalização 01 • Percussão"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👩 Eduarda Lima                     ›\n      Musicalização 01 • Flauta"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👨 Felipe Rocha                      ›\n      Musicalização 01 • Violão"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👩 Gabriela Santos                 ›\n      Musicalização 01 • Teclado"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👨 Hugo Martins                     ›\n      Musicalização 01 • Percussão"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👩 Isabela Nunes                    ›\n      Musicalização 01 • Flauta"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👨 Jorge Pereira                     ›\n      Musicalização 01 • Violão"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👩 Karla Vieira                       ›\n      Musicalização 01 • Teclado"
+                style="@style/AlunoItem" />
+
+            <TextView
+                android:text="👨 Lucas Barros                      ›\n      Musicalização 01 • Percussão"
+                style="@style/AlunoItem" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,9 +1,23 @@
+
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.SisGESC" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <!-- Estilo dos itens do menu -->
+    <style name="Aba">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#F0D98A</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="Theme.SisGESC" parent="Base.Theme.SisGESC" />
+    <!-- Tema principal do aplicativo -->
+    <style name="Theme.SisGESC" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#F2C94C</item>
+        <item name="colorSecondary">#E5B93D</item>
+        <item name="android:statusBarColor">#FAFAFA</item>
+        <item name="android:navigationBarColor">#FAFAFA</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
 </resources>

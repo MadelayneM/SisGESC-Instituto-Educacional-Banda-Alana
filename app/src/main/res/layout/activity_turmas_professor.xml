@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:text="Minhas Turmas"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_width="match_parent"
+            android:layout_height="65dp" />
+
+        <TextView
+            android:text="Musicalização 01\n\n12 alunos • Sala 02\n\n📅 Quarta-feira • 🕒 14:00\n\n● Ativa"
+            style="@style/TurmaItem" />
+
+        <TextView
+            android:text="Violão 02\n\n10 alunos • Sala 01\n\n📅 Sexta-feira • 🕒 15:00\n\n● Ativa"
+            style="@style/TurmaItem" />
+
+        <TextView
+            android:text="Percussão 01\n\n8 alunos • Sala 03\n\n📅 Terça-feira • 🕒 10:00\n\n● Ativa"
+            style="@style/TurmaItem" />
+
+    </LinearLayout>
+</ScrollView>

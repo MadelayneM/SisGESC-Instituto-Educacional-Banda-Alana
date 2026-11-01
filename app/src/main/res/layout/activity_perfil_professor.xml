@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#FAFAFA">
+
+    <TextView
+        android:text="Meu Perfil"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_width="match_parent"
+        android:layout_height="65dp" />
+
+    <TextView
+        android:text="👤"
+        android:textSize="65sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" />
+
+    <TextView
+        android:text="João"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:text="Professor de Música"
+        android:textSize="14sp"
+        android:textColor="#999999"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:text="Dados pessoais     ›"
+        style="@style/PerfilItem" />
+
+    <TextView
+        android:text="Configurações     ›"
+        style="@style/PerfilItem" />
+
+    <TextView
+        android:text="Sair da conta     ›"
+        style="@style/PerfilItem" />
+
+</LinearLayout>

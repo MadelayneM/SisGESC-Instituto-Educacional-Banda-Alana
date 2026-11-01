@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <TextView
+            android:text="Histórico de Frequência"
+            android:textSize="23sp"
+            android:textColor="#333333"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:text="MUSICALIZAÇÃO 01"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="12dp">
+
+            <TextView
+                android:text="🟢  25/08 — Segunda       ✓ Presente"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="🟢  28/08 — Quinta          ✓ Presente"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="🔴  01/09 — Segunda       ✕ Ausente"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="🟢  04/09 — Quinta          ✓ Presente"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="🟢  08/09 — Segunda       ✓ Presente"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="VIOLÃO 02"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="12dp">
+
+            <TextView
+                android:text="🟢  25/08 — Segunda       ✓ Presente\n\n🟢  28/08 — Quinta          ✓ Presente\n\n🔴  01/09 — Segunda       ✕ Ausente\n\n🟢  04/09 — Quinta          ✓ Presente\n\n🟢  08/09 — Segunda       ✓ Presente"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="PERCUSSÃO 01"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="12dp">
+
+            <TextView
+                android:text="🟢  25/08 — Segunda       ✓ Presente\n\n🟢  28/08 — Quinta          ✓ Presente\n\n🔴  01/09 — Segunda       ✕ Ausente\n\n🟢  04/09 — Quinta          ✓ Presente\n\n🟢  08/09 — Segunda       ✓ Presente"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

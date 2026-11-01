@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"></LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:elevation="6dp">
+
+        <TextView
+            android:id="@+id/navInicio"
+            style="@style/MenuItem"
+            android:text="⌂&#10;Início" />
+
+        <TextView
+            android:id="@+id/navAlunos"
+            style="@style/MenuItem"
+            android:text="♟&#10;Alunos" />
+
+        <TextView
+            android:id="@+id/navTurmas"
+            style="@style/MenuItem"
+            android:text="♫&#10;Turmas" />
+
+        <TextView
+            android:id="@+id/navFrequencia"
+            style="@style/MenuItem"
+            android:text="✓&#10;Freq." />
+
+        <TextView
+            android:id="@+id/navPerfil"
+            style="@style/MenuItem"
+            android:text="♙&#10;Perfil" />
+
+    </LinearLayout>
+
+</LinearLayout>

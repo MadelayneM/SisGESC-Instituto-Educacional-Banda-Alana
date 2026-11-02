@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Layout_appdev">
+        <activity
+            android:name=".SelecaoPerfilActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".admin.AdminLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminAlunosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminNovoAlunoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminTurmasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminNovaTurmaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminEquipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminNovoMembroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminPerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminEditarPerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminAlterarSenhaActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

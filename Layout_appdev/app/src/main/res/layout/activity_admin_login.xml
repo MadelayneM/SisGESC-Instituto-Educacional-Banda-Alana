@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Cabeçalho branco -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/alana_white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="56dp"
+            android:paddingBottom="24dp">
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="80dp"
+                android:contentDescription="Logo Banda Alana"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_banda_alana" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Gestão e acompanhamento escolar"
+                android:textColor="@color/alana_text_secondary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_chip_gestor"
+                android:paddingStart="14dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="4dp"
+                android:text="Gestor"
+                android:textColor="@color/alana_chip_gestor_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Formulário -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                style="@style/Alana.SectionLabel"
+                android:text="E-mail ou usuário" />
+
+            <EditText
+                android:id="@+id/etUsuario"
+                style="@style/Alana.Input"
+                android:hint="seu@email.com"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                style="@style/Alana.SectionLabel"
+                android:layout_marginTop="16dp"
+                android:text="Senha" />
+
+            <EditText
+                android:id="@+id/etSenha"
+                style="@style/Alana.Input"
+                android:hint="••••••••"
+                android:importantForAutofill="no"
+                android:inputType="textPassword" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:text="Entrar"
+                android:textColor="@color/alana_on_yellow"
+                android:textSize="16sp"
+                app:backgroundTint="@color/alana_yellow"
+                app:cornerRadius="12dp" />
+
+            <TextView
+                android:id="@+id/tvEsqueciSenha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:padding="8dp"
+                android:text="Esqueci minha senha"
+                android:textColor="@color/alana_yellow_link"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Empurra o rodapé para baixo -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvVoltarPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="32dp"
+            android:padding="12dp"
+            android:text="←  Voltar à seleção de perfil"
+            android:textColor="@color/alana_text_secondary"
+            android:textSize="14sp" />
+    </LinearLayout>
+</ScrollView>

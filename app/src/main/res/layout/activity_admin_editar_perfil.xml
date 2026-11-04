@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_form_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView style="@style/Alana.SectionLabel" android:text="Nome" />
+            <EditText
+                android:id="@+id/etNome"
+                style="@style/Alana.Input"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="E-mail" />
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/Alana.Input"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Telefone" />
+            <EditText
+                android:id="@+id/etTelefone"
+                style="@style/Alana.Input"
+                android:hint="(11) 90000-0000"
+                android:importantForAutofill="no"
+                android:inputType="phone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSalvar"
+                style="@style/Alana.ButtonPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Salvar alterações" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

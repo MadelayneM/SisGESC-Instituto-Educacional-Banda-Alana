@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_form_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Foto -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Alana.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <FrameLayout
+                        android:id="@+id/flFoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivFoto"
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_avatar_placeholder"
+                            app:shapeAppearanceOverlay="@style/Alana.Circle" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom|end"
+                            android:background="@drawable/bg_camera_badge"
+                            android:contentDescription="Escolher foto"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_camera" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Foto do aluno"
+                        android:textColor="@color/alana_text"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Opcional"
+                        android:textColor="@color/alana_hint"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView style="@style/Alana.FormLabel" android:text="Nome completo" />
+            <EditText
+                android:id="@+id/etNome"
+                style="@style/Alana.Input"
+                android:hint="Ex: Maria Silva"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Data de nascimento" />
+            <EditText
+                android:id="@+id/etNascimento"
+                style="@style/Alana.Input"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:focusable="false"
+                android:hint="dd/mm/aaaa"
+                android:importantForAutofill="no"
+                android:inputType="none" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="CPF" />
+            <EditText
+                android:id="@+id/etCpf"
+                style="@style/Alana.Input"
+                android:hint="000.000.000-00"
+                android:importantForAutofill="no"
+                android:inputType="number" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Telefone" />
+            <EditText
+                android:id="@+id/etTelefone"
+                style="@style/Alana.Input"
+                android:hint="(11) 90000-0000"
+                android:importantForAutofill="no"
+                android:inputType="phone" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="E-mail" />
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/Alana.Input"
+                android:hint="email@exemplo.com"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Nome do responsável" />
+            <EditText
+                android:id="@+id/etResponsavel"
+                style="@style/Alana.Input"
+                android:hint="Ex: João Silva"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Telefone do responsável" />
+            <EditText
+                android:id="@+id/etTelefoneResp"
+                style="@style/Alana.Input"
+                android:hint="(11) 90000-0000"
+                android:importantForAutofill="no"
+                android:inputType="phone" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Instrumento / Atividade" />
+            <EditText
+                android:id="@+id/etInstrumento"
+                style="@style/Alana.Input"
+                android:hint="Ex: Flauta, Violão"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Turma" />
+            <Spinner
+                android:id="@+id/spTurma"
+                style="@style/Alana.Spinner" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Status da matrícula" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/statusAtivo"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_status_opcao"
+                    android:gravity="center"
+                    android:text="Ativo"
+                    android:textColor="@color/alana_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/statusPendente"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_status_opcao"
+                    android:gravity="center"
+                    android:text="Pendente"
+                    android:textColor="@color/alana_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/statusInativo"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_status_opcao"
+                    android:gravity="center"
+                    android:text="Inativo"
+                    android:textColor="@color/alana_text"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCadastrar"
+                style="@style/Alana.ButtonPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Cadastrar aluno" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

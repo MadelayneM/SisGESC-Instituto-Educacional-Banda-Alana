@@ -1,77 +1,81 @@
 package com.example.sisgesc.Repository;
 
-import com.example.sisgesc.DTOs.Aluno;
-import com.example.sisgesc.DTOs.Funcionario;
+import com.example.sisgesc.DTOs.FuncionarioLoginResponse;
+import com.example.sisgesc.DTOs.MatriculaResponse;
+import com.example.sisgesc.DTOs.UsuarioLogado;
 import com.example.sisgesc.Supabase.SupabaseClient;
 import com.example.sisgesc.Supabase.SupabaseService;
 
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// Login único do app: descobre quem está entrando e com qual perfil.
 public class AuthRepository {
 
-    private final SupabaseService apiService;
+    private static final String STATUS_ATIVO = "eq.Ativo";
+    private static final String SELECT_ALUNO = "id_matricula";
+    private static final String SELECT_FUNCIONARIO = "fk_cpf_func,tb_funcionario_cargo(data_saida,tb_cargo(cargo))";
+
+    private final SupabaseService service;
 
     public AuthRepository() {
-        // Inicializa o serviço do Retrofit configurado anteriormente
-        this.apiService = SupabaseClient.getClient().create(SupabaseService.class);
+        this.service = SupabaseClient.getClient().create(SupabaseService.class);
     }
 
-    // Interface de callback para retornar o resultado de forma assíncrona para a Activity
-    public interface LoginCallback {
-        void onAlunoEncontrado(Aluno aluno);
-        void onFuncionarioEncontrado(Funcionario funcionario, boolean isAdministrador);
-        void onError(String mensagemErro);
+    // Procura primeiro entre os alunos e depois entre os funcionários.
+    public void entrar(String cpf, String senha, RepositoryCallback<UsuarioLogado> callback) {
+        service.entrarComoAluno("eq." + cpf, "eq." + senha, STATUS_ATIVO, SELECT_ALUNO, 1)
+                .enqueue(new Callback<List<MatriculaResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<MatriculaResponse>> call, Response<List<MatriculaResponse>> response) {
+                        if (!response.isSuccessful() || response.body() == null) {
+                            avisarErroDoServidor(response.code(), callback);
+                        } else if (response.body().isEmpty()) {
+                            entrarComoFuncionario(cpf, senha, callback);
+                        } else {
+                            callback.onSucesso(new UsuarioLogado(cpf, UsuarioLogado.Perfil.ALUNO));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<MatriculaResponse>> call, Throwable t) {
+                        avisarFalhaDeConexao(t, callback);
+                    }
+                });
     }
 
-    /** Tenta buscar o usuário pelo CPF nas tabelas correspondentes.
-     * (No futuro, você pode adaptar para buscar por email, dependendo de como estruturou o login).*/
-    public void verificarUsuarioPorCpf(String cpf, LoginCallback callback) {
+    private void entrarComoFuncionario(String cpf, String senha, RepositoryCallback<UsuarioLogado> callback) {
+        service.entrarComoFuncionario("eq." + cpf, "eq." + senha, SELECT_FUNCIONARIO, 1)
+                .enqueue(new Callback<List<FuncionarioLoginResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<FuncionarioLoginResponse>> call, Response<List<FuncionarioLoginResponse>> response) {
+                        if (!response.isSuccessful() || response.body() == null) {
+                            avisarErroDoServidor(response.code(), callback);
+                        } else if (response.body().isEmpty()) {
+                            callback.onErro("CPF ou senha incorretos.");
+                        } else {
+                            UsuarioLogado.Perfil perfil = response.body().get(0).isAdministrador()
+                                    ? UsuarioLogado.Perfil.ADMINISTRADOR
+                                    : UsuarioLogado.Perfil.PROFESSOR;
+                            callback.onSucesso(new UsuarioLogado(cpf, perfil));
+                        }
+                    }
 
-        // 1. Primeiro tenta buscar na tabela de Alunos
-        apiService.buscarAlunoPorCpf("eq." + cpf).enqueue(new Callback<List<Aluno>>() {
-            @Override
-            public void onResponse(Call<List<Aluno>> call, Response<List<Aluno>> response) {
-                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
-                    // Encontrou na tabela de alunos!
-                    Aluno aluno = response.body().get(0);
-                    callback.onAlunoEncontrado(aluno);
-                } else {
-                    // Se não é aluno, tenta buscar na tabela de funcionários (Professores / Admins)
-                    verificarFuncionario(cpf, callback);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Aluno>> call, Throwable t) {
-                callback.onError("Erro de conexão: " + t.getMessage());
-            }
-        });
+                    @Override
+                    public void onFailure(Call<List<FuncionarioLoginResponse>> call, Throwable t) {
+                        avisarFalhaDeConexao(t, callback);
+                    }
+                });
     }
 
-    private void verificarFuncionario(String cpf, LoginCallback callback) {
-        apiService.buscarFuncionarioPorCpf("eq." + cpf).enqueue(new Callback<List<Funcionario>>() {
-            @Override
-            public void onResponse(Call<List<Funcionario>> call, Response<List<Funcionario>> response) {
-                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
-                    Funcionario funcionario = response.body().get(0);
+    private void avisarErroDoServidor(int codigo, RepositoryCallback<UsuarioLogado> callback) {
+        callback.onErro("O servidor recusou a operação (HTTP " + codigo + ").");
+    }
 
-                    // Aqui você faria a regra para diferenciar Admin de Professor
-                    // (ex: consultando a tabela de cargos ligada ao funcionário)
-                    boolean isAdmin = false; // Defina a lógica do cargo aqui
-
-                    callback.onFuncionarioEncontrado(funcionario, isAdmin);
-                } else {
-                    callback.onError("Usuário não encontrado ou credenciais inválidas.");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Funcionario>> call, Throwable t) {
-                callback.onError("Erro de conexão ao buscar funcionário: " + t.getMessage());
-            }
-        });
+    private void avisarFalhaDeConexao(Throwable erro, RepositoryCallback<UsuarioLogado> callback) {
+        callback.onErro("Falha na comunicação com o servidor: " + erro.getMessage());
     }
 }

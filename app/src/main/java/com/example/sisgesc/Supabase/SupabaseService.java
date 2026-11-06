@@ -1,9 +1,8 @@
 package com.example.sisgesc.Supabase;
 
-import com.example.sisgesc.DTOs.Aluno;
 import com.example.sisgesc.DTOs.AlunoPerfilResponse;
 import com.example.sisgesc.DTOs.Aviso;
-import com.example.sisgesc.DTOs.Funcionario;
+import com.example.sisgesc.DTOs.FuncionarioLoginResponse;
 import com.example.sisgesc.DTOs.MatriculaResponse;
 import com.example.sisgesc.DTOs.Pessoa;
 
@@ -24,17 +23,27 @@ import retrofit2.http.Query;
 
 public interface SupabaseService {
 
-    // Busca o aluno e já traz os dados da pessoa associada (usando o relacionamento do banco)
-    @GET("rest/v1/tb_aluno")
-    Call<List<Aluno>> buscarAlunoPorCpf(@Query("fk_cpf") String filtroCpf);
-
-    // Exemplo para buscar um funcionário na tabela 'tb_funcionario'
-    @GET("rest/v1/tb_funcionario")
-    Call<List<Funcionario>> buscarFuncionarioPorCpf(@Query("fk_cpf_func") String filtroCpf);
-
-    // ... dentro da interface SupabaseService:
     @GET("rest/v1/tb_pessoa")
     Call<List<Pessoa>> buscarPessoaPorCpf(@Query("pk_cpf") String filtroCpf);
+
+    // ===== Login =====
+    // O CPF e a senha vão como filtro: a resposta só traz linhas se os dois baterem,
+    // e a senha nunca volta do servidor.
+
+    @GET("rest/v1/tb_matricula")
+    Call<List<MatriculaResponse>> entrarComoAluno(
+            @Query("fk_cpf") String filtroCpf,
+            @Query("senha_login") String filtroSenha,
+            @Query("status_matricula") String filtroStatus,
+            @Query("select") String select,
+            @Query("limit") int limite);
+
+    @GET("rest/v1/tb_funcionario")
+    Call<List<FuncionarioLoginResponse>> entrarComoFuncionario(
+            @Query("fk_cpf_func") String filtroCpf,
+            @Query("senha_funcionario") String filtroSenha,
+            @Query("select") String select,
+            @Query("limit") int limite);
 
     // ===== Módulo Aluno =====
 

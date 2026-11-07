@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     // branches, mesmo nas que ainda não têm a tela de algum módulo.
     private static final String TELA_ALUNO = "com.example.sisgesc.dashboardaluno";
     private static final String TELA_PROFESSOR = "com.example.sisgesc.turmasProfessor";
-    private static final String TELA_ADMINISTRADOR = "com.example.sisgesc_adm.DashboardActivity";
+    private static final String TELA_ADMINISTRADOR = "com.example.sisgesc.DashboardActivity";
 
     private EditText edtCpf, edtSenha;
     private AppCompatButton btnEntrar;

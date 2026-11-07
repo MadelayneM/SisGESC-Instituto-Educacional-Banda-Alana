@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="alana_yellow">#F5C400</color>
+    <color name="alana_yellow_link">#F2B800</color>
+    <color name="alana_on_yellow">#1E1E24</color>
+    <color name="alana_bg">#FAFAFA</color>
+    <color name="alana_white">#FFFFFF</color>
+    <color name="alana_text">#1E1E24</color>
+    <color name="alana_text_secondary">#6B6B76</color>
+    <color name="alana_label">#7A8190</color>
+    <color name="alana_hint">#9A9AA5</color>
+    <color name="alana_border">#E8E8EC</color>
+    <color name="alana_divider">#EEEEF2</color>
+
+    <!-- Chip Gestor -->
+    <color name="alana_chip_gestor_bg">#FFF6CC</color>
+    <color name="alana_chip_gestor_stroke">#F5E08A</color>
+    <color name="alana_chip_gestor_text">#B8900A</color>
+
+    <!-- Cards de estatística -->
+    <color name="alana_blue">#2196F3</color>
+    <color name="alana_blue_bg">#E3F2FD</color>
+    <color name="alana_green">#4CAF50</color>
+    <color name="alana_green_bg">#E8F5E9</color>
+    <color name="alana_purple">#9C27B0</color>
+    <color name="alana_purple_bg">#F3E5F5</color>
+    <color name="alana_yellow_bg">#FFF8D6</color>
+
+    <!-- Status -->
+    <color name="alana_status_ativo_bg">#DDF6E8</color>
+    <color name="alana_status_ativo_text">#1E9E5A</color>
+
+    <!-- Ações destrutivas (Sair) -->
+    <color name="alana_red">#E5484D</color>
+    <color name="alana_red_bg">#FDECEC</color>
+
+    <!-- Status Inativo -->
+    <color name="alana_status_inativo_bg">#FDE2E2</color>
+    <color name="alana_status_inativo_text">#E5484D</color>
+
+    <!-- Barra inferior -->
+    <color name="alana_nav_inactive">#F3DC85</color>
+</resources>

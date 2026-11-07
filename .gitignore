@@ -13,3 +13,10 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Arquivos do Android Studio que mudam de um computador para outro
+/.idea/.name
+/.idea/inspectionProfiles/
+
+# Documentos do grupo (ficam fora do projeto)
+*.pdf

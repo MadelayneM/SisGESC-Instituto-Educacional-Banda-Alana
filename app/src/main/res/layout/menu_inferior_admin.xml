@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Menu inferior do Administrador (mesmo estilo do menu do Aluno).
+     As telas usam este arquivo com a tag <include>,
+     e os cliques são configurados na classe MenuAdmin. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:elevation="5dp">
+
+    <!-- INÍCIO -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/navInicio"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:drawableTop="@drawable/ic_nav_inicio"
+        android:drawableTint="@color/nav_icone"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
+        android:stateListAnimator="@null"
+        android:text="Início"
+        android:textAllCaps="false"
+        android:textColor="@color/nav_texto"
+        android:textSize="8sp" />
+
+    <!-- ALUNOS -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/navAlunos"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:drawableTop="@drawable/ic_nav_admin_alunos"
+        android:drawableTint="@color/nav_icone"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
+        android:stateListAnimator="@null"
+        android:text="Alunos"
+        android:textAllCaps="false"
+        android:textColor="@color/nav_texto"
+        android:textSize="8sp" />
+
+    <!-- TURMAS -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/navTurmas"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:drawableTop="@drawable/ic_nav_admin_turmas"
+        android:drawableTint="@color/nav_icone"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
+        android:stateListAnimator="@null"
+        android:text="Turmas"
+        android:textAllCaps="false"
+        android:textColor="@color/nav_texto"
+        android:textSize="8sp" />
+
+    <!-- EQUIPE -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/navEquipe"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:drawableTop="@drawable/ic_nav_admin_equipe"
+        android:drawableTint="@color/nav_icone"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
+        android:stateListAnimator="@null"
+        android:text="Equipe"
+        android:textAllCaps="false"
+        android:textColor="@color/nav_texto"
+        android:textSize="8sp" />
+
+    <!-- PERFIL -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/navPerfil"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:drawableTop="@drawable/ic_nav_perfil"
+        android:drawableTint="@color/nav_icone"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
+        android:stateListAnimator="@null"
+        android:text="Perfil"
+        android:textAllCaps="false"
+        android:textColor="@color/nav_texto"
+        android:textSize="8sp" />
+
+</LinearLayout>

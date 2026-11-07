@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Alana" parent="" />
+
+    <!-- Avatar redondo (ShapeableImageView) -->
+    <style name="Alana.Circle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Rótulo de seção: "VISÃO GERAL", "GERENCIAMENTO"... -->
+    <style name="Alana.SectionLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/alana_label</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+
+    <!-- Card padrão (cantos arredondados + sombra suave) -->
+    <style name="Alana.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">3dp</item>
+        <item name="cardBackgroundColor">@color/alana_white</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- Dashboard: cards de estatística -->
+    <style name="Alana.StatIcon">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/bg_icon_box</item>
+    </style>
+
+    <style name="Alana.StatNumber">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="Alana.StatLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/alana_text_secondary</item>
+    </style>
+
+    <!-- Dashboard: cards de gerenciamento -->
+    <style name="Alana.ActionIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Alana.ActionText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/alana_text</item>
+    </style>
+
+    <!-- Login: campos de texto -->
+    <style name="Alana.Input">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:background">@drawable/bg_input</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/alana_text</item>
+        <item name="android:textColorHint">@color/alana_hint</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- Cabeçalho das telas -->
+    <style name="Alana.Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/alana_text</item>
+    </style>
+
+    <style name="Alana.Subtitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/alana_text_secondary</item>
+    </style>
+
+    <!-- Chips de filtro -->
+    <style name="Alana.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_bg</item>
+        <item name="chipStrokeColor">@color/chip_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:textColor">@color/alana_text</item>
+    </style>
+
+    <!-- Linha de menu (Perfil) -->
+    <style name="Alana.MenuRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <!-- Rótulo de campo dos formulários -->
+    <style name="Alana.FormLabel" parent="Alana.SectionLabel">
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <!-- Seletor (Spinner) dos formulários -->
+    <style name="Alana.Spinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:background">@drawable/bg_spinner</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">40dp</item>
+    </style>
+
+    <!-- Botão principal amarelo (CADASTRAR ...) -->
+    <style name="Alana.ButtonPrimary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/alana_yellow</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textColor">@color/alana_on_yellow</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+    <!-- Título de cada parte dos formulários: "Aluno", "Responsável", "Matrícula"... -->
+    <style name="Alana.FormSection">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">28dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/alana_text</item>
+    </style>
+
+    <!-- Botão vermelho de excluir (só aparece quando o formulário abre para editar) -->
+    <style name="Alana.ButtonDanger" parent="Widget.Material3.Button.TonalButton">
+        <item name="backgroundTint">@color/alana_red_bg</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textColor">@color/alana_red</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">52dp</item>
+    </style>
+
+    <!-- Botão pequeno amarelo com ícone (+ Novo) -->
+    <style name="Alana.ButtonSmall" parent="Widget.Material3.Button.Icon">
+        <item name="backgroundTint">@color/alana_yellow</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="icon">@drawable/ic_add</item>
+        <item name="iconTint">@color/alana_on_yellow</item>
+        <item name="iconGravity">textStart</item>
+        <item name="android:textColor">@color/alana_on_yellow</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+</resources>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tela de chamada do Professor, aberta pelo botão "Fazer chamada" (ou por uma aula do Histórico).
+     Dados: ProfessorRepository.buscarChamada(nomeTurma, dataAula, ...)
+     Salvar: ProfessorRepository.salvarChamada(dataAula, lista, ...)
+     Os textos com "tools:" só aparecem na pré-visualização do Android Studio, nunca no app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <!-- CABEÇALHO -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+
+        <!-- Volta para a tela anterior -->
+        <TextView
+            android:id="@+id/btnVoltarChamada"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="‹"
+            android:textColor="#222222"
+            android:textSize="26sp"
+            android:contentDescription="Voltar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chamada"
+            android:textColor="#222222"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FAFAFA">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <!-- Nome da turma (ProfessorTurma.getNomeTurma()) -->
+            <TextView
+                android:id="@+id/txtTurmaChamada"
+                android:textSize="23sp"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Violão A" />
+
+            <!-- Data da aula. Pode abrir um calendário para escolher outra data. -->
+            <TextView
+                android:id="@+id/txtDataChamada"
+                android:textSize="13sp"
+                android:textColor="#B38B00"
+                android:textStyle="bold"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="📅 03/11 — Terça" />
+
+            <TextView
+                android:text="ALUNOS   ✓ presente   ✕ ausente"
+                android:textSize="12sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical" />
+
+            <!-- Aparece só quando a turma não tem alunos ativos -->
+            <TextView
+                android:id="@+id/txtSemAlunosChamada"
+                android:text="Esta turma não tem alunos matriculados."
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <!-- As linhas dos alunos (item_chamada_aluno_professor.xml) entram aqui -->
+            <LinearLayout
+                android:id="@+id/listaChamada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="5dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- BOTÃO SALVAR, fixo embaixo para não sumir quando a lista é longa -->
+    <Button
+        android:id="@+id/btnSalvarChamada"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:text="Salvar chamada"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#F2C900" />
+
+</LinearLayout>

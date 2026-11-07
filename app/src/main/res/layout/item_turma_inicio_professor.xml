@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Um cartão de turma da tela Início do Professor.
+     O código cria uma cópia deste cartão para cada turma (ProfessorTurma) e o coloca em listaTurmasInicio.
+     Os textos com "tools:" só aparecem na pré-visualização do Android Studio, nunca no app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="@drawable/card_background"
+    android:layout_marginBottom="12dp">
+
+    <!-- Nome da turma: getNomeTurma() -->
+    <TextView
+        android:id="@+id/txtNomeTurma"
+        android:textSize="17sp"
+        android:textColor="#333333"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Violão A" />
+
+    <!-- Alunos e curso: getTotalAlunos() e getNomeCurso() -->
+    <TextView
+        android:id="@+id/txtInfoTurma"
+        android:textSize="13sp"
+        android:textColor="#999999"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        tools:text="4 alunos • Violão" />
+
+    <!-- Dia e horário: getDiaSemana() e getHorarioInicio() -->
+    <TextView
+        android:id="@+id/txtDiaHorario"
+        android:textSize="13sp"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        tools:text="📅 Terça-feira • 🕒 08:00" />
+
+    <!-- Abre a tela de chamada desta turma -->
+    <Button
+        android:id="@+id/btnChamada"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Fazer chamada"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#F2C900"
+        android:layout_marginTop="10dp" />
+
+    <!-- Abre a tela Alunos mostrando só os alunos desta turma -->
+    <Button
+        android:id="@+id/btnVerAlunos"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Ver alunos"
+        android:textColor="#555555"
+        android:backgroundTint="#F2F2F2" />
+
+</LinearLayout>

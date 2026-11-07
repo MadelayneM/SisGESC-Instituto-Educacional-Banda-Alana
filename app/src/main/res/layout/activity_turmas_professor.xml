@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Tela Minhas Turmas do Professor. Dados: ProfessorRepository.buscarTurmas -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#FAFAFA">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FAFAFA">
 
-        <TextView
-            android:text="Minhas Turmas"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="65dp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <TextView
-            android:text="Musicalização 01\n\n12 alunos • Sala 02\n\n📅 Quarta-feira • 🕒 14:00\n\n● Ativa"
-            style="@style/TurmaItem" />
+            <TextView
+                android:text="Minhas Turmas"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="65dp" />
 
-        <TextView
-            android:text="Violão 02\n\n10 alunos • Sala 01\n\n📅 Sexta-feira • 🕒 15:00\n\n● Ativa"
-            style="@style/TurmaItem" />
+            <!-- Aparece só quando o professor não tem turmas -->
+            <TextView
+                android:id="@+id/txtSemTurmas"
+                android:text="Você ainda não tem turmas."
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
-        <TextView
-            android:text="Percussão 01\n\n8 alunos • Sala 03\n\n📅 Terça-feira • 🕒 10:00\n\n● Ativa"
-            style="@style/TurmaItem" />
+            <!-- Os cartões das turmas (item_turma_professor.xml) entram aqui -->
+            <LinearLayout
+                android:id="@+id/listaTurmas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- MENU INFERIOR -->
+    <include layout="@layout/menu_inferior_professor" />
+
+</LinearLayout>

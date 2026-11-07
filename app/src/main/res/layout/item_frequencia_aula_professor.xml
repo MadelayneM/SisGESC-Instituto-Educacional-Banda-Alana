@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uma aula no Histórico de Frequência: a data à esquerda e quantos vieram e faltaram à direita.
+     O código cria uma cópia desta linha para cada TurmaFrequencia.Aula e a coloca em listaAulas.
+     Tocar na linha pode abrir a chamada daquela data para corrigir (buscarChamada com getDataAula()).
+     Os textos com "tools:" só aparecem na pré-visualização do Android Studio, nunca no app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- getDataFormatada(), ex.: "25/08 — Terça" -->
+    <TextView
+        android:id="@+id/txtDataAula"
+        android:textSize="14sp"
+        android:textColor="#555555"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        tools:text="25/08 — Terça" />
+
+    <!-- getPresentes() -->
+    <TextView
+        android:id="@+id/txtPresentesAula"
+        android:textSize="14sp"
+        android:textColor="#555555"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="🟢 10" />
+
+    <!-- getAusentes() -->
+    <TextView
+        android:id="@+id/txtAusentesAula"
+        android:textSize="14sp"
+        android:textColor="#555555"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        tools:text="🔴 2" />
+
+</LinearLayout>

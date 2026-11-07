@@ -1,77 +1,108 @@
 package com.example.sisgesc;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.widget.FrameLayout;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
+import com.example.sisgesc.DTOs.UsuarioLogado;
+import com.example.sisgesc.Repository.AuthRepository;
+import com.example.sisgesc.Repository.RepositoryCallback;
+
+// Tela de login única: confere o CPF e a senha e abre as telas do perfil de quem entrou.
 public class MainActivity extends AppCompatActivity {
 
-    private FrameLayout container;
+    // As outras telas leem o CPF de quem entrou com getIntent().getStringExtra(MainActivity.EXTRA_CPF)
+    public static final String EXTRA_CPF = "cpf";
 
-    private TextView navInicio;
-    private TextView navAlunos;
-    private TextView navTurmas;
-    private TextView navFrequencia;
-    private TextView navPerfil;
+    // Telas iniciais de cada módulo, pelo nome. Assim este arquivo pode ser igual em todas as
+    // branches, mesmo nas que ainda não têm a tela de algum módulo.
+    private static final String TELA_ALUNO = "com.example.sisgesc.dashboardaluno";
+    private static final String TELA_PROFESSOR = "com.example.sisgesc.dashboardProfessor";
+    private static final String TELA_ADMINISTRADOR = "com.example.sisgesc_adm.DashboardActivity";
 
-    private final int corSelecionada = 0xFFB99B00;
-    private final int corNormal = 0xFFD6BD43;
+    private EditText edtCpf, edtSenha;
+    private AppCompatButton btnEntrar;
+    private AuthRepository authRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
-        container = findViewById(R.id.fragmentContainer);
+        edtCpf = findViewById(R.id.edtCpf);
+        edtSenha = findViewById(R.id.edtSenha);
+        btnEntrar = findViewById(R.id.btnEntrarAluno);
+        authRepository = new AuthRepository();
 
-        navInicio = findViewById(R.id.navInicio);
-        navAlunos = findViewById(R.id.navAlunos);
-        navTurmas = findViewById(R.id.navTurmas);
-        navFrequencia = findViewById(R.id.navFrequencia);
-        navPerfil = findViewById(R.id.navPerfil);
-
-        navInicio.setOnClickListener(v ->
-                abrirTela(R.layout.activity_login_professor, navInicio));
-
-        navAlunos.setOnClickListener(v ->
-                abrirTela(R.layout.activity_alunos_professor, navAlunos));
-
-        navTurmas.setOnClickListener(v ->
-                abrirTela(R.layout.activity_turmas_professor, navTurmas));
-
-        navFrequencia.setOnClickListener(v ->
-                abrirTela(R.layout.activity_frequencia_professor, navFrequencia));
-
-        navPerfil.setOnClickListener(v ->
-                abrirTela(R.layout.activity_perfil_professor, navPerfil));
-
-        abrirTela(R.layout.activity_main, navInicio);
+        btnEntrar.setOnClickListener(v -> tentarEntrar());
     }
 
-    private void abrirTela(int layout, TextView itemSelecionado) {
+    private void tentarEntrar() {
+        String cpf = edtCpf.getText().toString().trim();
+        String senha = edtSenha.getText().toString();
 
-        container.removeAllViews();
-
-        android.view.View tela = LayoutInflater.from(this)
-                .inflate(layout, container, false);
-
-        container.addView(tela);
-
-        TextView[] itens = {
-                navInicio,
-                navAlunos,
-                navTurmas,
-                navFrequencia,
-                navPerfil
-        };
-
-        for (TextView item : itens) {
-            item.setTextColor(corNormal);
+        if (cpf.length() != 11) {
+            edtCpf.setError("Digite os 11 números do CPF");
+            return;
+        }
+        if (senha.isEmpty()) {
+            edtSenha.setError("Digite a senha");
+            return;
         }
 
-        itemSelecionado.setTextColor(corSelecionada);
+        // Evita enviar o login duas vezes enquanto a resposta não chega
+        btnEntrar.setEnabled(false);
+
+        authRepository.entrar(cpf, senha, new RepositoryCallback<UsuarioLogado>() {
+            @Override
+            public void onSucesso(UsuarioLogado usuario) {
+                btnEntrar.setEnabled(true);
+                abrirTelaDoPerfil(usuario);
+            }
+
+            @Override
+            public void onErro(String mensagem) {
+                btnEntrar.setEnabled(true);
+                Toast.makeText(MainActivity.this, mensagem, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void abrirTelaDoPerfil(UsuarioLogado usuario) {
+        String tela;
+        switch (usuario.getPerfil()) {
+            case ALUNO:
+                tela = TELA_ALUNO;
+                break;
+            case PROFESSOR:
+                tela = TELA_PROFESSOR;
+                break;
+            default:
+                tela = TELA_ADMINISTRADOR;
+                break;
+        }
+
+        Intent intent = new Intent().setClassName(this, tela).putExtra(EXTRA_CPF, usuario.getCpf());
+        try {
+            startActivity(intent);
+            finish();
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, "Este módulo ainda não está disponível nesta versão.", Toast.LENGTH_LONG).show();
+        }
     }
 }

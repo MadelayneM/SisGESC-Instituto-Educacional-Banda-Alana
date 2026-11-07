@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uma linha da tela de chamada: o aluno, a escolha Presente/Ausente e uma observação opcional.
+     O código cria uma cópia desta linha para cada ChamadaAluno e a coloca em listaChamada.
+     Ao salvar, o código passa a escolha para setPresente(true/false) e o texto para setObservacao.
+     Os textos com "tools:" só aparecem na pré-visualização do Android Studio, nunca no app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Foto: getFotoUrl(). O círculo amarelo aparece quando o aluno não tem foto. -->
+        <ImageView
+            android:id="@+id/imgFotoChamada"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/bg_foto_aluno"
+            android:scaleType="centerCrop"
+            android:contentDescription="Foto do aluno" />
+
+        <!-- getNome() -->
+        <TextView
+            android:id="@+id/txtNomeChamada"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:textSize="15sp"
+            android:textColor="#444444"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="Mariana Costa Oliveira" />
+
+        <!-- getPresente(): true marca rbPresente, false marca rbAusente, null deixa os dois vazios -->
+        <RadioGroup
+            android:id="@+id/grupoPresenca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbPresente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#2E9E4F"
+                android:text="✓"
+                android:textColor="#2E9E4F"
+                android:textSize="15sp"
+                android:contentDescription="Presente" />
+
+            <RadioButton
+                android:id="@+id/rbAusente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:buttonTint="#F04444"
+                android:text="✕"
+                android:textColor="#F04444"
+                android:textSize="15sp"
+                android:contentDescription="Ausente" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <!-- getObservacao(). Opcional, ex.: motivo da falta -->
+    <EditText
+        android:id="@+id/edtObservacao"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/card_background"
+        android:hint="Observação (opcional)"
+        android:inputType="textCapSentences"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:singleLine="true"
+        android:textColor="#555555"
+        android:textColorHint="#AAAAAA"
+        android:textSize="12sp" />
+
+</LinearLayout>

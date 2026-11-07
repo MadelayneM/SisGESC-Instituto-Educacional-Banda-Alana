@@ -1,129 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Tela Histórico de Frequência do Professor. Dados: ProfessorRepository.buscarHistoricoFrequencia -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#FAFAFA">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="18dp">
-
-        <TextView
-            android:text="Histórico de Frequência"
-            android:textSize="23sp"
-            android:textColor="#333333"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:text="MUSICALIZAÇÃO 01"
-            android:textSize="12sp"
-            android:textColor="#999999"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FAFAFA">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/card_background"
-            android:padding="12dp">
+            android:padding="18dp">
 
             <TextView
-                android:text="🟢  25/08 — Segunda       ✓ Presente"
-                android:textSize="14sp"
-                android:textColor="#555555"
-                android:padding="12dp"
+                android:text="Histórico de Frequência"
+                android:textSize="23sp"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:gravity="center_vertical"/>
+
+            <!-- Legenda das contagens de cada aula -->
+            <TextView
+                android:text="🟢 presentes   🔴 ausentes"
+                android:textSize="12sp"
+                android:textColor="#999999"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <!-- Aparece só quando o professor não tem turmas -->
             <TextView
-                android:text="🟢  28/08 — Quinta          ✓ Presente"
-                android:textSize="14sp"
-                android:textColor="#555555"
-                android:padding="12dp"
+                android:id="@+id/txtSemFrequencia"
+                android:text="Você ainda não tem turmas."
+                android:textSize="13sp"
+                android:textColor="#999999"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone" />
 
-            <TextView
-                android:text="🔴  01/09 — Segunda       ✕ Ausente"
-                android:textSize="14sp"
-                android:textColor="#555555"
-                android:padding="12dp"
+            <!-- As seções das turmas (item_frequencia_turma_professor.xml) entram aqui -->
+            <LinearLayout
+                android:id="@+id/listaFrequencia"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="🟢  04/09 — Quinta          ✓ Presente"
-                android:textSize="14sp"
-                android:textColor="#555555"
-                android:padding="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:text="🟢  08/09 — Segunda       ✓ Presente"
-                android:textSize="14sp"
-                android:textColor="#555555"
-                android:padding="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
         </LinearLayout>
+    </ScrollView>
 
-        <TextView
-            android:text="VIOLÃO 02"
-            android:textSize="12sp"
-            android:textColor="#999999"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center_vertical"/>
+    <!-- MENU INFERIOR -->
+    <include layout="@layout/menu_inferior_professor" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card_background"
-            android:padding="12dp">
-
-            <TextView
-                android:text="🟢  25/08 — Segunda       ✓ Presente\n\n🟢  28/08 — Quinta          ✓ Presente\n\n🔴  01/09 — Segunda       ✕ Ausente\n\n🟢  04/09 — Quinta          ✓ Presente\n\n🟢  08/09 — Segunda       ✓ Presente"
-                android:textSize="14sp"
-                android:textColor="#555555"
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:text="PERCUSSÃO 01"
-            android:textSize="12sp"
-            android:textColor="#999999"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:gravity="center_vertical"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/card_background"
-            android:padding="12dp">
-
-            <TextView
-                android:text="🟢  25/08 — Segunda       ✓ Presente\n\n🟢  28/08 — Quinta          ✓ Presente\n\n🔴  01/09 — Segunda       ✕ Ausente\n\n🟢  04/09 — Quinta          ✓ Presente\n\n🟢  08/09 — Segunda       ✓ Presente"
-                android:textSize="14sp"
-                android:textColor="#555555"
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

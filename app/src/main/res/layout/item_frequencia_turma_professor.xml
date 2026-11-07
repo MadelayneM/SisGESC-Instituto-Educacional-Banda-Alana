@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uma seção da tela Histórico de Frequência: o nome da turma e o cartão com as aulas dela.
+     O código cria uma cópia desta seção para cada turma (TurmaFrequencia) e a coloca em listaFrequencia.
+     Os textos com "tools:" só aparecem na pré-visualização do Android Studio, nunca no app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- getNomeTurma(). O textAllCaps deixa em maiúsculas, como no layout original. -->
+    <TextView
+        android:id="@+id/txtNomeTurmaFrequencia"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:textAllCaps="true"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        tools:text="Violão A" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_background"
+        android:padding="12dp">
+
+        <!-- Aparece só quando a turma ainda não tem chamada salva -->
+        <TextView
+            android:id="@+id/txtSemAulas"
+            android:text="Nenhuma chamada registrada."
+            android:textSize="14sp"
+            android:textColor="#999999"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <!-- As linhas das aulas (item_frequencia_aula_professor.xml) entram aqui -->
+        <LinearLayout
+            android:id="@+id/listaAulas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uma linha da lista da tela Alunos. Mesmo visual do estilo AlunoItem.
+     O código cria uma cópia desta linha para cada aluno (ProfessorAluno) e a coloca em listaAlunos.
+     Os textos com "tools:" só aparecem na pré-visualização do Android Studio, nunca no app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="18dp"
+    android:background="#FFFFFF">
+
+    <!-- Foto: getFotoUrl(). O círculo amarelo aparece quando o aluno não tem foto. -->
+    <ImageView
+        android:id="@+id/imgFotoAluno"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/bg_foto_aluno"
+        android:scaleType="centerCrop"
+        android:contentDescription="Foto do aluno" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical">
+
+        <!-- getNome() -->
+        <TextView
+            android:id="@+id/txtNomeAluno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#444444"
+            android:singleLine="true"
+            android:ellipsize="end"
+            tools:text="Mariana Costa Oliveira" />
+
+        <!-- getNomeTurma() e getNomeCurso() -->
+        <TextView
+            android:id="@+id/txtTurmaAluno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#444444"
+            android:singleLine="true"
+            android:ellipsize="end"
+            tools:text="Violão A • Violão" />
+
+    </LinearLayout>
+
+</LinearLayout>

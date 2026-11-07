@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- CABEÇALHO BRANCO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#FFFFFF"
+            android:paddingTop="24dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="90dp"
+                android:src="@drawable/logo_banda_alana"
+                android:scaleType="fitCenter"
+                android:contentDescription="Logo Banda Alana" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Gestão e acompanhamento escolar"
+                android:textColor="#777777"
+                android:textSize="13sp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- ÁREA DE RECUPERAÇÃO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recuperar senha"
+                android:textColor="#222222"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Informe o e-mail da sua conta. Vamos enviar as instruções para você criar uma nova senha."
+                android:textColor="#777777"
+                android:textSize="14sp" />
+
+            <!-- E-MAIL CADASTRADO -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="6dp"
+                android:text="E-MAIL CADASTRADO"
+                android:textColor="#777777"
+                android:textSize="12sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtEmailRecuperar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_card_acesso"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:hint="seu@email.com"
+                android:textColor="#333333"
+                android:textColorHint="#999999"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                android:autofillHints="emailAddress" />
+
+            <!-- ENVIAR -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnEnviarRecuperacao"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/campo_amarelo"
+                app:backgroundTint="@null"
+                android:text="Enviar instruções"
+                android:textColor="#171717"
+                android:textSize="15sp"
+                android:textAllCaps="false"
+                android:stateListAnimator="@null" />
+
+            <!-- MENSAGEM DE CONFIRMAÇÃO (aparece depois de enviar) -->
+            <LinearLayout
+                android:id="@+id/cardSucesso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
+                android:padding="14dp"
+                android:background="@drawable/bg_card_acesso"
+                android:backgroundTint="#E3F6E8"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:text="✅"
+                    android:textSize="18sp"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/txtMensagemSucesso"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:text="Se o e-mail estiver cadastrado, você receberá as instruções."
+                    android:textColor="#27864A"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- AJUDA: SEM ACESSO AO E-MAIL -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp"
+                android:padding="14dp"
+                android:background="@drawable/bg_card_acesso"
+                android:backgroundTint="#FFF4C2">
+
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:text="💬"
+                    android:textSize="18sp"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:text="Sem acesso ao e-mail cadastrado? Procure a secretaria do Instituto Alana para redefinir sua senha."
+                    android:textColor="#65551A"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- EMPURRA O "VOLTAR" PARA BAIXO -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- VOLTAR AO LOGIN -->
+            <LinearLayout
+                android:id="@+id/btnVoltarLogin"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="←"
+                    android:textColor="#777777"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Voltar ao login"
+                    android:textColor="#777777"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

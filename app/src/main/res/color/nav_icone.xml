@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cor do ícone do menu: a primeira linha vale para a tela atual, a segunda para as outras. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#F5C900" android:state_selected="true" />
+    <item android:color="#E7D78B" />
+</selector>

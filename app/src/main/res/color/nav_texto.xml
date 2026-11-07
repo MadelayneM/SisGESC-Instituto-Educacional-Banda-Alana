@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cor do texto do menu: a primeira linha vale para a tela atual, a segunda para as outras. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#D6AA00" android:state_selected="true" />
+    <item android:color="#C7B77C" />
+</selector>

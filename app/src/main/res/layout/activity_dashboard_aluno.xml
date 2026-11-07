@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bem-vinda de volta,"
+            android:text="Bem-vindo(a) de volta,"
             android:textColor="#777777"
             android:textSize="11sp" />
 
@@ -119,6 +119,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/txtCursoAluno"
                         android:text="🎵 Flauta"
                         android:textColor="#65551A"
                         android:textSize="9sp" />
@@ -126,6 +127,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/txtProfessorAluno"
                         android:layout_marginStart="14dp"
                         android:text="👨‍🏫 Prof. João Silva"
                         android:textColor="#65551A"
@@ -261,15 +263,6 @@
                         android:textColor="#333333"
                         android:textSize="11sp" />
 
-                    <TextView
-                        android:id="@+id/txtLocalAula"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Sala 02 • Instituto Alana"
-                        android:textColor="#888888"
-                        android:textSize="9sp" />
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -285,206 +278,18 @@
                 android:textSize="9sp"
                 android:letterSpacing="0.04" />
 
-            <!-- AVISO 1 -->
+            <!-- Lista de avisos: uma cópia de item_aviso.xml para cada aviso -->
             <LinearLayout
+                android:id="@+id/listaAvisos"
                 android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:background="@drawable/bg_card_branco"
-                android:layout_marginBottom="7dp">
-
-                <TextView
-                    android:layout_width="18dp"
-                    android:layout_height="wrap_content"
-                    android:text="📢"
-                    android:textSize="13sp"
-                    android:gravity="center" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginStart="8dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Apresentação da turma dia 25/09 às 18h no auditório."
-                        android:textColor="#333333"
-                        android:textSize="10sp"
-                        android:maxLines="2" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="Hoje"
-                        android:textColor="#AAAAAA"
-                        android:textSize="9sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- AVISO 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="66dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:background="@drawable/bg_card_branco2">
-
-                <TextView
-                    android:layout_width="18dp"
-                    android:layout_height="wrap_content"
-                    android:text="📢"
-                    android:textSize="13sp"
-                    android:gravity="center" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginStart="8dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Trazer instrumento na próxima aula de quarta."
-                        android:textColor="#333333"
-                        android:textSize="10sp"
-                        android:maxLines="2" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="Ontem"
-                        android:textColor="#AAAAAA"
-                        android:textSize="9sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
         </LinearLayout>
 
     </ScrollView>
 
     <!-- MENU INFERIOR -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#FFFFFF"
-        android:elevation="5dp">
-
-        <!-- INÍCIO -->
-        <LinearLayout
-            android:id="@+id/navInicio"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⌂"
-                android:textColor="#F5C900"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Início"
-                android:textColor="#D6AA00"
-                android:textSize="8sp" />
-
-        </LinearLayout>
-
-        <!-- TURMA -->
-        <LinearLayout
-            android:id="@+id/navTurma"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="▤"
-                android:textColor="#E7D78B"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Turma"
-                android:textColor="#C7B77C"
-                android:textSize="8sp" />
-
-        </LinearLayout>
-
-        <!-- FREQUÊNCIA -->
-        <LinearLayout
-            android:id="@+id/navFrequencia"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="✓"
-                android:textColor="#E7D78B"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Frequência"
-                android:textColor="#C7B77C"
-                android:textSize="8sp" />
-
-        </LinearLayout>
-
-        <!-- PERFIL -->
-        <LinearLayout
-            android:id="@+id/navPerfil"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="♟"
-                android:textColor="#E7D78B"
-                android:textSize="17sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Perfil"
-                android:textColor="#C7B77C"
-                android:textSize="8sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    <include layout="@layout/menu_inferior_aluno" />
 
 </LinearLayout>

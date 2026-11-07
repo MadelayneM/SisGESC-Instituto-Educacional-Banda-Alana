@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Um aviso da tela inicial. O back-end cria uma cópia desta linha para cada aviso,
+     do mesmo jeito que o método mostrarColegas de minha_turma.java faz. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:layout_marginBottom="7dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="@drawable/bg_card_branco">
+
+    <TextView
+        android:layout_width="18dp"
+        android:layout_height="wrap_content"
+        android:text="📢"
+        android:textSize="13sp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp">
+
+        <TextView
+            android:id="@+id/txtDescricaoAviso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="10sp"
+            android:maxLines="2" />
+
+        <TextView
+            android:id="@+id/txtDataAviso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:textColor="#AAAAAA"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

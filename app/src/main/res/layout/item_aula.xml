@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uma aula do histórico de frequência. O back-end cria uma cópia desta linha para cada aula,
+     do mesmo jeito que o método mostrarColegas de minha_turma.java faz.
+     Presente: fundos bg_ponto_presente e bg_status_presente, texto "Presente", cor #27864A.
+     Ausente: fundos bg_ponto_ausente e bg_status_ausente, texto "Ausente", cor #D83232. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="34dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp">
+
+    <View
+        android:id="@+id/pontoStatusAula"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:background="@drawable/bg_ponto_presente" />
+
+    <TextView
+        android:id="@+id/txtDataHistorico"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="9dp"
+        android:textColor="#333333"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/txtStatusAula"
+        android:layout_width="50dp"
+        android:layout_height="19dp"
+        android:gravity="center"
+        android:background="@drawable/bg_status_presente"
+        android:text="Presente"
+        android:textColor="#27864A"
+        android:textSize="8sp" />
+
+</LinearLayout>

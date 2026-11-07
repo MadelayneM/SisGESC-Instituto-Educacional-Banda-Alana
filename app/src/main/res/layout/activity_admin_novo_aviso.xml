@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/adminNovoAviso"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <!-- Cabeçalho padrão com botão de voltar e título da tela -->
+    <include layout="@layout/view_form_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Título do Aviso -->
+            <TextView
+                style="@style/Alana.FormLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Título do aviso" />
+
+            <EditText
+                android:id="@+id/etTituloAviso"
+                style="@style/Alana.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex: Reunião de pais e responsáveis"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences" />
+
+            <!-- Destinatário / Público-Alvo -->
+            <TextView
+                style="@style/Alana.FormLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Público-Alvo" />
+
+            <Spinner
+                android:id="@+id/spDestinatario"
+                style="@style/Alana.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Conteúdo do Aviso -->
+            <TextView
+                style="@style/Alana.FormLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Conteúdo do aviso" />
+
+            <EditText
+                android:id="@+id/etConteudoAviso"
+                style="@style/Alana.Input"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:gravity="top|start"
+                android:hint="Escreva aqui o comunicado..."
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine|textCapSentences"
+                android:padding="12dp" />
+
+            <!-- Botão Publicar Aviso -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPublicarAviso"
+                style="@style/Alana.ButtonPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Publicar aviso" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id ="@+id/adminTurmas"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/alana_white">
+
+    <!-- Cabeçalho Horizontal (Título e Botão) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Turmas"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            style="@style/Alana.Title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNovaTurmaTopo"
+            style="@style/Alana.ButtonPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="+ Nova turma"
+            android:textSize="14sp"
+            app:cornerRadius="24dp" />
+    </LinearLayout>
+
+
+
+
+    <!-- RecyclerView para listar as turmas cadastradas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTurmas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp" />
+
+    <!-- Barra de navegação inferior padrão -->
+    <include layout="@layout/view_admin_bottom_nav" />
+
+</LinearLayout>

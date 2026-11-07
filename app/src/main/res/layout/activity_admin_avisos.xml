@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/Avisos"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <!-- Cabeçalho -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Avisos"
+            android:textColor="@color/alana_text"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNovoAviso"
+            style="@style/Alana.ButtonPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="+ Novo aviso"
+            android:textSize="14sp"
+            app:cornerRadius="24dp" />
+    </LinearLayout>
+
+    <!-- Lista de avisos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAvisos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingHorizontal="16dp" />
+
+    <!-- Barra de navegação inferior -->
+    <include layout="@layout/view_admin_bottom_nav" />
+
+</LinearLayout>

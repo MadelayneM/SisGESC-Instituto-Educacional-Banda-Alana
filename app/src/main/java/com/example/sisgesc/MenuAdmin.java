@@ -1,7 +1,6 @@
 package com.example.sisgesc;
 
 import android.content.Intent;
-import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +21,7 @@ public final class MenuAdmin {
 
         telaAtual.findViewById(R.id.navInicio).setOnClickListener(v -> abrirTela(telaAtual, TELA_INICIO));
         telaAtual.findViewById(R.id.navAlunos).setOnClickListener(v -> abrirTela(telaAtual, activity_admin_alunos.class));
-        // A tela de lista de Turmas ainda não existe neste módulo
-        telaAtual.findViewById(R.id.navTurmas).setOnClickListener(v ->
-                Toast.makeText(telaAtual, "A tela de Turmas ainda não está disponível.", Toast.LENGTH_SHORT).show());
+        telaAtual.findViewById(R.id.navTurmas).setOnClickListener(v -> abrirTela(telaAtual, activity_admin_turmas.class));
         telaAtual.findViewById(R.id.navEquipe).setOnClickListener(v -> abrirTela(telaAtual, activity_admin_equipe.class));
         telaAtual.findViewById(R.id.navPerfil).setOnClickListener(v -> abrirTela(telaAtual, activity_admin_perfil.class));
     }

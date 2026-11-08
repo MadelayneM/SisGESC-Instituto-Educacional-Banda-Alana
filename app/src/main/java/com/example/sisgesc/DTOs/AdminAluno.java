@@ -31,6 +31,6 @@ public class AdminAluno {
     public Integer getIdMatricula() { return idMatricula; }
     public String getNomeTurma() { return nomeTurma; }
     public String getNomeCurso() { return nomeCurso; }
-    // Um dos valores de NovoAluno.STATUS_MATRICULA, ex.: Ativo
+    // Um dos valores de CadastroAluno.STATUS_MATRICULA, ex.: Ativo
     public String getStatus() { return status; }
 }

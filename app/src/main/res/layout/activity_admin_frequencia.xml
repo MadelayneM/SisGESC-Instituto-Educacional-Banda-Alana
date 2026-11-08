@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tela "Consultar frequência" do Administrador (atalho do Dashboard).
+     Dados: AdminRepository.buscarTurmas (presenças, faltas e frequência de cada turma).
+       tvFreqGeral / tvTotalPresencas / tvTotalFaltas  soma de todas as turmas
+       rvFrequencia  uma linha activity_item_admin_frequencia_turma por turma
+       tvSemFrequencia aparece quando não há nenhuma turma -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adminFrequencia"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_form_header" />
+
+    <!-- VISÃO GERAL -->
+    <TextView
+        style="@style/Alana.SectionLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Visão geral" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="14dp"
+        android:orientation="horizontal">
+
+        <!-- Frequência geral -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Alana.Card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:focusable="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    style="@style/Alana.StatIcon"
+                    android:backgroundTint="@color/alana_yellow_bg"
+                    android:text="✅" />
+
+                <TextView
+                    android:id="@+id/tvFreqGeral"
+                    style="@style/Alana.StatNumber"
+                    android:textColor="@color/alana_yellow"
+                    android:textSize="24sp"
+                    tools:text="89%" />
+
+                <TextView
+                    style="@style/Alana.StatLabel"
+                    android:text="Frequência" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Presenças -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Alana.Card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:focusable="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    style="@style/Alana.StatIcon"
+                    android:backgroundTint="@color/alana_green_bg"
+                    android:text="🙋" />
+
+                <TextView
+                    android:id="@+id/tvTotalPresencas"
+                    style="@style/Alana.StatNumber"
+                    android:textColor="@color/alana_green"
+                    android:textSize="24sp"
+                    tools:text="214" />
+
+                <TextView
+                    style="@style/Alana.StatLabel"
+                    android:text="Presenças" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Faltas -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Alana.Card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:focusable="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    style="@style/Alana.StatIcon"
+                    android:backgroundTint="@color/alana_red_bg"
+                    android:text="❌" />
+
+                <TextView
+                    android:id="@+id/tvTotalFaltas"
+                    style="@style/Alana.StatNumber"
+                    android:textColor="@color/alana_red"
+                    android:textSize="24sp"
+                    tools:text="26" />
+
+                <TextView
+                    style="@style/Alana.StatLabel"
+                    android:text="Faltas" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <!-- POR TURMA -->
+    <TextView
+        style="@style/Alana.SectionLabel"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="14dp"
+        android:text="Por turma" />
+
+    <TextView
+        android:id="@+id/tvSemFrequencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Nenhuma turma cadastrada."
+        android:textColor="@color/alana_text_secondary"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <!-- A lista rola sozinha (RecyclerView), por isso não fica dentro de um ScrollView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFrequencia"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="14dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/activity_item_admin_frequencia_turma" />
+</LinearLayout>

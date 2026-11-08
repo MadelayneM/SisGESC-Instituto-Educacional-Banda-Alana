@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uma turma na tela "Consultar frequência" (AdminFrequenciaAdapter, dados de AdminTurma).
+       tvNomeTurma      getNomeTurma()
+       tvPercentual     getFrequencia() + "%", ou dois traços sem chamadas (cor muda pela faixa)
+       tvCursoProfessor getNomeCurso() · getProfessoresTexto()
+       pbFrequencia     getFrequencia() de 0 a 100
+       tvPresencas / tvFaltas / tvAlunos  getPresencas() / getFaltas() / getAlunosAtivos()
+       tvSemChamada     aparece quando getFrequencia() é null -->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Alana.Card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="6dp"
+    android:clickable="false"
+    android:focusable="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvNomeTurma"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/alana_text"
+                android:textSize="17sp"
+                tools:text="Musicalização 01" />
+
+            <TextView
+                android:id="@+id/tvPercentual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/alana_green"
+                android:textSize="22sp"
+                tools:text="92%" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvCursoProfessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/alana_text_secondary"
+            android:textSize="12sp"
+            tools:text="Musicalização · João Silva" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/pbFrequencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:max="100"
+            app:indicatorColor="@color/alana_green"
+            app:trackColor="@color/alana_divider"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="8dp"
+            tools:progress="92" />
+
+        <TextView
+            android:id="@+id/tvSemChamada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Nenhuma chamada registrada."
+            android:textColor="@color/alana_text_secondary"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/alana_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvPresencas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:textColor="@color/alana_text_secondary"
+                android:textSize="13sp"
+                tools:text="🙋  46 presenças" />
+
+            <TextView
+                android:id="@+id/tvFaltas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/alana_text_secondary"
+                android:textSize="13sp"
+                tools:text="❌  4 faltas" />
+
+            <TextView
+                android:id="@+id/tvAlunos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/alana_text_secondary"
+                android:textSize="13sp"
+                tools:text="👥  12 alunos" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

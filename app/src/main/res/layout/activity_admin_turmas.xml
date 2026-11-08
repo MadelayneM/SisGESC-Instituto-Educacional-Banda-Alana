@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tela Turmas do Administrador: lista das turmas cadastradas
+     (cada linha usa o layout activity_item_admin_turma) e o botão
+     "Nova", que abre o formulário activity_admin_nova_turma. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adminTurmas"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <!-- CABEÇALHO -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/alana_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <TextView
+            style="@style/Alana.Title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Turmas" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNovaTurma"
+            style="@style/Alana.ButtonSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:text="Nova Turma" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/alana_divider" />
+
+    <!-- LISTA DE TURMAS
+         Cada item (activity_item_admin_turma) já é um card com margens,
+         por isso a lista não fica dentro de outro card como na Equipe.
+         A lista rola sozinha (RecyclerView), então não usa ScrollView. -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTurmas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/activity_item_admin_turma" />
+
+    <!-- MENU INFERIOR -->
+    <include layout="@layout/menu_inferior_admin" />
+</LinearLayout>

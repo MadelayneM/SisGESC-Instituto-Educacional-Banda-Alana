@@ -23,8 +23,6 @@ import com.example.sisgesc.Repository.RepositoryCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 // Formulário de membro da equipe: cadastrar (sem extra) ou editar (com FormularioAdmin.EXTRA_CPF_MEMBRO).
 //
 // Para o back-end:
@@ -42,11 +40,10 @@ public class activity_admin_novo_membro extends AppCompatActivity {
     private String cpfEdicao;
     private List<AdminOpcao> opcoesTurmas = new ArrayList<>();
     private List<AdminOpcao> opcoesFuncoes = new ArrayList<>();
+
     private Spinner spCargo;
     private LinearLayout llTurmas;
     private AdminRepository repo;
-
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +51,31 @@ public class activity_admin_novo_membro extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_novo_membro);
 
-
         spCargo = findViewById(R.id.spCargo);
         repo = new AdminRepository();
         llTurmas = findViewById(R.id.llTurmas);
-        cpfEdicao = getIntent().getStringExtra("cpf");
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        cpfEdicao = getIntent().getStringExtra(FormularioAdmin.EXTRA_CPF_MEMBRO);
+        boolean edicao = cpfEdicao != null;
+
+        FormularioAdmin.configurarCabecalho(this, edicao ? "Editar membro" : "Novo membro");
+        FormularioAdmin.preencherSpinner((Spinner) findViewById(R.id.spTipoTelefone), AdminPerfil.TIPOS_TELEFONE);
+
+        findViewById(R.id.btnAdicionarTurma).setOnClickListener(v -> adicionarLinhaTurma(null, null));
+
+        if (edicao) {
+            // O CPF não pode mudar (o banco não deixa)
+            findViewById(R.id.etCpf).setEnabled(false);
+            ((Button) findViewById(R.id.btnCadastrarMembro)).setText("Salvar alterações");
+            findViewById(R.id.btnDesligar).setVisibility(View.VISIBLE);
+            findViewById(R.id.btnExcluir).setVisibility(View.VISIBLE);
+        }
 
         // 1. Carregar spCargo
         repo.buscarOpcoesCargos(new RepositoryCallback<List<AdminOpcao>>() {
@@ -74,6 +91,7 @@ public class activity_admin_novo_membro extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+
         // 2. Opções das linhas (turmas -> tipos -> edição)
         repo.buscarOpcoesTurmas(new RepositoryCallback<List<AdminOpcao>>() {
             @Override public void onSucesso(List<AdminOpcao> turmas) {
@@ -82,32 +100,6 @@ public class activity_admin_novo_membro extends AppCompatActivity {
             }
             @Override public void onErro(String msg) { erro("turmas", msg); }
         });
-
-
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        cpfEdicao = getIntent().getStringExtra(FormularioAdmin.EXTRA_CPF_MEMBRO);
-        boolean edicao = cpfEdicao != null;
-
-        FormularioAdmin.configurarCabecalho(this, edicao ? "Editar membro" : "Novo membro");
-        FormularioAdmin.preencherSpinner((Spinner) findViewById(R.id.spTipoTelefone), AdminPerfil.TIPOS_TELEFONE);
-
-        llTurmas = findViewById(R.id.llTurmas);
-        findViewById(R.id.btnAdicionarTurma).setOnClickListener(v -> adicionarLinhaTurma(null, null));
-
-        if (edicao) {
-            // O CPF não pode mudar (o banco não deixa)
-            findViewById(R.id.etCpf).setEnabled(false);
-            ((Button) findViewById(R.id.btnCadastrarMembro)).setText("Salvar alterações");
-            findViewById(R.id.btnDesligar).setVisibility(View.VISIBLE);
-            findViewById(R.id.btnExcluir).setVisibility(View.VISIBLE);
-        }
     }
 
     private void carregarTipos() {
@@ -159,8 +151,6 @@ public class activity_admin_novo_membro extends AppCompatActivity {
         llTurmas.addView(linha);
     }
 
-
-
     // Passa as linhas da tela para o CadastroMembro (substitui as turmas que ele tinha)
     void lerTurmas(CadastroMembro membro) {
         membro.limparTurmas();
@@ -181,5 +171,4 @@ public class activity_admin_novo_membro extends AppCompatActivity {
     private void erro(String context, String mensagem) {
         msg(context, mensagem);
     }
-
 }

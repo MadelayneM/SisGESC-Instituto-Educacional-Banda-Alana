@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -100,6 +101,22 @@ public class activity_admin_novo_membro extends AppCompatActivity {
             }
             @Override public void onErro(String msg) { erro("turmas", msg); }
         });
+
+        // =========================================
+        //  CONFIGURAÇÃO DOS BOTÕES NO onCreate()
+        // ==========================================
+        // Cole esta parte dentro do seu onCreate(), logo após configurar os spinners:
+
+
+    // 2. DatePicker para Data de Nascimento
+    FormularioAdmin.configurarDatePicker(this, findViewById(R.id.etNascimento));
+
+    // 3. Botão de Cadastrar / Salvar alterações
+    findViewById(R.id.btnCadastrarMembro).setOnClickListener(v -> salvarOuEditarMembro(edicao));
+
+    // 4. Botões de Desligar e Excluir
+    findViewById(R.id.btnDesligar).setOnClickListener(v -> confirmarDesligarMembro());
+    findViewById(R.id.btnExcluir).setOnClickListener(v -> confirmarExclusaoMembro());
     }
 
     private void carregarTipos() {
@@ -113,18 +130,7 @@ public class activity_admin_novo_membro extends AppCompatActivity {
         });
     }
 
-    private void carregarEdicao() {
-        repo.buscarCadastroMembro(cpfEdicao, new RepositoryCallback<CadastroMembro>() {
-            @Override public void onSucesso(CadastroMembro cadastro) {
-                // preencher os campos de texto aqui (nome, e-mail, telefone...)
 
-                for (CadastroMembro.Turma t : cadastro.getTurmas()) {
-                    adicionarLinhaTurma(t.getNomeTurma(), t.getCodigoTipoMonitor());
-                }
-            }
-            @Override public void onErro(String msg) { msg("cadastro", msg); }
-        });
-    }
 
     // Opções dos Spinners de cada linha de turma (vêm do banco)
     void setOpcoesTurmas(List<AdminOpcao> turmas, List<AdminOpcao> funcoes) {
@@ -170,5 +176,187 @@ public class activity_admin_novo_membro extends AppCompatActivity {
 
     private void erro(String context, String mensagem) {
         msg(context, mensagem);
+    }
+
+
+
+    // =========================================
+    //  MÉTODO carregarEdicao (Preencher campos)
+    // ==========================================
+    private void carregarEdicao() {
+        repo.buscarCadastroMembro(cpfEdicao, new RepositoryCallback<CadastroMembro>() {
+            @Override
+            public void onSucesso(CadastroMembro cadastro) {
+                // Preencher campos de texto do membro
+                ((EditText) findViewById(R.id.etNome)).setText(cadastro.getPrimeiroNome());
+                ((EditText) findViewById(R.id.etCpf)).setText(cadastro.getCpf());
+                ((EditText) findViewById(R.id.etEmail)).setText(cadastro.getEmail());
+                ((EditText) findViewById(R.id.etTelefone)).setText(cadastro.getNumeroTelefone());
+                FormularioAdmin.selecionar((Spinner) findViewById(R.id.spTipoTelefone), cadastro.getTipoTelefone());
+                ((EditText) findViewById(R.id.etNascimento)).setText(FormularioAdmin.dataParaTela(cadastro.getDataNascimento()));
+
+                // Selecionar o cargo no Spinner
+                FormularioAdmin.selecionar(spCargo, cadastro.getCodigoCargo());
+
+                // Adicionar as linhas de turmas vinculadas ao membro
+                llTurmas.removeAllViews(); // Limpa linha vazia padrão se houver
+                if (cadastro.getTurmas() != null && !cadastro.getTurmas().isEmpty()) {
+                    for (CadastroMembro.Turma t : cadastro.getTurmas()) {
+                        adicionarLinhaTurma(t.getNomeTurma(), t.getCodigoTipoMonitor());
+                    }
+                } else {
+                    adicionarLinhaTurma(null, null);
+                }
+            }
+
+            @Override
+            public void onErro(String msg) {
+                msg("cadastro", msg);
+            }
+        });
+    }
+
+    // =========================================
+    //  MÉTODO salvarOuEditarMembro
+    // ==========================================
+    private void salvarOuEditarMembro(boolean edicao) {
+        EditText etPrimeiroNome = findViewById(R.id.etNome);
+        EditText etSobrenome = findViewById(R.id.etSobrenome);
+
+        EditText etCpf = findViewById(R.id.etCpf);
+        EditText etEmail = findViewById(R.id.etEmail);
+        EditText etTelefone = findViewById(R.id.etTelefone);
+        Spinner spTipoTelefone = findViewById(R.id.spTipoTelefone);
+        EditText etNascimento = findViewById(R.id.etNascimento);
+
+        String primeiroNome = etPrimeiroNome.getText().toString().trim();
+        String sobrenome = etSobrenome.getText().toString().trim();
+        String cpf = etCpf.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String telefone = etTelefone.getText().toString().trim();
+        String tipoTel = spTipoTelefone.getSelectedItem() != null ? spTipoTelefone.getSelectedItem().toString() : null;
+        String dataNascBanco = FormularioAdmin.dataParaBanco(etNascimento.getText().toString().trim());
+        //EditText etSenha = findViewById(R.id.etSenha); // Ajuste o ID conforme o seu XML se necessário
+        //String senha = etSenha.getText().toString().trim();
+
+
+        // Validação obrigatória para nome e sobrenome
+        if (primeiroNome.isEmpty()) {
+            etPrimeiroNome.setError("Informe o primeiro nome");
+            etPrimeiroNome.requestFocus();
+            return;
+        }
+
+        if (sobrenome.isEmpty()) {
+            etSobrenome.setError("Informe o sobrenome");
+            etSobrenome.requestFocus();
+            return;
+        }
+
+        if (cpf.isEmpty()) {
+            etCpf.setError("Informe o CPF");
+            etCpf.requestFocus();
+            return;
+        }
+        // Validação da senha (obrigatória apenas no cadastro)
+        /*if (!edicao && senha.isEmpty()) {
+            etSenha.setError("Defina a senha de acesso");
+            etSenha.requestFocus();
+            return;
+        }*/
+
+// Passar para o DTO
+        CadastroMembro membro = null;
+        //membro.setSenha(senha);
+
+        membro = new CadastroMembro();
+        membro.setPrimeiroNome(primeiroNome);
+        membro.setSobrenome(sobrenome);
+
+        membro.setCpf(cpf);
+        membro.setEmail(email);
+        //membro.setTelefone(telefone);
+        // Como o DTO separa DDD, número e tipo:
+// Defina os valores de ddd e numero a partir do seu EditText de telefone (ou divida-os se necessário)
+        String ddd = ""; // extraia o DDD se estiver separado, ou passe os parâmetros corretos
+        String numeroTelefone = telefone;
+
+
+        membro.setTelefone(ddd, numeroTelefone, tipoTel);
+
+        membro.setDataNascimento(dataNascBanco);
+
+        // Obter o cargo selecionado do Spinner
+        Object cargoObj = spCargo.getSelectedItem();
+        if (cargoObj instanceof AdminOpcao) {
+            membro.setCodigoCargo(((AdminOpcao) cargoObj).getValor());
+        }
+
+        // Ler as turmas dinâmicas da tela
+        lerTurmas(membro);
+
+        if (edicao) {
+            repo.editarMembro(membro, new RepositoryCallback<Void>() {
+                @Override
+                public void onSucesso(Void resultado) {
+                    Toast.makeText(activity_admin_novo_membro.this, "Membro atualizado com sucesso!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+                @Override
+                public void onErro(String mensagem) {
+                    Toast.makeText(activity_admin_novo_membro.this, "Erro ao atualizar: " + mensagem, Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            repo.cadastrarMembro(membro, new RepositoryCallback<Void>() {
+                @Override
+                public void onSucesso(Void resultado) {
+                    Toast.makeText(activity_admin_novo_membro.this, "Membro cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+                @Override
+                public void onErro(String mensagem) {
+                    Toast.makeText(activity_admin_novo_membro.this, "Erro ao cadastrar: " + mensagem, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    }
+    // =========================================
+    //  MÉTODOS DE DESLIGAR E EXCLUIR
+    // ==========================================
+    private void confirmarDesligarMembro() {
+        if (cpfEdicao == null) return;
+
+        repo.desligarMembro(cpfEdicao, new RepositoryCallback<Void>() {
+            @Override
+            public void onSucesso(Void resultado) {
+                Toast.makeText(activity_admin_novo_membro.this, "Membro desligado com sucesso!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void onErro(String mensagem) {
+                Toast.makeText(activity_admin_novo_membro.this, "Erro ao desligar: " + mensagem, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void confirmarExclusaoMembro() {
+        if (cpfEdicao == null) return;
+
+        repo.excluirMembro(cpfEdicao, new RepositoryCallback<Void>() {
+            @Override
+            public void onSucesso(Void resultado) {
+                Toast.makeText(activity_admin_novo_membro.this, "Membro excluído com sucesso!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void onErro(String mensagem) {
+                Toast.makeText(activity_admin_novo_membro.this, "Erro ao excluir: " + mensagem, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

@@ -5,12 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.sisgesc.DTOs.AlunoTurma;
+import com.example.sisgesc.Repository.AlunoRepository;
+import com.example.sisgesc.Repository.RepositoryCallback;
 
 import java.util.List;
 
@@ -28,6 +33,48 @@ public class minha_turma extends AppCompatActivity {
         });
 
         MenuAluno.configurar(this, R.id.navTurma);
+
+        String cpf = SessaoAluno.cpfOuVoltarAoLogin(this);
+        if (cpf == null) {
+            return;
+        }
+
+        new AlunoRepository().buscarTurma(cpf, new RepositoryCallback<AlunoTurma>() {
+            @Override
+            public void onSucesso(AlunoTurma turma) {
+                if (SessaoAluno.telaFechada(minha_turma.this)) return;
+                mostrarTurma(turma);
+            }
+
+            @Override
+            public void onErro(String mensagem) {
+                if (SessaoAluno.telaFechada(minha_turma.this)) return;
+                Toast.makeText(minha_turma.this, mensagem, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void mostrarTurma(AlunoTurma turma) {
+        texto(R.id.txtTurmaTitulo, turma.getNomeTurma(), "Sem turma");
+        texto(R.id.txtProfessorTurma, turma.getProfessor(), "-");
+        texto(R.id.txtMonitorTurma, turma.getMonitor(), "-");
+        texto(R.id.txtDiaTurma, turma.getDiaSemana(), "-");
+
+        // Ex.: "14:00 - 15:30"
+        String inicio = turma.getHorarioInicio();
+        String fim = turma.getHorarioFim();
+        String horario = inicio == null ? null : (fim == null ? inicio : inicio + " - " + fim);
+        texto(R.id.txtHorarioTurma, horario, "-");
+
+        Integer qtd = turma.getQtdAlunos();
+        texto(R.id.txtQuantidadeAlunos, qtd == null ? null : String.valueOf(qtd), "-");
+
+        mostrarColegas(turma.getColegas());
+    }
+
+    // Escreve o valor na tela, ou o texto alternativo quando o banco não tem o dado
+    private void texto(int idDoCampo, String valor, String alternativa) {
+        ((TextView) findViewById(idDoCampo)).setText(valor == null || valor.isEmpty() ? alternativa : valor);
     }
 
     // Monta a lista de colegas na tela. Chamar com turma.getColegas() dentro do onSucesso de buscarTurma.

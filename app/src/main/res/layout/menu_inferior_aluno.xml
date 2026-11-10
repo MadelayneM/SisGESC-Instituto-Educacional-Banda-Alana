@@ -29,6 +29,9 @@
         android:textSize="8sp" />
 
     <!-- TURMA -->
+
+    <!-- FREQUÊNCIA -->
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/navTurma"
         android:layout_width="0dp"
@@ -47,7 +50,6 @@
         android:textColor="@color/nav_texto"
         android:textSize="8sp" />
 
-    <!-- FREQUÊNCIA -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/navFrequencia"
         android:layout_width="0dp"

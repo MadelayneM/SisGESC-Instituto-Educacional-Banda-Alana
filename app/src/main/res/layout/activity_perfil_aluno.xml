@@ -211,6 +211,9 @@
             </LinearLayout>
 
             <!-- BOTÃO EDITAR DADOS -->
+
+            <!-- BOTÃO ALTERAR SENHA -->
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnEditarDados"
                 android:layout_width="match_parent"
@@ -218,13 +221,12 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bg_botao_contorno_amarelo"
                 android:backgroundTint="@null"
+                android:stateListAnimator="@null"
                 android:text="Editar dados"
-                android:textColor="#D6A900"
-                android:textSize="11sp"
                 android:textAllCaps="false"
-                android:stateListAnimator="@null" />
+                android:textColor="#D6A900"
+                android:textSize="11sp" />
 
-            <!-- BOTÃO ALTERAR SENHA -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAlterarSenha"
                 android:layout_width="match_parent"

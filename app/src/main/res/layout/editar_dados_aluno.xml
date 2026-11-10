@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tela "Editar dados" do aluno: e-mail, telefone e endereço. Adaptada para qualquer tamanho de tela. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <!-- CABEÇALHO -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar dados"
+            android:textColor="#222222"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- CONTEÚDO ROLÁVEL RESPONSIVO -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Contato"
+                android:textColor="#222222"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="E-MAIL"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="exemplo@email.com"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Telefone"
+                android:textColor="#222222"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="DDD"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtDdd"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="11"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="2"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="NÚMERO"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtNumeroTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="912345678"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="9"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="TIPO"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <Spinner
+                android:id="@+id/spnTipoTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Endereço"
+                android:textColor="#222222"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="CEP"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtCep"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="01001000"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="8"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="LOGRADOURO"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtLogradouro"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="Rua, avenida..."
+                android:importantForAutofill="no"
+                android:inputType="textPostalAddress"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="BAIRRO"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtBairro"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="Bairro"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="CIDADE"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtCidade"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="Cidade"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="UF"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtUf"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="SP"
+                android:importantForAutofill="no"
+                android:inputType="textCapCharacters"
+                android:maxLength="2"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="NÚMERO"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtNumeroEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="123"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="5dp"
+                android:text="COMPLEMENTO (OPCIONAL)"
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:letterSpacing="0.04" />
+
+            <EditText
+                android:id="@+id/edtComplemento"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="Apto, bloco..."
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:textColorHint="#AAAAAA"
+                android:textSize="14sp" />
+
+            <!-- BOTÃO SALVAR -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSalvarDados"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_botao_amarelo"
+                android:backgroundTint="@null"
+                android:enabled="false"
+                android:stateListAnimator="@null"
+                android:text="Salvar"
+                android:textAllCaps="false"
+                android:textColor="#171717"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- BOTÃO CANCELAR -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCancelarEdicao"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_botao_contorno_cinza"
+                android:backgroundTint="@null"
+                android:stateListAnimator="@null"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

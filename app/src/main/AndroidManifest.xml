@@ -34,6 +34,13 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".activity_admin_turmas"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity_admin_frequencia"
+            android:exported="false" />
+        <activity
             android:name=".activity_admin_equipe"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

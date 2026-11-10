@@ -147,7 +147,8 @@
             <TextView style="@style/Alana.FormLabel" android:text="Período na escola" />
             <Spinner
                 android:id="@+id/spPeriodoEscola"
-                style="@style/Alana.Spinner" />
+                style="@style/Alana.Spinner"
+                android:spinnerMode="dropdown"/>
 
             <!-- setTelefone(ddd, número, tipo) - opcional -->
             <TextView style="@style/Alana.FormLabel" android:text="Telefone (opcional)" />
@@ -180,7 +181,8 @@
 
             <Spinner
                 android:id="@+id/spTipoTelefone"
-                style="@style/Alana.Spinner" />
+                style="@style/Alana.Spinner"
+                android:spinnerMode="dropdown"/>
 
             <!-- setEmail - opcional (vazio na edição apaga o e-mail) -->
             <TextView style="@style/Alana.FormLabel" android:text="E-mail (opcional)" />
@@ -239,7 +241,8 @@
             <TextView style="@style/Alana.FormLabel" android:text="Parentesco" />
             <Spinner
                 android:id="@+id/spGrauParentesco"
-                style="@style/Alana.Spinner" />
+                style="@style/Alana.Spinner"
+                android:spinnerMode="dropdown"/>
 
             <!-- setTelefoneResponsavel(ddd, número) - opcional, gravado como Celular -->
             <TextView style="@style/Alana.FormLabel" android:text="Telefone do responsável (opcional)" />
@@ -294,7 +297,8 @@
             <TextView style="@style/Alana.FormLabel" android:text="Período" />
             <Spinner
                 android:id="@+id/spPeriodo"
-                style="@style/Alana.Spinner" />
+                style="@style/Alana.Spinner"
+                android:spinnerMode="dropdown"/>
 
             <!-- setStatus: um dos dois fica selecionado (setSelected) -->
             <TextView style="@style/Alana.FormLabel" android:text="Status da matrícula" />

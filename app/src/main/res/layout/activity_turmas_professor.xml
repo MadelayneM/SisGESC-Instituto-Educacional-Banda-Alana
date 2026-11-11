@@ -29,6 +29,5 @@
         <TextView
             android:text="Percussão 01\n\n8 alunos • Sala 03\n\n📅 Terça-feira • 🕒 10:00\n\n● Ativa"
             style="@style/TurmaItem" />
-
     </LinearLayout>
 </ScrollView>

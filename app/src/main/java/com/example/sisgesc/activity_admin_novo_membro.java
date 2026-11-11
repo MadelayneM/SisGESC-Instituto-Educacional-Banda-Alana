@@ -45,6 +45,7 @@ public class activity_admin_novo_membro extends AppCompatActivity {
     private Spinner spCargo;
     private LinearLayout llTurmas;
     private AdminRepository repo;
+    private CadastroMembro membroAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,8 +188,11 @@ public class activity_admin_novo_membro extends AppCompatActivity {
         repo.buscarCadastroMembro(cpfEdicao, new RepositoryCallback<CadastroMembro>() {
             @Override
             public void onSucesso(CadastroMembro cadastro) {
+                // Guarda ou usa este 'membroDoBanco' na activity
+                membroAtual = cadastro;
                 // Preencher campos de texto do membro
                 ((EditText) findViewById(R.id.etNome)).setText(cadastro.getPrimeiroNome());
+                ((EditText) findViewById(R.id.etSobrenome)).setText(cadastro.getSobrenome());
                 ((EditText) findViewById(R.id.etCpf)).setText(cadastro.getCpf());
                 ((EditText) findViewById(R.id.etEmail)).setText(cadastro.getEmail());
                 ((EditText) findViewById(R.id.etTelefone)).setText(cadastro.getNumeroTelefone());
@@ -225,10 +229,12 @@ public class activity_admin_novo_membro extends AppCompatActivity {
 
         EditText etCpf = findViewById(R.id.etCpf);
         EditText etEmail = findViewById(R.id.etEmail);
+        EditText etDdd = findViewById(R.id.etDdd);
         EditText etTelefone = findViewById(R.id.etTelefone);
         Spinner spTipoTelefone = findViewById(R.id.spTipoTelefone);
         EditText etNascimento = findViewById(R.id.etNascimento);
 
+        String ddd = etDdd.getText().toString().trim();
         String primeiroNome = etPrimeiroNome.getText().toString().trim();
         String sobrenome = etSobrenome.getText().toString().trim();
         String cpf = etCpf.getText().toString().trim();
@@ -236,8 +242,8 @@ public class activity_admin_novo_membro extends AppCompatActivity {
         String telefone = etTelefone.getText().toString().trim();
         String tipoTel = spTipoTelefone.getSelectedItem() != null ? spTipoTelefone.getSelectedItem().toString() : null;
         String dataNascBanco = FormularioAdmin.dataParaBanco(etNascimento.getText().toString().trim());
-        //EditText etSenha = findViewById(R.id.etSenha); // Ajuste o ID conforme o seu XML se necessário
-        //String senha = etSenha.getText().toString().trim();
+        EditText etSenha = findViewById(R.id.etSenha); // Ajuste o ID conforme o seu XML se necessário
+        String senha = etSenha.getText().toString().trim();
 
 
         // Validação obrigatória para nome e sobrenome
@@ -259,11 +265,11 @@ public class activity_admin_novo_membro extends AppCompatActivity {
             return;
         }
         // Validação da senha (obrigatória apenas no cadastro)
-        /*if (!edicao && senha.isEmpty()) {
+        if (!edicao && senha.isEmpty()) {
             etSenha.setError("Defina a senha de acesso");
             etSenha.requestFocus();
             return;
-        }*/
+        }
 
 // Passar para o DTO
         CadastroMembro membro = null;
@@ -276,12 +282,7 @@ public class activity_admin_novo_membro extends AppCompatActivity {
         membro.setCpf(cpf);
         membro.setEmail(email);
         //membro.setTelefone(telefone);
-        // Como o DTO separa DDD, número e tipo:
-// Defina os valores de ddd e numero a partir do seu EditText de telefone (ou divida-os se necessário)
-        String ddd = ""; // extraia o DDD se estiver separado, ou passe os parâmetros corretos
         String numeroTelefone = telefone;
-
-
         membro.setTelefone(ddd, numeroTelefone, tipoTel);
 
         membro.setDataNascimento(dataNascBanco);
@@ -296,7 +297,31 @@ public class activity_admin_novo_membro extends AppCompatActivity {
         lerTurmas(membro);
 
         if (edicao) {
-            repo.editarMembro(membro, new RepositoryCallback<Void>() {
+            // MODO EDIÇÃO: Usa o objeto já carregado do banco (membroAtual)
+            if (membroAtual == null) {
+                Toast.makeText(this, "Erro: dados do membro não carregados.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            membroAtual.setPrimeiroNome(primeiroNome);
+            membroAtual.setSobrenome(sobrenome);
+            membroAtual.setEmail(email);
+            membroAtual.setTelefone(ddd, numeroTelefone, tipoTel);
+            membroAtual.setDataNascimento(dataNascBanco);
+
+            cargoObj = spCargo.getSelectedItem();
+            if (cargoObj instanceof AdminOpcao) {
+                membroAtual.setCodigoCargo(((AdminOpcao) cargoObj).getValor());
+            }
+
+            // Atualiza a senha apenas se o usuário digitou uma nova
+            /*if (!senha.isEmpty()) {
+                membroAtual.setSenha(senha);
+            }*/
+
+            membroAtual.limparTurmas();
+            lerTurmas(membroAtual);
+            repo.editarMembro(membroAtual, new RepositoryCallback<Void>() {
                 @Override
                 public void onSucesso(Void resultado) {
                     Toast.makeText(activity_admin_novo_membro.this, "Membro atualizado com sucesso!", Toast.LENGTH_SHORT).show();
@@ -309,7 +334,23 @@ public class activity_admin_novo_membro extends AppCompatActivity {
                 }
             });
         } else {
-            repo.cadastrarMembro(membro, new RepositoryCallback<Void>() {
+            // MODO CADASTRO NOVO: Cria um novo objeto do zero
+            CadastroMembro membroNovo = new CadastroMembro();
+            membroNovo.setPrimeiroNome(primeiroNome);
+            membroNovo.setSobrenome(sobrenome);
+            membroNovo.setCpf(cpf);
+            membroNovo.setEmail(email);
+            membroNovo.setSenha(senha);
+            membroNovo.setTelefone(ddd, numeroTelefone, tipoTel);
+            membroNovo.setDataNascimento(dataNascBanco);
+
+            cargoObj = spCargo.getSelectedItem();
+            if (cargoObj instanceof AdminOpcao) {
+                membroNovo.setCodigoCargo(((AdminOpcao) cargoObj).getValor());
+            }
+
+            lerTurmas(membroNovo);
+            repo.cadastrarMembro(membroNovo, new RepositoryCallback<Void>() {
                 @Override
                 public void onSucesso(Void resultado) {
                     Toast.makeText(activity_admin_novo_membro.this, "Membro cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
@@ -329,34 +370,48 @@ public class activity_admin_novo_membro extends AppCompatActivity {
     private void confirmarDesligarMembro() {
         if (cpfEdicao == null) return;
 
-        repo.desligarMembro(cpfEdicao, new RepositoryCallback<Void>() {
-            @Override
-            public void onSucesso(Void resultado) {
-                Toast.makeText(activity_admin_novo_membro.this, "Membro desligado com sucesso!", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("Desligar membro")
+                .setMessage("O desligamento remove o membro das turmas e bloqueia o acesso ao app, mas preserva todo o histórico de atividades.\n\nEsta é a opção recomendada para o dia a dia.\nDeseja continuar?")
+                .setPositiveButton("Sim, desligar", (dialog, which) -> {
+                    repo.desligarMembro(cpfEdicao, new RepositoryCallback<Void>() {
+                        @Override
+                        public void onSucesso(Void resultado) {
+                            Toast.makeText(activity_admin_novo_membro.this, "Membro desligado com sucesso!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
 
-            @Override
-            public void onErro(String mensagem) {
-                Toast.makeText(activity_admin_novo_membro.this, "Erro ao desligar: " + mensagem, Toast.LENGTH_LONG).show();
-            }
-        });
+                        @Override
+                        public void onErro(String mensagem) {
+                            Toast.makeText(activity_admin_novo_membro.this, "Erro ao desligar: " + mensagem, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     private void confirmarExclusaoMembro() {
         if (cpfEdicao == null) return;
 
-        repo.excluirMembro(cpfEdicao, new RepositoryCallback<Void>() {
-            @Override
-            public void onSucesso(Void resultado) {
-                Toast.makeText(activity_admin_novo_membro.this, "Membro excluído com sucesso!", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("ATENÇÃO: Excluir membro")
+                .setMessage("A exclusão apaga permanentemente todos os dados e o histórico do membro.\n\n⚠️ Nota: Se o membro já possuir avisos, avaliações ou registos associados, o banco de dados impedirá a exclusão. Nesses casos, utilize a opção **Desligar**.\n\nDeseja realmente excluir tudo?")
+                .setPositiveButton("Excluir definitivamente", (dialog, which) -> {
+                    repo.excluirMembro(cpfEdicao, new RepositoryCallback<Void>() {
+                        @Override
+                        public void onSucesso(Void resultado) {
+                            Toast.makeText(activity_admin_novo_membro.this, "Membro excluído com sucesso!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
 
-            @Override
-            public void onErro(String mensagem) {
-                Toast.makeText(activity_admin_novo_membro.this, "Erro ao excluir: " + mensagem, Toast.LENGTH_LONG).show();
-            }
-        });
+                        @Override
+                        public void onErro(String mensagem) {
+                            Toast.makeText(activity_admin_novo_membro.this, "Não foi possível excluir (há histórico vinculado). Utilize a opção Desligar. Erro: " + mensagem, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }

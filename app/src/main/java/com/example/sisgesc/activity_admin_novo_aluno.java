@@ -206,8 +206,8 @@ public class activity_admin_novo_aluno extends AppCompatActivity {
         aluno.setTelefoneResponsavel(dddResp, numResp);
 
         aluno.setAutorizadoBusca(((androidx.appcompat.widget.SwitchCompat) findViewById(R.id.swAutorizadoBusca)).isChecked());
-        aluno.setSenhaLogin(((EditText) findViewById(R.id.etSenha)).getText().toString().trim());
-        aluno.setNomeTurma(((Spinner) findViewById(R.id.spTurma)).getSelectedItem().toString());
+        //aluno.setSenhaLogin(((EditText) findViewById(R.id.etSenha)).getText().toString().trim());
+        //aluno.setNomeTurma(((Spinner) findViewById(R.id.spTurma)).getSelectedItem().toString());
         aluno.setPeriodo(((Spinner) findViewById(R.id.spPeriodo)).getSelectedItem().toString());
         aluno.setStatus(getStatusSelecionado());
 
@@ -215,6 +215,23 @@ public class activity_admin_novo_aluno extends AppCompatActivity {
         String senhaDigitada = ((EditText) findViewById(R.id.etSenha)).getText().toString().trim();
         if (!edicao || !senhaDigitada.isEmpty()) {
             aluno.setSenhaLogin(senhaDigitada);
+        }
+
+        if (aluno.getPrimeiroNome().isEmpty() || aluno.getSobrenome().isEmpty()) {
+            Toast.makeText(this, "Preencha nome e sobrenome do aluno.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (aluno.getCpf().length() != 11) {
+            Toast.makeText(this, "O CPF do aluno deve ter 11 dígitos.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (aluno.getCpfResponsavel().length() != 11) {
+            Toast.makeText(this, "O CPF do responsável deve ter 11 dígitos.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!edicao && aluno.getSenhaLogin().length() < 6) {
+            Toast.makeText(this, "A senha deve ter pelo menos 6 caracteres.", Toast.LENGTH_LONG).show();
+            return;
         }
 
 
@@ -245,7 +262,9 @@ public class activity_admin_novo_aluno extends AppCompatActivity {
                 }
                 @Override
                 public void onErro(String mensagem) {
-                    Toast.makeText(activity_admin_novo_aluno.this, "Erro: " + mensagem, Toast.LENGTH_SHORT).show();
+                    btnCadastrar.setEnabled(true);
+                    android.util.Log.e("SisGESC", "Falha ao salvar aluno: " + mensagem);
+                    Toast.makeText(activity_admin_novo_aluno.this, "Erro: " + mensagem, Toast.LENGTH_LONG).show();
                 }
             });
         } else {
@@ -257,7 +276,9 @@ public class activity_admin_novo_aluno extends AppCompatActivity {
                 }
                 @Override
                 public void onErro(String mensagem) {
-                    Toast.makeText(activity_admin_novo_aluno.this, "Erro: " + mensagem, Toast.LENGTH_SHORT).show();
+                    btnCadastrar.setEnabled(true);
+                    android.util.Log.e("SisGESC", "Falha ao salvar aluno: " + mensagem);
+                    Toast.makeText(activity_admin_novo_aluno.this, "Erro: " + mensagem, Toast.LENGTH_LONG).show();
                 }
             });
         }

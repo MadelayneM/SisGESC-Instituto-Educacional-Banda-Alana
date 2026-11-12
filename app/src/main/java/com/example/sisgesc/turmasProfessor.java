@@ -1,8 +1,10 @@
 package com.example.sisgesc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,8 @@ import com.example.sisgesc.Repository.RepositoryCallback;
 
 import java.util.List;
 
+// Tela "Minhas Turmas" do Professor: exibe todas as turmas vinculadas ao professor
+// com informações detalhadas e atalho para enviar avisos.
 public class turmasProfessor extends AppCompatActivity {
 
     private String cpf;
@@ -35,6 +39,7 @@ public class turmasProfessor extends AppCompatActivity {
             return insets;
         });
 
+        // Configura o menu inferior do professor
         MenuProfessor.configurar(this, R.id.navTurmas);
 
         cpf = getIntent().getStringExtra(MainActivity.EXTRA_CPF);
@@ -51,6 +56,7 @@ public class turmasProfessor extends AppCompatActivity {
         }
     }
 
+    // Busca a lista de turmas do professor no Supabase
     private void carregarTurmas() {
         repo.buscarTurmas(cpf, new RepositoryCallback<List<ProfessorTurma>>() {
             @Override
@@ -65,6 +71,7 @@ public class turmasProfessor extends AppCompatActivity {
         });
     }
 
+    // Infla os cartões de cada turma na tela "Minhas Turmas"
     private void mostrarTurmas(List<ProfessorTurma> turmas) {
         LinearLayout lista = findViewById(R.id.listaTurmas);
         lista.removeAllViews();
@@ -76,15 +83,25 @@ public class turmasProfessor extends AppCompatActivity {
             TextView txtInfo = cartao.findViewById(R.id.txtInfoTurma);
             TextView txtDia = cartao.findViewById(R.id.txtDiaHorario);
             TextView txtStatus = cartao.findViewById(R.id.txtStatusTurma);
+            Button btnEnviarAviso = cartao.findViewById(R.id.btnEnviarAvisoTurma);
 
             txtNome.setText(turma.getNomeTurma());
             txtInfo.setText(turma.getTotalAlunos() + " alunos • " + turma.getNomeCurso());
             txtDia.setText("📅 " + turma.getDiaSemana() + " • 🕒 " + turma.getHorarioInicio() + " às " + turma.getHorarioFim());
             txtStatus.setText(turma.isAtiva() ? "● Ativa" : "○ Sem alunos");
 
+            // Ação do botão Enviar Aviso para a turma
+            btnEnviarAviso.setOnClickListener(v -> {
+                Intent i = new Intent(this, enviar_aviso.class);
+                i.putExtra(MainActivity.EXTRA_CPF, cpf);
+                i.putExtra("nomeTurma", turma.getNomeTurma());
+                startActivity(i);
+            });
+
             lista.addView(cartao);
         }
 
+        // Exibe mensagem se a lista de turmas estiver vazia
         View txtSemTurmas = findViewById(R.id.txtSemTurmas);
         if (txtSemTurmas != null) {
             txtSemTurmas.setVisibility(turmas.isEmpty() ? View.VISIBLE : View.GONE);

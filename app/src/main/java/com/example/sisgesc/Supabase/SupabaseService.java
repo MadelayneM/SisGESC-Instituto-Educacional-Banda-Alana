@@ -162,4 +162,8 @@ public interface SupabaseService {
     Call<List<Object>> salvarFrequencias(
             @Query("columns") String colunas,
             @Body List<Map<String, Object>> linhas);
+
+    @Headers("Prefer: return=representation")
+    @POST("rest/v1/tb_aviso")
+    Call<List<Aviso>> enviarAviso(@Body Map<String, String> campos);
 }

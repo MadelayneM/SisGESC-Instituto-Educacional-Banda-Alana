@@ -25,6 +25,8 @@ import com.example.sisgesc.Repository.RepositoryCallback;
 
 import java.util.List;
 
+// Tela "Alunos" do Professor: exibe a lista de alunos (geral ou filtrada por turma)
+// com campo de pesquisa em tempo real e clique para visualizar os detalhes do aluno.
 public class alunosProfessor extends AppCompatActivity {
 
     private String cpf;
@@ -42,6 +44,7 @@ public class alunosProfessor extends AppCompatActivity {
             return insets;
         });
 
+        // Configura o menu inferior do professor
         MenuProfessor.configurar(this, R.id.navAlunos);
 
         cpf = getIntent().getStringExtra(MainActivity.EXTRA_CPF);
@@ -51,6 +54,7 @@ public class alunosProfessor extends AppCompatActivity {
         EditText pesquisarAluno = findViewById(R.id.pesquisarAluno);
         TextView txtFiltroTurma = findViewById(R.id.txtFiltroTurma);
 
+        // Se a tela foi aberta a partir de "Ver alunos" de uma turma específica, exibe o filtro
         if (nomeTurma != null && !nomeTurma.isEmpty()) {
             txtFiltroTurma.setVisibility(View.VISIBLE);
             txtFiltroTurma.setText("Turma: " + nomeTurma);
@@ -58,6 +62,7 @@ public class alunosProfessor extends AppCompatActivity {
             txtFiltroTurma.setVisibility(View.GONE);
         }
 
+        // Listener de texto para buscar alunos em tempo real conforme o professor digita
         pesquisarAluno.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -74,6 +79,7 @@ public class alunosProfessor extends AppCompatActivity {
         carregarAlunos(null);
     }
 
+    // Busca os alunos no Supabase (geral ou filtrado por turma e texto de busca)
     private void carregarAlunos(String busca) {
         RepositoryCallback<List<ProfessorAluno>> callback = new RepositoryCallback<List<ProfessorAluno>>() {
             @Override
@@ -94,6 +100,7 @@ public class alunosProfessor extends AppCompatActivity {
         }
     }
 
+    // Infla as linhas de cada aluno na lista da tela
     private void mostrarAlunos(List<ProfessorAluno> alunos) {
         LinearLayout lista = findViewById(R.id.listaAlunos);
         lista.removeAllViews();
@@ -108,10 +115,12 @@ public class alunosProfessor extends AppCompatActivity {
             txtNome.setText(aluno.getNome());
             txtTurma.setText(aluno.getNomeTurma() + " • " + aluno.getNomeCurso());
 
+            // Carrega a foto do aluno com Glide, se houver URL
             if (aluno.getFotoUrl() != null && !aluno.getFotoUrl().isEmpty()) {
                 Glide.with(this).load(aluno.getFotoUrl()).circleCrop().into(imgFoto);
             }
 
+            // Clique na linha do aluno abre a tela de detalhes (dadosAlunoActivity)
             linha.setOnClickListener(v -> {
                 Intent i = new Intent(this, dadosAlunoActivity.class);
                 i.putExtra(MainActivity.EXTRA_CPF, cpf);
@@ -125,6 +134,7 @@ public class alunosProfessor extends AppCompatActivity {
             lista.addView(linha);
         }
 
+        // Exibe mensagem caso nenhum aluno seja encontrado
         View txtSemAlunos = findViewById(R.id.txtSemAlunos);
         if (txtSemAlunos != null) {
             txtSemAlunos.setVisibility(alunos.isEmpty() ? View.VISIBLE : View.GONE);

@@ -50,4 +50,15 @@
         android:textColor="#444444"
         tools:text="● Ativa" />
 
+    <!-- Botão Enviar Aviso -->
+    <Button
+        android:id="@+id/btnEnviarAvisoTurma"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Enviar aviso"
+        android:textColor="#555555"
+        android:backgroundTint="#F2F2F2"
+        android:layout_marginTop="16dp"
+        android:textAllCaps="false" />
+
 </LinearLayout>

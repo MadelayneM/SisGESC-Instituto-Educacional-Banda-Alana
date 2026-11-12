@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+// Tela Início (Dashboard) do Professor: exibe a saudação com o primeiro nome
+// e a lista de turmas do professor com atalhos para chamada, ver alunos e enviar aviso.
 public class dashboardProfessor extends AppCompatActivity {
 
     private String cpf;
@@ -41,8 +43,10 @@ public class dashboardProfessor extends AppCompatActivity {
             return insets;
         });
 
+        // Configura o menu inferior do professor
         MenuProfessor.configurar(this, R.id.navInicio);
 
+        // Recupera o CPF do professor logado e instancia o repositório
         cpf = getIntent().getStringExtra(MainActivity.EXTRA_CPF);
         repo = new ProfessorRepository();
 
@@ -57,12 +61,15 @@ public class dashboardProfessor extends AppCompatActivity {
         }
     }
 
+    // Busca os dados da tela Início no Supabase através do ProfessorRepository
     private void carregarDados() {
         repo.buscarInicio(cpf, new RepositoryCallback<ProfessorInicio>() {
             @Override
             public void onSucesso(ProfessorInicio inicio) {
+                // Exibe o primeiro nome do professor na saudação
                 TextView txtNome = findViewById(R.id.txtNomeProfessor);
                 txtNome.setText(inicio.getPrimeiroNome() + "! 👋");
+                // Preenche a lista de turmas
                 mostrarTurmas(inicio.getTurmas());
             }
 
@@ -73,6 +80,7 @@ public class dashboardProfessor extends AppCompatActivity {
         });
     }
 
+    // Infla dinamicamente os cartões de cada turma na tela Início
     private void mostrarTurmas(List<ProfessorTurma> turmas) {
         LinearLayout lista = findViewById(R.id.listaTurmasInicio);
         lista.removeAllViews();
@@ -87,11 +95,13 @@ public class dashboardProfessor extends AppCompatActivity {
             TextView txtDia = cartao.findViewById(R.id.txtDiaHorario);
             Button btnChamada = cartao.findViewById(R.id.btnChamada);
             Button btnVerAlunos = cartao.findViewById(R.id.btnVerAlunos);
+            Button btnEnviarAviso = cartao.findViewById(R.id.btnEnviarAvisoTurma);
 
             txtNome.setText(turma.getNomeTurma());
             txtInfo.setText(turma.getTotalAlunos() + " alunos • " + turma.getNomeCurso());
             txtDia.setText("📅 " + turma.getDiaSemana() + " • 🕒 " + turma.getHorarioInicio());
 
+            // Ação do botão Fazer Chamada
             btnChamada.setOnClickListener(v -> {
                 Intent i = new Intent(this, chamadaProfessor.class);
                 i.putExtra(MainActivity.EXTRA_CPF, cpf);
@@ -100,8 +110,17 @@ public class dashboardProfessor extends AppCompatActivity {
                 startActivity(i);
             });
 
+            // Ação do botão Ver Alunos
             btnVerAlunos.setOnClickListener(v -> {
                 Intent i = new Intent(this, alunosProfessor.class);
+                i.putExtra(MainActivity.EXTRA_CPF, cpf);
+                i.putExtra("nomeTurma", turma.getNomeTurma());
+                startActivity(i);
+            });
+
+            // Ação do botão Enviar Aviso
+            btnEnviarAviso.setOnClickListener(v -> {
+                Intent i = new Intent(this, enviar_aviso.class);
                 i.putExtra(MainActivity.EXTRA_CPF, cpf);
                 i.putExtra("nomeTurma", turma.getNomeTurma());
                 startActivity(i);
@@ -110,6 +129,7 @@ public class dashboardProfessor extends AppCompatActivity {
             lista.addView(cartao);
         }
 
+        // Exibe mensagem caso o professor não tenha turmas cadastradas
         View txtSemTurmas = findViewById(R.id.txtSemTurmas);
         if (txtSemTurmas != null) {
             txtSemTurmas.setVisibility(turmas.isEmpty() ? View.VISIBLE : View.GONE);

@@ -12,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 
+// Tela de detalhes e dados do aluno (modo somente leitura), exibindo foto,
+// dados pessoais, contatos de emergência e observações.
 public class dadosAlunoActivity extends AppCompatActivity {
 
     @Override
@@ -25,13 +27,16 @@ public class dadosAlunoActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Botão voltar no topo da tela
         findViewById(R.id.btnVoltarAluno).setOnClickListener(v -> finish());
 
+        // Recupera os dados do aluno passados pela Intent da tela anterior (lista de alunos)
         String nome = getIntent().getStringExtra("nome");
         String fotoUrl = getIntent().getStringExtra("fotoUrl");
         String nomeTurma = getIntent().getStringExtra("nomeTurma");
         String nomeCurso = getIntent().getStringExtra("nomeCurso");
 
+        // Referências das views no layout activity_dados_aluno.xml
         TextView txtNome = findViewById(R.id.txtNomeDetalheAluno);
         TextView txtCurso = findViewById(R.id.txtCursoDetalheAluno);
         TextView txtInstrumentoBanner = findViewById(R.id.txtInstrumentoBanner);
@@ -45,6 +50,7 @@ public class dadosAlunoActivity extends AppCompatActivity {
         TextView txtObs = findViewById(R.id.txtObservacoesAluno);
         ImageView imgFoto = findViewById(R.id.imgFotoDetalheAluno);
 
+        // Preenche os campos principais com os dados recebidos
         if (nome != null) txtNome.setText(nome);
         if (nomeCurso != null) {
             txtCurso.setText(nomeCurso);
@@ -55,7 +61,7 @@ public class dadosAlunoActivity extends AppCompatActivity {
             txtTurmaDetalhe.setText(nomeTurma);
         }
 
-        // Placeholder data for demonstration as in Figma mockup
+        // Dados complementares de exemplo/mockup para contatos e observações
         txtDataNascimento.setText("12/03/2014");
         txtMae.setText("Patrícia Costa");
         txtTelMae.setText("(11) 98001-1111");
@@ -63,6 +69,7 @@ public class dadosAlunoActivity extends AppCompatActivity {
         txtTelPai.setText("(11) 97002-2222");
         txtObs.setText("Aluna dedicada, participa ativamente.");
 
+        // Carrega a foto do aluno usando Glide (se houver URL válida)
         if (fotoUrl != null && !fotoUrl.isEmpty()) {
             Glide.with(this).load(fotoUrl).circleCrop().into(imgFoto);
         }

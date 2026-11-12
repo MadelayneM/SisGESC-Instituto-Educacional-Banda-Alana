@@ -57,6 +57,17 @@
         android:layout_height="48dp"
         android:text="Ver alunos"
         android:textColor="#555555"
-        android:backgroundTint="#F2F2F2" />
+        android:backgroundTint="#F2F2F2"
+        android:layout_marginTop="8dp" />
+
+    <!-- Abre a tela de envio de aviso para esta turma -->
+    <Button
+        android:id="@+id/btnEnviarAvisoTurma"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Enviar aviso"
+        android:textColor="#555555"
+        android:backgroundTint="#F2F2F2"
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>

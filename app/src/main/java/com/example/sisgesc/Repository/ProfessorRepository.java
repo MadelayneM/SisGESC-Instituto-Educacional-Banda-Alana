@@ -269,6 +269,20 @@ public class ProfessorRepository {
         });
     }
 
+    // Envia um aviso para a tabela tb_aviso
+    public void enviarAviso(String cpf, String nomeTurma, String mensagem, RepositoryCallback<Void> callback) {
+        if (estaVazio(mensagem)) {
+            callback.onErro("O aviso não pode ficar em branco.");
+            return;
+        }
+        Map<String, String> campos = new HashMap<>();
+        campos.put("titulo_aviso", "Aviso - " + nomeTurma);
+        campos.put("descricao_aviso", mensagem);
+        campos.put("fk_cpf_coordenador", cpf);
+
+        executar(service.enviarAviso(campos), callback, inseridos -> callback.onSucesso(null));
+    }
+
     private boolean dataValida(String data) {
         return data != null && data.matches("\\d{4}-\\d{2}-\\d{2}");
     }

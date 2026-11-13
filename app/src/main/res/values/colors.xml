@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Cores do tema Banda Alana -->
+    <color name="alana_bg">#F5F6F8</color>
+    <color name="alana_white">#FFFFFF</color>
+    <color name="alana_text">#1A1D1F</color>
+    <color name="alana_text_secondary">#6F767E</color>
+    <color name="alana_hint">#9A9FA5</color>
+</resources>

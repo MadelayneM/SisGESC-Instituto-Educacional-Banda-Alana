@@ -44,6 +44,7 @@ public class enviar_aviso extends AppCompatActivity {
         // Referências dos elementos de UI
         ImageButton btnVoltar = findViewById(R.id.btnVoltar);
         TextView txtTurma = findViewById(R.id.txtNomeTurma);
+        EditText edtTitulo = findViewById(R.id.edtTitulo);
         EditText edtAviso = findViewById(R.id.edtAviso);
         TextView txtContador = findViewById(R.id.txtContador);
         Button btnEnviar = findViewById(R.id.btnEnviarAviso);
@@ -60,7 +61,7 @@ public class enviar_aviso extends AppCompatActivity {
         btnVoltar.setOnClickListener(v -> finish());
         btnCancelar.setOnClickListener(v -> finish());
 
-        // Atualiza o contador de caracteres (máximo 300) conforme o professor digita
+        // Atualiza o contador de caracteres (máximo 300) conforme o professor digita a mensagem
         edtAviso.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -75,10 +76,17 @@ public class enviar_aviso extends AppCompatActivity {
             }
         });
 
-        // Ação ao clicar em "Enviar aviso": valida e grava no banco via repositório
+        // Ação ao clicar em "Enviar aviso": valida o título e a mensagem e grava no banco via repositório
         btnEnviar.setOnClickListener(v -> {
+            String titulo = edtTitulo.getText().toString().trim();
             String mensagem = edtAviso.getText().toString().trim();
-            repo.enviarAviso(cpf, nomeTurma != null ? nomeTurma : "Geral", mensagem, new RepositoryCallback<Void>() {
+
+            if (titulo.isEmpty()) {
+                edtTitulo.setError("Digite o título do aviso");
+                return;
+            }
+
+            repo.enviarAviso(cpf, titulo, mensagem, new RepositoryCallback<Void>() {
                 @Override
                 public void onSucesso(Void unused) {
                     Toast.makeText(enviar_aviso.this, "Aviso enviado com sucesso!", Toast.LENGTH_SHORT).show();

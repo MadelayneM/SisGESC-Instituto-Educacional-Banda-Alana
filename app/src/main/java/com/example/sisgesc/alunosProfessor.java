@@ -1,5 +1,6 @@
 package com.example.sisgesc;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -33,6 +34,7 @@ public class alunosProfessor extends AppCompatActivity {
     private String nomeTurma;
     private ProfessorRepository repo;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +83,7 @@ public class alunosProfessor extends AppCompatActivity {
 
     // Busca os alunos no Supabase (geral ou filtrado por turma e texto de busca)
     private void carregarAlunos(String busca) {
-        RepositoryCallback<List<ProfessorAluno>> callback = new RepositoryCallback<List<ProfessorAluno>>() {
+        RepositoryCallback<List<ProfessorAluno>> callback = new RepositoryCallback<>() {
             @Override
             public void onSucesso(List<ProfessorAluno> alunos) {
                 mostrarAlunos(alunos);

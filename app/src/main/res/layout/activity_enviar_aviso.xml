@@ -46,13 +46,11 @@
             android:orientation="vertical"
             android:padding="22dp">
 
-            <!-- Informação -->
-
             <!-- Turma -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="25dp"
                 android:background="#FFF8DF"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -93,6 +91,29 @@
                 android:textSize="17sp"
                 android:textColor="#222222" />
 
+            <!-- Título do Aviso -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Título"
+                android:textSize="18sp"
+                android:textColor="#444444"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:id="@+id/edtTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/card_background"
+                android:paddingHorizontal="18dp"
+                android:hint="Digite o título do aviso..."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:textColorHint="#999999"
+                android:singleLine="true"
+                android:inputType="textCapSentences"/>
+
             <!-- Mensagem -->
             <TextView
                 android:layout_width="wrap_content"
@@ -100,16 +121,17 @@
                 android:text="Mensagem"
                 android:textSize="18sp"
                 android:textColor="#444444"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"/>
 
             <EditText
                 android:id="@+id/edtAviso"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
+                android:background="@drawable/card_background"
                 android:gravity="top|start"
                 android:padding="18dp"
-                android:hint="Digite o aviso aqui..."
+                android:hint="Digite a mensagem do aviso aqui..."
                 android:textSize="16sp"
                 android:textColor="#333333"
                 android:textColorHint="#999999"
@@ -136,7 +158,7 @@
                 android:textSize="18sp"
                 android:textColor="#333333"
                 android:backgroundTint="#FFC400"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="25dp"
                 android:textAllCaps="false"/>
 
             <!-- Botão cancelar -->
@@ -148,7 +170,7 @@
                 android:textSize="17sp"
                 android:textColor="#555555"
                 android:backgroundTint="#FFFFFF"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:textAllCaps="false"/>
 
         </LinearLayout>

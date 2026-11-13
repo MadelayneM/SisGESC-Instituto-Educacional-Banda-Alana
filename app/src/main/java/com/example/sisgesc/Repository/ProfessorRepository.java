@@ -10,10 +10,13 @@ import com.example.sisgesc.DTOs.TurmaFrequencia;
 import com.example.sisgesc.Supabase.SupabaseClient;
 import com.example.sisgesc.Supabase.SupabaseService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import okhttp3.MediaType;
@@ -270,15 +273,18 @@ public class ProfessorRepository {
     }
 
     // Envia um aviso para a tabela tb_aviso
-    public void enviarAviso(String cpf, String nomeTurma, String mensagem, RepositoryCallback<Void> callback) {
-        if (estaVazio(mensagem)) {
-            callback.onErro("O aviso não pode ficar em branco.");
+    public void enviarAviso(String cpf, String titulo, String mensagem, RepositoryCallback<Void> callback) {
+        if (estaVazio(titulo) || estaVazio(mensagem)) {
+            callback.onErro("O título e a mensagem não podem ficar em branco.");
             return;
         }
+        String dataAtual = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US).format(new Date());
+
         Map<String, String> campos = new HashMap<>();
-        campos.put("titulo_aviso", "Aviso - " + nomeTurma);
+        campos.put("titulo_aviso", titulo);
         campos.put("descricao_aviso", mensagem);
         campos.put("fk_cpf_coordenador", cpf);
+        campos.put("data_envio", dataAtual);
 
         executar(service.enviarAviso(campos), callback, inseridos -> callback.onSucesso(null));
     }

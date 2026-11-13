@@ -1,5 +1,7 @@
 package com.example.sisgesc.DTOs;
 
+// DTO que representa um funcionário da instituição, estendendo a classe Pessoa
+// para associar os dados cadastrais básicos ao CPF específico do funcionário (fk_cpf_func).
 public class Funcionario extends Pessoa {
     private String fk_cpf_func;
 

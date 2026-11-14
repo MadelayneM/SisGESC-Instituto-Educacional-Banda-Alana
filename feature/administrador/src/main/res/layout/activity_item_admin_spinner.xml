@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Texto de cada opção dos Spinners do Administrador (FormularioAdmin.preencherSpinner).
+     Substitui o item padrão do Android, que aparecia cinza-claro como se fosse uma dica. -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:minHeight="48dp"
+    android:gravity="center_vertical"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:singleLine="true"
+    android:textColor="@color/alana_text"
+    android:textSize="14sp"
+    android:background="@android:color/white" />

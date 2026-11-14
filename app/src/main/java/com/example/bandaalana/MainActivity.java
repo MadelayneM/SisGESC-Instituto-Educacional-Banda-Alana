@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
 
@@ -29,22 +26,23 @@ public class MainActivity extends AppCompatActivity {
         cardAluno.setOnClickListener(v -> {
             Toast.makeText(this, "Abrindo Perfil Aluno...", Toast.LENGTH_SHORT).show();
             // Quando importar o módulo do Aluno, descomente as linhas abaixo:
-            //Intent intent = new Intent(MainActivity.this, com.example.bandaalana.MainActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, com.example.bandaalana.feature.aluno.LoginAlunoActivity.class);
+            startActivity(intent);
         });
 
         // 2. Card Professor / Mentor
         cardProfessor.setOnClickListener(v -> {
             Toast.makeText(this, "Abrindo Perfil Professor...", Toast.LENGTH_SHORT).show();
             // Quando importar o módulo do Professor, descomente as linhas abaixo:
-            // Intent intent = new Intent(MainActivity.this, TelaInicialProfessorActivity.class);
-            // startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, com.example.bandaalana.professor.LoginProfessorActivity.class);
+
+            startActivity(intent);
         });
 
         // 3. Card Gestor / Administrador (Módulo :feature:perfila que você já importou)
         cardGestor.setOnClickListener(v -> {
-            //Intent intent = new Intent(MainActivity.this, com.example.bandaalana.feature.MainActivity.class);
-            //tartActivity(intent);
+            Intent intent = new Intent(MainActivity.this, com.example.bandaalana.administrador.LoginAdminActivity.class);
+            startActivity(intent);
         });
 
 

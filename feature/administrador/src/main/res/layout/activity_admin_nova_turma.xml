@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Formulário da turma: serve para CRIAR e para EDITAR.
+     Objeto: CadastroTurma. Cada campo abaixo indica o setter correspondente.
+       Criar:  new CadastroTurma() -> AdminRepository.criarTurma
+       Editar: AdminRepository.buscarCadastroTurma(nome) preenche os campos ->
+               AdminRepository.editarTurma. No modo edição: título "Editar turma",
+               btnCriarTurma com texto "Salvar alterações", etNomeTurma desabilitado
+               (o nome é a chave da turma) e btnExcluir visível (AdminRepository.excluirTurma,
+               que recusa se a turma ainda tiver matrículas).
+     Opções dos Spinners:
+       spCurso              AdminRepository.buscarOpcoesCursos
+       spProfessor          "Sem professor" + AdminRepository.buscarOpcoesProfessores
+       spFuncaoProfessor    AdminRepository.buscarOpcoesTiposMonitor
+     Data: a tela mostra dd/mm/aaaa e envia ano-mês-dia. Horários: hora:minuto (TimePicker). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_form_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- setNomeTurma (não muda no modo edição) -->
+            <TextView style="@style/Alana.SectionLabel" android:text="Nome da turma" />
+            <EditText
+                android:id="@+id/etNomeTurma"
+                style="@style/Alana.Input"
+                android:hint="Ex: Violão B"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences" />
+
+            <!-- setCodigoCurso -->
+            <TextView style="@style/Alana.FormLabel" android:text="Curso" />
+            <Spinner
+                android:id="@+id/spCurso"
+                style="@style/Alana.Spinner" />
+
+            <!-- setVagas -->
+            <TextView style="@style/Alana.FormLabel" android:text="Vagas" />
+            <EditText
+                android:id="@+id/etVagas"
+                style="@style/Alana.Input"
+                android:hint="Ex: 15"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="3" />
+
+            <!-- setDataAula: o dia da semana mostrado nas listas sai desta data -->
+            <TextView style="@style/Alana.FormLabel" android:text="Data da aula" />
+            <EditText
+                android:id="@+id/etDataAula"
+                style="@style/Alana.Input"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:focusable="false"
+                android:hint="dd/mm/aaaa"
+                android:importantForAutofill="no"
+                android:inputType="none" />
+
+            <!-- setHorarioInicio e setHorarioFim (o fim precisa ser depois do início) -->
+            <TextView style="@style/Alana.FormLabel" android:text="Horário" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etHorarioInicio"
+                    style="@style/Alana.Input"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:hint="Início 00:00"
+                    android:importantForAutofill="no"
+                    android:inputType="none" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="até"
+                    android:textColor="@color/alana_text_secondary" />
+
+                <EditText
+                    android:id="@+id/etHorarioFim"
+                    style="@style/Alana.Input"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:hint="Fim 00:00"
+                    android:importantForAutofill="no"
+                    android:inputType="none" />
+            </LinearLayout>
+
+            <!-- setProfessor(cpf, codigoTipoMonitor). "Sem professor" = setProfessor(null, null) -->
+            <TextView style="@style/Alana.FormLabel" android:text="Professor responsável (opcional)" />
+            <Spinner
+                android:id="@+id/spProfessor"
+                style="@style/Alana.Spinner" />
+
+            <TextView style="@style/Alana.FormLabel" android:text="Função do professor na turma" />
+            <Spinner
+                android:id="@+id/spFuncaoProfessor"
+                style="@style/Alana.Spinner" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCriarTurma"
+                style="@style/Alana.ButtonPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Criar turma" />
+
+            <!-- Só no modo edição: AdminRepository.excluirTurma (pedir confirmação antes) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExcluir"
+                style="@style/Alana.ButtonDanger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Excluir turma"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

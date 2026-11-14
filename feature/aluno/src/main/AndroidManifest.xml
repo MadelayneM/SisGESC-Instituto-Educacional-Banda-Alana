@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity
+            android:name=".LoginAlunoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".dashboardaluno"
+            android:exported="false" />
+        <activity
+            android:name=".minha_frequencia"
+            android:exported="false" />
+        <activity
+            android:name=".minha_turma"
+            android:exported="false" />
+        <activity
+            android:name=".perfil_aluno"
+            android:exported="false" />
+        <activity
+            android:name=".EditarDadosAluno"
+            android:exported="false" />
+    </application>
 
 </manifest>

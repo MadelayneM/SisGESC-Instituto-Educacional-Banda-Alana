@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Formulário do funcionário (professor/monitor ou coordenador): serve para CADASTRAR e para EDITAR.
+     Objeto: CadastroMembro. Cada campo abaixo indica o setter correspondente.
+       Cadastrar: new CadastroMembro() -> AdminRepository.cadastrarMembro
+       Editar:    AdminRepository.buscarCadastroMembro(cpf) preenche os campos ->
+                  AdminRepository.editarMembro. No modo edição: título "Editar membro",
+                  btnCadastrarMembro com texto "Salvar alterações", etCpf desabilitado
+                  e btnDesligar / btnExcluir visíveis.
+     Opções dos Spinners:
+       spCargo          AdminRepository.buscarOpcoesCargos
+       spTipoTelefone   AdminPerfil.TIPOS_TELEFONE
+       Turmas: cada linha é um activity_item_admin_turma_membro (turma + função).
+     Datas: a tela mostra dd/mm/aaaa e envia ano-mês-dia. CPF e telefone: só os dígitos. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_form_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- ===================== DADOS PESSOAIS ===================== -->
+            <TextView
+                style="@style/Alana.FormSection"
+                android:layout_marginTop="0dp"
+                android:text="Dados pessoais" />
+
+            <!-- setPrimeiroNome -->
+            <TextView style="@style/Alana.FormLabel" android:text="Nome" />
+            <EditText
+                android:id="@+id/etNome"
+                style="@style/Alana.Input"
+                android:hint="Ex: João"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <!-- setSobrenome -->
+            <TextView style="@style/Alana.FormLabel" android:text="Sobrenome" />
+            <EditText
+                android:id="@+id/etSobrenome"
+                style="@style/Alana.Input"
+                android:hint="Ex: Silva Santos"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <!-- setCpf (não muda no modo edição) -->
+            <TextView style="@style/Alana.FormLabel" android:text="CPF" />
+            <EditText
+                android:id="@+id/etCpf"
+                style="@style/Alana.Input"
+                android:hint="000.000.000-00"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="14" />
+
+            <!-- setDataNascimento: abre um DatePicker -->
+            <TextView style="@style/Alana.FormLabel" android:text="Data de nascimento" />
+            <EditText
+                android:id="@+id/etNascimento"
+                style="@style/Alana.Input"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:focusable="false"
+                android:hint="dd/mm/aaaa"
+                android:importantForAutofill="no"
+                android:inputType="none" />
+
+            <!-- setTelefone(ddd, número, tipo) - opcional -->
+            <TextView style="@style/Alana.FormLabel" android:text="Telefone (opcional)" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etDdd"
+                    style="@style/Alana.Input"
+                    android:layout_width="76dp"
+                    android:gravity="center"
+                    android:hint="DDD"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="2" />
+
+                <EditText
+                    android:id="@+id/etTelefone"
+                    style="@style/Alana.Input"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:hint="90000-0000"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    android:maxLength="10" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spTipoTelefone"
+                style="@style/Alana.Spinner" />
+
+            <!-- setEmail - opcional (vazio na edição apaga o e-mail) -->
+            <TextView style="@style/Alana.FormLabel" android:text="E-mail (opcional)" />
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/Alana.Input"
+                android:hint="email@exemplo.com"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+
+            <!-- ===================== TRABALHO ===================== -->
+            <TextView style="@style/Alana.FormSection" android:text="Trabalho" />
+
+            <!-- setCodigoCargo. Coordenador entra no app como Administrador. -->
+            <TextView style="@style/Alana.FormLabel" android:text="Cargo" />
+            <Spinner
+                android:id="@+id/spCargo"
+                style="@style/Alana.Spinner" />
+
+            <!-- adicionarTurma(nomeTurma, codigoTipoMonitor) para cada linha.
+                 Na edição, a lista substitui as turmas antigas (limparTurmas antes de adicionar). -->
+            <TextView style="@style/Alana.FormLabel" android:text="Turmas e função em cada uma" />
+            <LinearLayout
+                android:id="@+id/llTurmas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAdicionarTurma"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Adicionar turma"
+                android:textColor="@color/alana_yellow_link"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/alana_yellow_link" />
+
+            <!-- setSenha: obrigatória no cadastro; na edição, vazia mantém a senha atual -->
+            <TextView style="@style/Alana.FormLabel" android:text="Senha de acesso" />
+            <EditText
+                android:id="@+id/etSenha"
+                style="@style/Alana.Input"
+                android:hint="Senha para entrar no app"
+                android:importantForAutofill="no"
+                android:inputType="textPassword" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCadastrarMembro"
+                style="@style/Alana.ButtonPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Cadastrar membro" />
+
+            <!-- Só no modo edição: AdminRepository.desligarMembro (mantém o histórico) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDesligar"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:text="Desligar do instituto"
+                android:textColor="@color/alana_text_secondary"
+                android:visibility="gone"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/alana_border" />
+
+            <!-- Só no modo edição: AdminRepository.excluirMembro (pedir confirmação antes) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExcluir"
+                style="@style/Alana.ButtonDanger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Excluir membro"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <!-- CABEÇALHO -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Minha Turma"
+            android:textColor="#222222"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <!-- CONTEÚDO ROLÁVEL -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="12dp">
+
+            <!-- INFORMAÇÕES DA TURMA -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="153dp"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:background="@drawable/bg_card_aluno_amarelo"
+                android:elevation="2dp">
+
+                <TextView
+                    android:id="@+id/txtTurmaTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Musicalização 01"
+                    android:textColor="#222222"
+                    android:textSize="14sp" />
+
+                <!-- PRIMEIRA LINHA -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PROFESSOR"
+                            android:textColor="#8B7415"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/txtProfessorTurma"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="João Silva"
+                            android:textColor="#333333"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MONITOR"
+                            android:textColor="#8B7415"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/txtMonitorTurma"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ana Souza"
+                            android:textColor="#333333"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- SEGUNDA LINHA -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="7dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DIA"
+                            android:textColor="#8B7415"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/txtDiaTurma"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quarta-feira"
+                            android:textColor="#333333"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="HORÁRIO"
+                            android:textColor="#8B7415"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/txtHorarioTurma"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="14:00"
+                            android:textColor="#333333"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- TERCEIRA LINHA -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="7dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ALUNOS"
+                            android:textColor="#8B7415"
+                            android:textSize="8sp" />
+
+                        <TextView
+                            android:id="@+id/txtQuantidadeAlunos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="11"
+                            android:textColor="#333333"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- TÍTULO DA LISTA -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="9dp"
+                android:text="COLEGAS DE TURMA"
+                android:textColor="#777777"
+                android:textSize="9sp"
+                android:letterSpacing="0.04" />
+
+            <!-- LISTA DE COLEGAS: as linhas são criadas pelo método mostrarColegas de minha_turma.java -->
+            <LinearLayout
+                android:id="@+id/listaColegas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card_branco"
+                android:divider="@drawable/divisor_lista"
+                android:showDividers="middle"
+                android:elevation="1dp"
+                android:clipToOutline="true" />
+
+            <!-- Aparece só quando a turma não tem outros alunos -->
+            <TextView
+                android:id="@+id/txtSemColegas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nenhum colega nesta turma."
+                android:textColor="#777777"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- MENU INFERIOR -->
+    <include layout="@layout/menu_inferior_aluno" />
+
+</LinearLayout>

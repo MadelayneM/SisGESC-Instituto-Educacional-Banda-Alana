@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Menu inferior do Professor (mesmos botões que estavam na antiga LoginProfessorActivity).
+     As telas usam este arquivo com a tag <include>,
+     e os cliques são configurados na classe MenuProfessor. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:elevation="6dp">
+
+    <!-- INÍCIO -->
+    <TextView
+        android:id="@+id/navInicio"
+        style="@style/MenuItem"
+        android:textColor="@color/menu_professor_texto"
+        android:text="⌂&#10;Início" />
+
+    <!-- ALUNOS -->
+    <TextView
+        android:id="@+id/navAlunos"
+        style="@style/MenuItem"
+        android:textColor="@color/menu_professor_texto"
+        android:text="♟&#10;Alunos" />
+
+    <!-- TURMAS -->
+    <TextView
+        android:id="@+id/navTurmas"
+        style="@style/MenuItem"
+        android:textColor="@color/menu_professor_texto"
+        android:text="♫&#10;Turmas" />
+
+    <!-- FREQUÊNCIA -->
+    <TextView
+        android:id="@+id/navFrequencia"
+        style="@style/MenuItem"
+        android:textColor="@color/menu_professor_texto"
+        android:text="✓&#10;Freq." />
+
+    <!-- PERFIL -->
+    <TextView
+        android:id="@+id/navPerfil"
+        style="@style/MenuItem"
+        android:textColor="@color/menu_professor_texto"
+        android:text="♙&#10;Perfil" />
+
+</LinearLayout>

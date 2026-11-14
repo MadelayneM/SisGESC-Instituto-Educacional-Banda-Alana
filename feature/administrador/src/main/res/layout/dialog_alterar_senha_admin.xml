@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Conteúdo da janela "Alterar senha" do Perfil do Administrador.
+     Pensado para um AlertDialog: os botões Salvar e Cancelar são os do próprio dialog.
+     Salvar: AdminRepository.alterarSenha(cpf, senha atual, nova senha, ...) (ainda será criado)
+     A confirmação é só conferida na tela (nova senha e confirmação precisam ser iguais). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:text="SENHA ATUAL"
+        android:textColor="#AAAAAA"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtSenhaAtual"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:autofillHints="password"
+        android:background="@drawable/card_background"
+        android:hint="••••••••"
+        android:inputType="textPassword"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:textColorHint="#AAAAAA"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="6dp"
+        android:text="NOVA SENHA"
+        android:textColor="#AAAAAA"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtNovaSenha"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:autofillHints="newPassword"
+        android:background="@drawable/card_background"
+        android:hint="••••••••"
+        android:inputType="textPassword"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:textColorHint="#AAAAAA"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="6dp"
+        android:text="CONFIRMAR NOVA SENHA"
+        android:textColor="#AAAAAA"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtConfirmarSenha"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:autofillHints="newPassword"
+        android:background="@drawable/card_background"
+        android:hint="••••••••"
+        android:inputType="textPassword"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:textColorHint="#AAAAAA"
+        android:textSize="14sp" />
+
+</LinearLayout>

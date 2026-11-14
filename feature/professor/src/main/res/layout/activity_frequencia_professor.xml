@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tela Histórico de Frequência do Professor. Dados: ProfessorRepository.buscarHistoricoFrequencia -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FAFAFA">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:text="Histórico de Frequência"
+                android:textSize="23sp"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:gravity="center_vertical"/>
+
+            <!-- Legenda das contagens de cada aula -->
+            <TextView
+                android:text="🟢 presentes   🔴 ausentes"
+                android:textSize="12sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- Aparece só quando o professor não tem turmas -->
+            <TextView
+                android:id="@+id/txtSemFrequencia"
+                android:text="Você ainda não tem turmas."
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone" />
+
+            <!-- As seções das turmas (item_frequencia_turma_professor.xml) entram aqui -->
+            <LinearLayout
+                android:id="@+id/listaFrequencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- MENU INFERIOR -->
+    <include layout="@layout/menu_inferior_professor" />
+
+</LinearLayout>

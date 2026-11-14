@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Formulário do aluno: serve para CADASTRAR e para EDITAR.
+     Objeto: CadastroAluno. Cada campo abaixo indica o setter correspondente.
+       Cadastrar: new CadastroAluno() -> AdminRepository.cadastrarAluno
+       Editar:    AdminRepository.buscarCadastroAluno(cpf) preenche os campos ->
+                  AdminRepository.editarAluno. No modo edição: título "Editar aluno",
+                  btnCadastrar com texto "Salvar alterações", etCpf desabilitado (o CPF não muda)
+                  e btnExcluir visível (AdminRepository.excluirAluno).
+     Opções dos Spinners:
+       spTurma            AdminRepository.buscarOpcoesTurmas (o curso vem da turma)
+       spPeriodoEscola    CadastroAluno.PERIODOS_ESCOLA
+       spTipoTelefone     AdminPerfil.TIPOS_TELEFONE
+       spGrauParentesco   CadastroAluno.GRAUS_PARENTESCO
+       spPeriodo          CadastroAluno.PERIODOS
+     Datas: a tela mostra dd/mm/aaaa e envia ano-mês-dia (ex.: 2015-04-10).
+     CPF e telefones: enviar só os dígitos. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/alana_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_form_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- FOTO (opcional): depois de cadastrar, AdminRepository.atualizarFoto(cpf, ...) -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Alana.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <FrameLayout
+                        android:id="@+id/flFoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivFoto"
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_avatar_placeholder"
+                            app:shapeAppearanceOverlay="@style/Alana.Circle" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom|end"
+                            android:background="@drawable/bg_camera_badge"
+                            android:contentDescription="Escolher foto"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_camera" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Foto do aluno"
+                        android:textColor="@color/alana_text"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Opcional"
+                        android:textColor="@color/alana_hint"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ===================== ALUNO ===================== -->
+            <TextView style="@style/Alana.FormSection" android:text="Aluno" />
+
+            <!-- setPrimeiroNome -->
+            <TextView style="@style/Alana.FormLabel" android:text="Nome" />
+            <EditText
+                android:id="@+id/etNome"
+                style="@style/Alana.Input"
+                android:hint="Ex: Maria"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <!-- setSobrenome -->
+            <TextView style="@style/Alana.FormLabel" android:text="Sobrenome" />
+            <EditText
+                android:id="@+id/etSobrenome"
+                style="@style/Alana.Input"
+                android:hint="Ex: Silva Santos"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <!-- setDataNascimento: abre um DatePicker -->
+            <TextView style="@style/Alana.FormLabel" android:text="Data de nascimento" />
+            <EditText
+                android:id="@+id/etNascimento"
+                style="@style/Alana.Input"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:focusable="false"
+                android:hint="dd/mm/aaaa"
+                android:importantForAutofill="no"
+                android:inputType="none" />
+
+            <!-- setCpf (não muda no modo edição) -->
+            <TextView style="@style/Alana.FormLabel" android:text="CPF" />
+            <EditText
+                android:id="@+id/etCpf"
+                style="@style/Alana.Input"
+                android:hint="000.000.000-00"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="14" />
+
+            <!-- setNomeEscola -->
+            <TextView style="@style/Alana.FormLabel" android:text="Escola" />
+            <EditText
+                android:id="@+id/etEscola"
+                style="@style/Alana.Input"
+                android:hint="Ex: EMEF Monteiro Lobato"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords" />
+
+            <!-- setPeriodoEscola -->
+            <TextView style="@style/Alana.FormLabel" android:text="Período na escola" />
+            <Spinner
+                android:id="@+id/spPeriodoEscola"
+                style="@style/Alana.Spinner"
+                android:spinnerMode="dropdown"/>
+
+            <!-- setTelefone(ddd, número, tipo) - opcional -->
+            <TextView style="@style/Alana.FormLabel" android:text="Telefone (opcional)" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etDdd"
+                    style="@style/Alana.Input"
+                    android:layout_width="76dp"
+                    android:gravity="center"
+                    android:hint="DDD"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="2" />
+
+                <EditText
+                    android:id="@+id/etTelefone"
+                    style="@style/Alana.Input"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:hint="90000-0000"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    android:maxLength="10" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spTipoTelefone"
+                style="@style/Alana.Spinner"
+                android:spinnerMode="dropdown"/>
+
+            <!-- setEmail - opcional (vazio na edição apaga o e-mail) -->
+            <TextView style="@style/Alana.FormLabel" android:text="E-mail (opcional)" />
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/Alana.Input"
+                android:hint="email@exemplo.com"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+
+            <!-- ===================== RESPONSÁVEL ===================== -->
+            <TextView style="@style/Alana.FormSection" android:text="Responsável" />
+
+            <!-- setPrimeiroNomeResponsavel -->
+            <TextView style="@style/Alana.FormLabel" android:text="Nome" />
+            <EditText
+                android:id="@+id/etNomeResponsavel"
+                style="@style/Alana.Input"
+                android:hint="Ex: João"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <!-- setSobrenomeResponsavel -->
+            <TextView style="@style/Alana.FormLabel" android:text="Sobrenome" />
+            <EditText
+                android:id="@+id/etSobrenomeResponsavel"
+                style="@style/Alana.Input"
+                android:hint="Ex: Silva Santos"
+                android:importantForAutofill="no"
+                android:inputType="textCapWords|textPersonName" />
+
+            <!-- setCpfResponsavel: se o responsável já estiver cadastrado (irmão), ele é reaproveitado -->
+            <TextView style="@style/Alana.FormLabel" android:text="CPF" />
+            <EditText
+                android:id="@+id/etCpfResponsavel"
+                style="@style/Alana.Input"
+                android:hint="000.000.000-00"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="14" />
+
+            <!-- setDataNascimentoResponsavel (o banco exige) -->
+            <TextView style="@style/Alana.FormLabel" android:text="Data de nascimento" />
+            <EditText
+                android:id="@+id/etNascimentoResponsavel"
+                style="@style/Alana.Input"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:focusable="false"
+                android:hint="dd/mm/aaaa"
+                android:importantForAutofill="no"
+                android:inputType="none" />
+
+            <!-- setGrauParentesco -->
+            <TextView style="@style/Alana.FormLabel" android:text="Parentesco" />
+            <Spinner
+                android:id="@+id/spGrauParentesco"
+                style="@style/Alana.Spinner"
+                android:spinnerMode="dropdown"/>
+
+            <!-- setTelefoneResponsavel(ddd, número) - opcional, gravado como Celular -->
+            <TextView style="@style/Alana.FormLabel" android:text="Telefone do responsável (opcional)" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etDddResponsavel"
+                    style="@style/Alana.Input"
+                    android:layout_width="76dp"
+                    android:gravity="center"
+                    android:hint="DDD"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="2" />
+
+                <EditText
+                    android:id="@+id/etTelefoneResponsavel"
+                    style="@style/Alana.Input"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:hint="90000-0000"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    android:maxLength="10" />
+            </LinearLayout>
+
+            <!-- setAutorizadoBusca -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swAutorizadoBusca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:checked="true"
+                android:text="Pode buscar o aluno na escola"
+                android:textColor="@color/alana_text"
+                android:textSize="14sp" />
+
+            <!-- ===================== MATRÍCULA ===================== -->
+            <TextView style="@style/Alana.FormSection" android:text="Matrícula" />
+
+            <!-- setNomeTurma -->
+            <TextView style="@style/Alana.FormLabel" android:text="Turma" />
+            <Spinner
+                android:id="@+id/spTurma"
+                style="@style/Alana.Spinner" />
+
+            <!-- setPeriodo -->
+            <TextView style="@style/Alana.FormLabel" android:text="Período" />
+            <Spinner
+                android:id="@+id/spPeriodo"
+                style="@style/Alana.Spinner"
+                android:spinnerMode="dropdown"/>
+
+            <!-- setStatus: um dos dois fica selecionado (setSelected) -->
+            <TextView style="@style/Alana.FormLabel" android:text="Status da matrícula" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/statusAtivo"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_status_opcao"
+                    android:gravity="center"
+                    android:text="Ativo"
+                    android:textColor="@color/alana_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/statusInativo"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_status_opcao"
+                    android:gravity="center"
+                    android:text="Inativo"
+                    android:textColor="@color/alana_text"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- setSenhaLogin: obrigatória no cadastro; na edição, vazia mantém a senha atual -->
+            <TextView style="@style/Alana.FormLabel" android:text="Senha de acesso do aluno" />
+            <EditText
+                android:id="@+id/etSenha"
+                style="@style/Alana.Input"
+                android:hint="Senha para entrar no app"
+                android:importantForAutofill="no"
+                android:inputType="textPassword" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCadastrar"
+                style="@style/Alana.ButtonPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Cadastrar aluno" />
+
+            <!-- Só no modo edição: AdminRepository.excluirAluno (pedir confirmação antes) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExcluir"
+                style="@style/Alana.ButtonDanger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Excluir aluno"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tela Alunos do Professor. Dados: ProfessorRepository.buscarAlunos -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="#FAFAFA"
+        android:padding="18dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="Alunos"
+                android:textSize="25sp"
+                android:textColor="#333333"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="🔒 Somente leitura"
+                android:textSize="11sp"
+                android:textColor="#999999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- O texto digitado aqui vai como textoBusca em buscarAlunos -->
+        <EditText
+            android:id="@+id/pesquisarAluno"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="⌕  Pesquisar aluno..."
+            android:inputType="textPersonName"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:padding="12dp"
+            android:background="@drawable/card_background"
+            android:layout_marginTop="10dp" />
+
+        <!-- Aparece só quando a tela foi aberta pelo botão "Ver alunos" de uma turma -->
+        <TextView
+            android:id="@+id/txtFiltroTurma"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#B38B00"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:text="Turma: Violão A"
+            tools:visibility="visible" />
+
+        <TextView
+            android:text="Você pode visualizar os dados dos alunos, mas não pode editá-los."
+            android:textSize="13sp"
+            android:textColor="#999999"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Aparece só quando nenhum aluno é encontrado -->
+        <TextView
+            android:id="@+id/txtSemAlunos"
+            android:text="Nenhum aluno encontrado."
+            android:textSize="13sp"
+            android:textColor="#999999"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- As linhas dos alunos (item_aluno_professor.xml) entram aqui -->
+            <LinearLayout
+                android:id="@+id/listaAlunos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="5dp" />
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <!-- MENU INFERIOR -->
+    <include layout="@layout/menu_inferior_professor" />
+
+</LinearLayout>

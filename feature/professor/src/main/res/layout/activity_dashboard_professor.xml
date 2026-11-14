@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tela Início do Professor. Dados: ProfessorRepository.buscarInicio -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FAFAFA">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:text="Bem-vindo de volta,"
+                android:textSize="14sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Primeiro nome do professor: getPrimeiroNome() + "! 👋" -->
+            <TextView
+                android:id="@+id/txtNomeProfessor"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="28dp"
+                tools:text="Rafael! 👋" />
+
+            <TextView
+                android:text="MINHAS TURMAS"
+                android:textSize="12sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Aparece só quando o professor não tem turmas -->
+            <TextView
+                android:id="@+id/txtSemTurmas"
+                android:text="Você ainda não tem turmas."
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <!-- Os cartões das turmas (item_turma_inicio_professor.xml) entram aqui -->
+            <LinearLayout
+                android:id="@+id/listaTurmasInicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- MENU INFERIOR -->
+    <include layout="@layout/menu_inferior_professor" />
+
+</LinearLayout>

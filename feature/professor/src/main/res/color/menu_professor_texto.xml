@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cor dos botões do menu do Professor: a primeira linha vale para a tela atual, a segunda para as outras. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#B99B00" android:state_selected="true" />
+    <item android:color="#D6BD43" />
+</selector>

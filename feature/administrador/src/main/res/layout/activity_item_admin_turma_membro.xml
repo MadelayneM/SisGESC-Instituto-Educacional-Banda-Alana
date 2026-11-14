@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uma linha da lista "Turmas e função em cada uma" do formulário de membro.
+     A tela infla uma destas para cada turma e põe dentro de llTurmas.
+       spTurmaMembro   AdminRepository.buscarOpcoesTurmas      -> nomeTurma
+       spFuncaoMembro  AdminRepository.buscarOpcoesTiposMonitor -> codigoTipoMonitor
+       btnRemoverTurma tira a linha da lista -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <Spinner
+        android:id="@+id/spTurmaMembro"
+        style="@style/Alana.Spinner"
+        android:layout_width="0dp"
+        android:layout_weight="1" />
+
+    <Spinner
+        android:id="@+id/spFuncaoMembro"
+        style="@style/Alana.Spinner"
+        android:layout_width="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/btnRemoverTurma"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="6dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Remover turma"
+        android:padding="8dp"
+        android:rotation="45"
+        android:src="@drawable/ic_add"
+        android:tint="@color/alana_text_secondary" />
+</LinearLayout>

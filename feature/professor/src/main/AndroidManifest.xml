@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity
+            android:name=".LoginProfessorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".dashboardProfessor"
+            android:exported="false" />
+        <activity
+            android:name=".alunosProfessor"
+            android:exported="false" />
+        <activity
+            android:name=".chamadaProfessor"
+            android:exported="false" />
+        <activity
+            android:name=".dadosAlunoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".enviar_aviso"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".frequenciaProfessor"
+            android:exported="false" />
+        <activity
+            android:name=".perfilProfessor"
+            android:exported="false" />
+        <activity
+            android:name=".turmasProfessor"
+            android:exported="false" />
+    </application>
 
 </manifest>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Um cartão da tela Minhas Turmas. Mesmo visual do estilo TurmaItem, mas com um texto para cada dado.
+     O código cria uma cópia deste cartão para cada turma (ProfessorTurma) e o coloca em listaTurmas.
+     Os textos com "tools:" só aparecem na pré-visualização do Android Studio, nunca no app. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/card_background"
+    android:layout_marginBottom="14dp">
+
+    <!-- getNomeTurma() -->
+    <TextView
+        android:id="@+id/txtNomeTurma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#444444"
+        tools:text="Violão A" />
+
+    <!-- getTotalAlunos() e getNomeCurso() -->
+    <TextView
+        android:id="@+id/txtInfoTurma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:textSize="16sp"
+        android:textColor="#444444"
+        tools:text="4 alunos • Violão" />
+
+    <!-- getDiaSemana(), getHorarioInicio() e getHorarioFim() -->
+    <TextView
+        android:id="@+id/txtDiaHorario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:textSize="16sp"
+        android:textColor="#444444"
+        tools:text="📅 Terça-feira • 🕒 08:00 às 09:30" />
+
+    <!-- isAtiva(): "● Ativa" ou "○ Sem alunos" -->
+    <TextView
+        android:id="@+id/txtStatusTurma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:textSize="16sp"
+        android:textColor="#444444"
+        tools:text="● Ativa" />
+
+    <!-- Botão Enviar Aviso -->
+    <Button
+        android:id="@+id/btnEnviarAvisoTurma"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Enviar aviso"
+        android:textColor="#555555"
+        android:backgroundTint="#F2F2F2"
+        android:layout_marginTop="16dp"
+        android:textAllCaps="false" />
+
+</LinearLayout>

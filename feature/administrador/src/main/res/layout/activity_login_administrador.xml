@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- CABEÇALHO BRANCO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="20dp">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:contentDescription="Logo Banda Alana"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_banda_alana" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Gestão e acompanhamento escolar"
+                android:textColor="#777777"
+                android:textSize="13sp" />
+
+            <!-- SELO DO PERFIL - ADMINISTRADOR -->
+            <TextView
+                android:id="@+id/txtPerfilAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card_acesso"
+                android:backgroundTint="#E3F2FD"
+                android:gravity="center"
+                android:paddingStart="14dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="5dp"
+                android:text="Administrador do Sistema"
+                android:textColor="#1565C0"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- ÁREA DE LOGIN -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="12dp">
+
+            <!-- CPF OU USUÁRIO ADMINISTRATIVO -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:letterSpacing="0.04"
+                android:text="Email"
+                android:textColor="#777777"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edtCpf"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:autofillHints="emailAddress"
+                android:background="@drawable/bg_card_acesso"
+                android:hint="Digite seu usuário ou CPF"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="#333333"
+                android:textColorHint="#999999"
+                android:textSize="14sp" />
+
+            <!-- SENHA -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:letterSpacing="0.04"
+                android:text="SENHA"
+                android:textColor="#777777"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edtSenhaAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:autofillHints="password"
+                android:background="@drawable/bg_card_acesso"
+                android:hint="••••••••"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="#333333"
+                android:textColorHint="#999999"
+                android:textSize="14sp" />
+
+            <!-- ENTRAR -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnEntrarAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_botao_contorno_amarelo"
+                android:stateListAnimator="@null"
+                android:text="Entrar como Administrador"
+                android:textAllCaps="false"
+                android:textColor="#171717"
+                android:textSize="15sp"
+                app:backgroundTint="@null" />
+
+            <!-- RECUPERAÇÃO DE SENHA -->
+            <TextView
+                android:id="@+id/txtEsqueciSenhaAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Esqueci minha senha"
+                android:textColor="#1565C0"
+                android:textSize="13sp" />
+
+            <!-- EMPURRA O "VOLTAR" PARA BAIXO -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- VOLTAR À SELEÇÃO -->
+            <LinearLayout
+                android:id="@+id/btnVoltarPerfilAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="←"
+                    android:textColor="#777777"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Voltar à seleção de perfil"
+                    android:textColor="#777777"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

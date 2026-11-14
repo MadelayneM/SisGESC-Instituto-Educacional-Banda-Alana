@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_width="160dp"
                 android:layout_height="100dp"
-                android:src="@drawable/logo_banda_alana"
+                android:src="@drawable/logo_tela_inicial"
                 android:scaleType="fitCenter"
                 android:contentDescription="Logo Banda Alana" />
 

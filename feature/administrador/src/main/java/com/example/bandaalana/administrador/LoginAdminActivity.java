@@ -39,6 +39,7 @@ public class LoginAdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_administrador);
+        findViewById(R.id.btnVoltarPerfilAdmin).setOnClickListener(v -> finish());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -51,6 +52,11 @@ public class LoginAdminActivity extends AppCompatActivity {
         authRepository = new AuthRepository();
 
         btnEntrar.setOnClickListener(v -> tentarEntrar());
+
+        findViewById(R.id.txtEsqueciSenhaAdmin).setOnClickListener(v -> {
+            Intent intent = new Intent(LoginAdminActivity.this, RecuperarSenhaActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void tentarEntrar() {

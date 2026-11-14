@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FAFAFA"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Criar nova senha"
+        android:textColor="#222222"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="CPF localizado! Digite e confirme sua nova senha de acesso abaixo."
+        android:textColor="#777777"
+        android:textSize="13sp" />
+
+    <!-- NOVA SENHA -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="6dp"
+        android:text="NOVA SENHA"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        android:letterSpacing="0.04" />
+
+    <EditText
+        android:id="@+id/edtNovaSenhaDialog"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_card_acesso"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:hint="Mínimo 4 caracteres"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:inputType="textPassword" />
+
+    <!-- CONFIRMAR SENHA -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="6dp"
+        android:text="CONFIRMAR NOVA SENHA"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        android:letterSpacing="0.04" />
+
+    <EditText
+        android:id="@+id/edtConfirmarSenhaDialog"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_card_acesso"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:hint="Repita a nova senha"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:inputType="textPassword" />
+
+    <!-- BOTÕES -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancelarDialogSenha"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_card_acesso"
+            app:backgroundTint="@null"
+            android:text="Cancelar"
+            android:textColor="#555555"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSalvarDialogSenha"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/campo_amarelo"
+            app:backgroundTint="@null"
+            android:text="Salvar senha"
+            android:textColor="#171717"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
+    </LinearLayout>
+
+</LinearLayout>

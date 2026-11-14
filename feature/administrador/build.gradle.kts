@@ -21,7 +21,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.activity.ktx)
     implementation(libs.appcompat)
+    implementation(libs.constraintlayout)
     implementation(libs.material)
 
     // Bibliotecas de Rede e Imagens (Retrofit, Gson e Glide)

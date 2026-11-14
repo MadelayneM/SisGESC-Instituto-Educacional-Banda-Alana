@@ -78,4 +78,92 @@ public class AuthRepository {
     private void avisarFalhaDeConexao(Throwable erro, RepositoryCallback<UsuarioLogado> callback) {
         callback.onErro("Falha na comunicação com o servidor: " + erro.getMessage());
     }
+
+
+    /*public void verificarCpfRecuperacao(String cpf, RepositoryCallback<Boolean> callback) {
+        service.verificarFuncionarioPorCpf("eq." + cpf, "fk_cpf_func", 1)
+                .enqueue(new Callback<List<FuncionarioLoginResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<FuncionarioLoginResponse>> call, Response<List<FuncionarioLoginResponse>> response) {
+                        if (!response.isSuccessful() || response.body() == null) {
+                            callback.onErro("Erro ao verificar CPF (HTTP " + response.code() + ").");
+                        } else if (response.body().isEmpty()) {
+                            callback.onErro("CPF de funcionário não cadastrado.");
+                        } else {
+                            callback.onSucesso(true);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<FuncionarioLoginResponse>> call, Throwable t) {
+                        callback.onErro("Falha na comunicação com o servidor: " + t.getMessage());
+                    }
+                });
+    }*/
+    // Administrador Recupear Senha
+    /* public void verificarCpfRecuperacao(String cpf, RepositoryCallback<Boolean> callback) {
+        service.verificarFuncionarioPorCpf("eq." + cpf, "fk_cpf_func", 1)
+                .enqueue(new Callback<List<FuncionarioLoginResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<FuncionarioLoginResponse>> call, Response<List<FuncionarioLoginResponse>> response) {
+                        if (!response.isSuccessful() || response.body() == null) {
+                            callback.onErro("Erro ao verificar CPF (HTTP " + response.code() + ").");
+                        } else if (response.body().isEmpty()) {
+                            callback.onErro("CPF de funcionário não cadastrado.");
+                        } else {
+                            callback.onSucesso(true);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<FuncionarioLoginResponse>> call, Throwable t) {
+                        callback.onErro("Falha na comunicação com o servidor: " + t.getMessage());
+                    }
+                });
+    }*/
+   // Administrador Recupear Senha
+    /*public void redefinirSenhaPorCpf(String cpf, String novaSenha, RepositoryCallback<String> callback) {
+        java.util.Map<String, String> campos = new java.util.HashMap<>();
+        campos.put("senha_funcionario", novaSenha);
+        service.atualizarSenhaFuncionario("eq." + cpf, campos)
+                .enqueue(new Callback<List<FuncionarioLoginResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<FuncionarioLoginResponse>> call, Response<List<FuncionarioLoginResponse>> response) {
+                        if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                            callback.onSucesso("Senha alterada com sucesso!");
+                        } else {
+                            callback.onErro("Erro ao redefinir a senha.");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<FuncionarioLoginResponse>> call, Throwable t) {
+                        callback.onErro("Falha na comunicação com o servidor: " + t.getMessage());
+                    }
+                });
+    }*/
+
+    /*public void redefinirSenhaPorCpf(String cpf, String novaSenha, RepositoryCallback<String> callback) {
+        java.util.Map<String, String> campos = new java.util.HashMap<>();
+        campos.put("senha_funcionario", novaSenha);
+        service.atualizarSenhaFuncionario("eq." + cpf, campos)
+                .enqueue(new Callback<List<FuncionarioLoginResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<FuncionarioLoginResponse>> call, Response<List<FuncionarioLoginResponse>> response) {
+                        if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                            callback.onSucesso("Senha alterada com sucesso!");
+                        } else {
+                            callback.onErro("Erro ao redefinir a senha.");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<FuncionarioLoginResponse>> call, Throwable t) {
+                        callback.onErro("Falha na comunicação com o servidor: " + t.getMessage());
+                    }
+                });
+    }*/
+
+
+
 }

@@ -29,7 +29,7 @@
                 android:layout_height="100dp"
                 android:contentDescription="Logo Banda Alana"
                 android:scaleType="fitCenter"
-                android:src="@drawable/logo_banda_alana" />
+                android:src="@drawable/logo_tela_inicial" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/bg_botao_contorno_amarelo"
+                android:background="@drawable/campo_amarelo"
                 android:stateListAnimator="@null"
                 android:text="Entrar"
                 android:textAllCaps="false"

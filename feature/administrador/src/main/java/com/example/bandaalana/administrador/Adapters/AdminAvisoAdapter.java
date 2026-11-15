@@ -1,9 +1,9 @@
 package com.example.bandaalana.administrador.Adapters;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +40,26 @@ public class AdminAvisoAdapter extends RecyclerView.Adapter<AdminAvisoAdapter.Av
         notifyDataSetChanged();
     }
 
+    public void removerAvisoPorId(Integer id) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getId() != null && lista.get(i).getId().equals(id)) {
+                lista.remove(i);
+                notifyItemRemoved(i);
+                notifyItemRangeChanged(i, lista.size());
+                break;
+            }
+        }
+    }
+
+    public void removerAviso(Aviso aviso) {
+        int posicao = lista.indexOf(aviso);
+        if (posicao != -1) {
+            lista.remove(posicao);
+            notifyItemRemoved(posicao);
+            notifyItemRangeChanged(posicao, lista.size());
+        }
+    }
+
     @NonNull
     @Override
     public AvisoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -72,7 +92,7 @@ public class AdminAvisoAdapter extends RecyclerView.Adapter<AdminAvisoAdapter.Av
 
     static class AvisoViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitulo, tvDescricao, tvData;
-        android.widget.ImageButton btnExcluir;
+        ImageButton btnExcluir;
 
         AvisoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,15 +102,4 @@ public class AdminAvisoAdapter extends RecyclerView.Adapter<AdminAvisoAdapter.Av
             btnExcluir = itemView.findViewById(R.id.btnExcluirAvisoItem);
         }
     }
-
-
-    public void removerAviso(Aviso aviso) {
-        int posicao = lista.indexOf(aviso);
-        if (posicao != -1) {
-            lista.remove(posicao);
-            notifyItemRemoved(posicao);
-            notifyItemRangeChanged(posicao, lista.size());
-        }
-    }
-
 }

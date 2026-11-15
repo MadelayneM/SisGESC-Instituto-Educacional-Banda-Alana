@@ -185,7 +185,9 @@ public class AdminAvisos extends AppCompatActivity {
                         public void onSucesso(Void resultado) {
                             Toast.makeText(AdminAvisos.this, "Aviso excluído com sucesso!", Toast.LENGTH_SHORT).show();
                             //carregarAvisos();
-                            adapter.removerAviso(aviso);
+                            //adapter.removerAviso(aviso);
+                            // Opção A: Se o adapter remove por ID (recomendado)
+                            adapter.removerAvisoPorId(aviso.getId());
                         }
 
                         @Override

@@ -17,6 +17,7 @@ import com.example.bandaalana.administrador.Supabase.AdminService;
 import com.example.bandaalana.administrador.Supabase.SupabaseClient;
 import com.example.bandaalana.administrador.Supabase.SupabaseService;
 import com.google.gson.GsonBuilder;
+import com.example.navigation.model.LoginResponse;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -50,43 +51,43 @@ public class AdminRepository {
 
     private static final String SELECT_PESSOA = "tb_pessoa(primeiro_nome,sobrenome,imagem_perfil)";
     private static final String SELECT_PESSOA_COMPLETA =
-            "tb_pessoa(primeiro_nome,sobrenome,data_nasc,imagem_perfil,tb_email(pk_email),tb_telefone(pk_ddd,pk_numero,tipo_telefone))";
+            "tb_pessoa(primeiro_nome,sobrenome,data_nasc,imagem_perfil,tb_email(email),tb_telefone(pk_ddd,pk_numero,tipo_telefone))";
 
     private static final String SELECT_ALUNOS =
             "fk_cpf," + SELECT_PESSOA + ","
-            + "tb_matricula(id_matricula,status_matricula,tb_turma(pk_nome_turma),tb_curso(nome_curso))";
+                    + "tb_matricula(id_matricula,status_matricula,tb_turma(pk_nome_turma),tb_curso(nome_curso))";
 
     private static final String SELECT_CADASTRO_ALUNO =
             "fk_cpf,nome_escola,periodo_escola," + SELECT_PESSOA_COMPLETA + ","
-            + "tb_aluno_responsavel(fk_cpf_responsavel,grau_parentesco,autorizado_busca,"
-            + "tb_responsavel(tb_pessoa(primeiro_nome,sobrenome,data_nasc,tb_telefone(pk_ddd,pk_numero,tipo_telefone)))),"
-            + "tb_matricula(id_matricula,periodo,status_matricula,tb_turma(pk_nome_turma))";
+                    + "tb_aluno_responsavel(fk_cpf_responsavel,grau_parentesco,autorizado_busca,"
+                    + "tb_responsavel(tb_pessoa(primeiro_nome,sobrenome,data_nasc,tb_telefone(pk_ddd,pk_numero,tipo_telefone)))),"
+                    + "tb_matricula(id_matricula,periodo,status_matricula,tb_turma(pk_nome_turma))";
 
     private static final String SELECT_RECENTES =
             "id_matricula,fk_cpf,status_matricula,tb_aluno(" + SELECT_PESSOA + "),"
-            + "tb_turma(pk_nome_turma),tb_curso(nome_curso)";
+                    + "tb_turma(pk_nome_turma),tb_curso(nome_curso)";
 
     private static final String SELECT_CARGOS = "tb_funcionario_cargo(fk_cod_cargo,data_saida,tb_cargo(cargo))";
 
     private static final String SELECT_EQUIPE =
             "fk_cpf_func," + SELECT_PESSOA + "," + SELECT_CARGOS + ","
-            + "tb_turma_funcionario(fk_nome_turma,tb_tipo_monitor(tipo_monitor))";
+                    + "tb_turma_funcionario(fk_nome_turma,tb_tipo_monitor(tipo_monitor))";
 
     private static final String SELECT_CADASTRO_MEMBRO =
             "fk_cpf_func," + SELECT_PESSOA_COMPLETA + "," + SELECT_CARGOS + ","
-            + "tb_turma_funcionario(fk_nome_turma,fk_cod_tipo)";
+                    + "tb_turma_funcionario(fk_nome_turma,fk_cod_tipo)";
 
     private static final String SELECT_PERFIL = "fk_cpf_func," + SELECT_PESSOA_COMPLETA + "," + SELECT_CARGOS;
 
     private static final String SELECT_TURMAS =
             "pk_nome_turma,pk_horario,fk_cod_curso,qtd_alunos,data_da_aula,horario_inicio,horario_fim,"
-            + "tb_curso(nome_curso),"
-            + "tb_turma_funcionario(tb_funcionario(tb_pessoa(primeiro_nome,sobrenome))),"
-            + "tb_matricula(status_matricula,tb_frequencia(presenca))";
+                    + "tb_curso(nome_curso),"
+                    + "tb_turma_funcionario(tb_funcionario(tb_pessoa(primeiro_nome,sobrenome))),"
+                    + "tb_matricula(status_matricula,tb_frequencia(presenca))";
 
     private static final String SELECT_CADASTRO_TURMA =
             "pk_nome_turma,fk_cod_curso,qtd_alunos,data_da_aula,horario_inicio,horario_fim,"
-            + "tb_turma_funcionario(fk_cpf_funcionario,fk_cod_tipo)";
+                    + "tb_turma_funcionario(fk_cpf_funcionario,fk_cod_tipo)";
 
     private final AdminService admin;
     private final SupabaseService service;
@@ -109,19 +110,19 @@ public class AdminRepository {
     // além do primeiro nome para o "Bem-vindo".
     public void buscarResumo(String cpf, RepositoryCallback<AdminResumo> callback) {
         buscarFuncionario(cpf, "fk_cpf_func," + SELECT_PESSOA, callback, eu ->
-            contar("tb_aluno", filtros(), callback, totalAlunos ->
-                contar("tb_turma", filtros(), callback, totalTurmas ->
-                    executar(admin.buscarFuncionarios(filtros("select", "fk_cpf_func," + SELECT_CARGOS)), callback, funcionarios ->
-                        contar("tb_frequencia", filtros(), callback, chamadas ->
-                            contar("tb_frequencia", filtros("presenca", "eq.true"), callback, presencas -> {
-                                Integer frequencia = chamadas == 0 ? null : Math.round(presencas * 100f / chamadas);
-                                callback.onSucesso(new AdminResumo(
-                                        eu.pessoa == null ? null : eu.pessoa.primeiroNome,
-                                        totalAlunos,
-                                        totalTurmas,
-                                        AdminMapper.soProfessores(funcionarios).size(),
-                                        frequencia));
-                            }))))));
+                contar("tb_aluno", filtros(), callback, totalAlunos ->
+                        contar("tb_turma", filtros(), callback, totalTurmas ->
+                                executar(admin.buscarFuncionarios(filtros("select", "fk_cpf_func," + SELECT_CARGOS)), callback, funcionarios ->
+                                        contar("tb_frequencia", filtros(), callback, chamadas ->
+                                                contar("tb_frequencia", filtros("presenca", "eq.true"), callback, presencas -> {
+                                                    Integer frequencia = chamadas == 0 ? null : Math.round(presencas * 100f / chamadas);
+                                                    callback.onSucesso(new AdminResumo(
+                                                            eu.pessoa == null ? null : eu.pessoa.primeiroNome,
+                                                            totalAlunos,
+                                                            totalTurmas,
+                                                            AdminMapper.soProfessores(funcionarios).size(),
+                                                            frequencia));
+                                                }))))));
     }
 
     // Lista "Alunos recentes": as últimas matrículas feitas, da mais nova para a mais antiga
@@ -157,6 +158,7 @@ public class AdminRepository {
     }
 
     // Botão "Cadastrar aluno": cria a pessoa, o aluno, os contatos, o responsável e a matrícula
+    // Botão "Cadastrar aluno": cria a pessoa, o aluno, os contatos, o responsável e a matrícula
     public void cadastrarAluno(CadastroAluno aluno, RepositoryCallback<Void> callback) {
         String erro = validarAluno(aluno, true);
         if (erro != null) {
@@ -164,18 +166,30 @@ public class AdminRepository {
             return;
         }
         verificarCpfLivre(aluno.getCpf(), callback, () ->
-            buscarCursoDaTurma(aluno.getNomeTurma(), callback, codCurso -> {
-                String cpf = aluno.getCpf();
-                List<Etapa> etapas = new ArrayList<>();
-                etapas.add(inserir("tb_pessoa", pessoa(cpf, aluno.getPrimeiroNome(), aluno.getSobrenome(),
-                        aluno.getDataNascimento()), "dados pessoais do aluno"));
-                etapas.add(inserir("tb_aluno", dadosEscolares(cpf, aluno), "aluno"));
-                etapasEmail(etapas, cpf, null, aluno.getEmail());
-                etapasTelefone(etapas, cpf, null, null, aluno.getDdd(), aluno.getNumeroTelefone(), aluno.getTipoTelefone());
-                etapasNovoResponsavel(etapas, aluno);
-                etapas.add(inserir("tb_matricula", novaMatricula(aluno, codCurso), "matrícula"));
-                gravarEmOrdem(etapas, callback, () -> excluirAluno(cpf, semAviso()));
-            }));
+                buscarCursoDaTurma(aluno.getNomeTurma(), callback, codCurso -> {
+                    String cpf = aluno.getCpf();
+                    List<Etapa> etapas = new ArrayList<>();
+
+                    // Etapas de cadastro em sequência rigorosa
+                    etapas.add(inserir("tb_pessoa", pessoa(cpf, aluno.getPrimeiroNome(), aluno.getSobrenome(),
+                            aluno.getDataNascimento()), "dados pessoais do aluno"));
+                    etapas.add(inserir("tb_aluno", dadosEscolares(cpf, aluno), "aluno"));
+
+                    Map<String, Object> loginAluno = new HashMap<>();
+                    loginAluno.put("fk_cpf", cpf);
+                    loginAluno.put("senha_hash", aluno.getSenhaLogin());
+                    loginAluno.put("ativo", true);
+                    loginAluno.put("trocar_senha", true);
+                    etapas.add(inserir("tb_login", loginAluno, "dados de login"));
+
+                    etapasEmail(etapas, cpf, null, aluno.getEmail());
+                    etapasTelefone(etapas, cpf, null, null, aluno.getDdd(), aluno.getNumeroTelefone(), aluno.getTipoTelefone());
+                    etapasNovoResponsavel(etapas, aluno);
+                    etapas.add(inserir("tb_matricula", novaMatricula(aluno, codCurso), "matrícula"));
+
+                    // Se der erro no meio, o 'excluirAluno' limpa tudo o que foi inserido parcialmente para não deixar lixo no banco
+                    gravarEmOrdem(etapas, callback, () -> excluirAluno(cpf, semAviso()));
+                }));
     }
 
     // Botão "Salvar" do formulário aberto por buscarCadastroAluno.
@@ -237,7 +251,7 @@ public class AdminRepository {
                 matricula.put("fk_cod_curso", codCurso);
                 matricula.put("periodo", aluno.getPeriodo());
                 matricula.put("status_matricula", aluno.getStatus());
-                if (!estaVazio(aluno.getSenhaLogin())) matricula.put("senha_login", aluno.getSenhaLogin());
+
                 etapas.add(atualizar("tb_matricula", filtros("id_matricula", "eq." + aluno.getIdMatricula()),
                         matricula, "matrícula"));
             }
@@ -499,10 +513,19 @@ public class AdminRepository {
             etapas.add(inserir("tb_pessoa", pessoa(cpf, membro.getPrimeiroNome(), membro.getSobrenome(),
                     membro.getDataNascimento()), "dados pessoais"));
             Map<String, Object> funcionario = linha("fk_cpf_func", cpf);
-            funcionario.put("senha_funcionario", membro.getSenha());
+// (A linha antiga .put("senha_funcionario", ...) foi removida daqui)
             etapas.add(inserir("tb_funcionario", funcionario, "funcionário"));
-            etapas.add(inserir("tb_funcionario_cargo", novoCargo(cpf, membro.getCodigoCargo()), "cargo"));
-            etapasEmail(etapas, cpf, null, membro.getEmail());
+
+// ---> ADICIONE ESTE BLOCO ABAIXO:
+            Map<String, Object> loginMembro = new HashMap<>();
+            loginMembro.put("fk_cpf", cpf);
+            loginMembro.put("senha_hash", membro.getSenha());
+            loginMembro.put("ativo", true);
+            loginMembro.put("trocar_senha", true);
+            etapas.add(inserir("tb_login", loginMembro, "dados de login"));
+// <--------------------------------
+
+            etapas.add(inserir("tb_funcionario_cargo", novoCargo(cpf, membro.getCodigoCargo()), "cargo"));   etapasEmail(etapas, cpf, null, membro.getEmail());
             etapasTelefone(etapas, cpf, null, null, membro.getDdd(), membro.getNumeroTelefone(), membro.getTipoTelefone());
             etapasTurmasDoMembro(etapas, cpf, membro);
             gravarEmOrdem(etapas, callback, () -> excluirMembro(cpf, semAviso()));
@@ -615,18 +638,28 @@ public class AdminRepository {
     }
 
     // Janela "Alterar senha": o próprio PATCH confere a senha atual
+    // Janela "Alterar senha": atualizado para a tabela centralizada tb_login
     public void alterarSenha(String cpf, String senhaAtual, String novaSenha, RepositoryCallback<Void> callback) {
         if (estaVazio(novaSenha)) {
             callback.onErro("A nova senha não pode ficar em branco.");
             return;
         }
-        Map<String, String> filtros = filtrosSemSenha("fk_cpf_func", cpf);
-        filtros.put("senha_funcionario", "eq." + senhaAtual);
-        executar(admin.atualizar("tb_funcionario", filtros, linha("senha_funcionario", novaSenha)), callback,
-                alteradas -> {
-                    if (alteradas.isEmpty()) callback.onErro("Senha atual incorreta ou alteração não permitida.");
-                    else callback.onSucesso(null);
-                });
+
+        Map<String, Object> campos = new HashMap<>();
+        campos.put("senha_hash", novaSenha);
+        campos.put("trocar_senha", false);
+
+        // O select pede só o fk_cpf para a senha não voltar na resposta
+        Call<List<LoginResponse>> chamada =
+                service.alterarSenhaLogin("eq." + cpf, "eq." + senhaAtual, "fk_cpf", campos);
+
+        executar(chamada, callback, alteradas -> {
+            if (alteradas.isEmpty()) {
+                callback.onErro("Senha atual incorreta ou alteração não permitida.");
+            } else {
+                callback.onSucesso(null);
+            }
+        });
     }
 
     // Envia a foto para o Storage, salva o endereço em tb_pessoa e devolve esse endereço.
@@ -654,7 +687,7 @@ public class AdminRepository {
             callback.onErro("O e-mail não pode ficar em branco.");
             return;
         }
-        executar(admin.atualizar("tb_email", filtros("fk_cpf", "eq." + cpf), linha("pk_email", novoEmail.trim())),
+        executar(admin.atualizar("tb_email", filtros("fk_cpf", "eq." + cpf), linha("email", novoEmail.trim())),
                 callback, alteradas -> {
                     if (!alteradas.isEmpty()) {
                         callback.onSucesso(null);
@@ -740,12 +773,12 @@ public class AdminRepository {
         String email = vazioParaNull(novo);
         if (original == null && email != null) {
             Map<String, Object> linha = linha("fk_cpf", cpf);
-            linha.put("pk_email", email);
+            linha.put("email", email);
             etapas.add(inserir("tb_email", linha, "e-mail"));
         } else if (original != null && email == null) {
             etapas.add(excluir("tb_email", filtros("fk_cpf", "eq." + cpf), "e-mail", true));
         } else if (original != null && !original.equals(email)) {
-            etapas.add(atualizar("tb_email", filtros("fk_cpf", "eq." + cpf), linha("pk_email", email), "e-mail"));
+            etapas.add(atualizar("tb_email", filtros("fk_cpf", "eq." + cpf), linha("email", email), "e-mail"));
         }
     }
 
@@ -815,7 +848,7 @@ public class AdminRepository {
         matricula.put("data_matricula", hojeNoBanco());
         matricula.put("periodo", aluno.getPeriodo());
         matricula.put("status_matricula", aluno.getStatus());
-        matricula.put("senha_login", aluno.getSenhaLogin());
+
         return matricula;
     }
 
@@ -933,6 +966,7 @@ public class AdminRepository {
     private Map<String, String> selectSemSenha(String tabela) {
         if ("tb_funcionario".equals(tabela)) return filtros("select", "fk_cpf_func");
         if ("tb_matricula".equals(tabela)) return filtros("select", "id_matricula");
+        if ("tb_login".equals(tabela)) return filtros("select", "fk_cpf"); // <-- ADICIONE APENAS ESTA LINHA
         return filtros();
     }
 

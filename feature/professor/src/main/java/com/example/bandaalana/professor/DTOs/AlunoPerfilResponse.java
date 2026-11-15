@@ -40,7 +40,7 @@ public class AlunoPerfilResponse {
 
     // Espelha o e-mail da tabela tb_email
     public static class Email {
-        @SerializedName("pk_email") public String endereco;
+        @SerializedName("email") public String endereco;
     }
 
     // Espelha o telefone da tabela tb_telefone

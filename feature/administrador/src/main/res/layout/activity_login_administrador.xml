@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:letterSpacing="0.04"
-                android:text="Email"
+                android:text="CPF"
                 android:textColor="#777777"
                 android:textSize="12sp" />
 
@@ -177,6 +177,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/btnVoltarPerfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Voltar à seleção de perfil"

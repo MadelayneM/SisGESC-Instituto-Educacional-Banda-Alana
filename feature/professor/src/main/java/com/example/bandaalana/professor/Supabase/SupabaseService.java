@@ -6,6 +6,7 @@ import com.example.bandaalana.professor.DTOs.FuncionarioLoginResponse;
 import com.example.bandaalana.professor.DTOs.FuncionarioResponse;
 import com.example.bandaalana.professor.DTOs.MatriculaResponse;
 import com.example.bandaalana.professor.DTOs.Pessoa;
+import com.example.navigation.model.LoginResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -31,18 +32,17 @@ public interface SupabaseService {
     // O CPF e a senha vão como filtro: a resposta só traz linhas se os dois baterem,
     // e a senha nunca volta do servidor.
 
-    @GET("rest/v1/tb_matricula")
-    Call<List<MatriculaResponse>> entrarComoAluno(
+    @GET("rest/v1/tb_login")
+    Call<List<LoginResponse>> realizarLogin(
             @Query("fk_cpf") String filtroCpf,
-            @Query("senha_login") String filtroSenha,
-            @Query("status_matricula") String filtroStatus,
+            @Query("senha_hash") String filtroSenha,
+            @Query("ativo") String filtroAtivo,
             @Query("select") String select,
             @Query("limit") int limite);
 
     @GET("rest/v1/tb_funcionario")
-    Call<List<FuncionarioLoginResponse>> entrarComoFuncionario(
+    Call<List<FuncionarioLoginResponse>> buscarFuncionarioPorCpf(
             @Query("fk_cpf_func") String filtroCpf,
-            @Query("senha_funcionario") String filtroSenha,
             @Query("select") String select,
             @Query("limit") int limite);
 
@@ -166,4 +166,12 @@ public interface SupabaseService {
     @Headers("Prefer: return=representation")
     @POST("rest/v1/tb_aviso")
     Call<List<Aviso>> enviarAviso(@Body Map<String, String> campos);
+
+    @Headers("Prefer: return=representation")
+    @PATCH("rest/v1/tb_login")
+    Call<List<LoginResponse>> alterarSenhaLogin(
+            @Query("fk_cpf") String filtroCpf,
+            @Query("senha_hash") String filtroSenhaAtual,
+            @Query("select") String select,
+            @Body Map<String, Object> campos);
 }

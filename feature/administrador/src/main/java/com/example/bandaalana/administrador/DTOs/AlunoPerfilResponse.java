@@ -35,7 +35,8 @@ public class AlunoPerfilResponse {
     }
 
     public static class Email {
-        @SerializedName("pk_email") public String endereco;
+        @SerializedName("email") public String endereco;
+
     }
 
     public static class Telefone {

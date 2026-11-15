@@ -5,6 +5,7 @@ import com.example.bandaalana.feature.aluno.DTOs.Aviso;
 import com.example.bandaalana.feature.aluno.DTOs.FuncionarioLoginResponse;
 import com.example.bandaalana.feature.aluno.DTOs.MatriculaResponse;
 import com.example.bandaalana.feature.aluno.DTOs.Pessoa;
+import com.example.navigation.model.LoginResponse; // 1. NOVO IMPORT
 
 import java.util.List;
 import java.util.Map;
@@ -26,22 +27,19 @@ public interface SupabaseService {
     @GET("rest/v1/tb_pessoa")
     Call<List<Pessoa>> buscarPessoaPorCpf(@Query("pk_cpf") String filtroCpf);
 
-    // ===== Login =====
-    // O CPF e a senha vão como filtro: a resposta só traz linhas se os dois baterem,
-    // e a senha nunca volta do servidor.
-
-    @GET("rest/v1/tb_matricula")
-    Call<List<MatriculaResponse>> entrarComoAluno(
+    // ===== 2. NOVO LOGIN CENTRALIZADO (tb_login) =====
+    @GET("rest/v1/tb_login")
+    Call<List<LoginResponse>> realizarLogin(
             @Query("fk_cpf") String filtroCpf,
-            @Query("senha_login") String filtroSenha,
-            @Query("status_matricula") String filtroStatus,
+            @Query("senha_hash") String filtroSenha,
+            @Query("ativo") String filtroAtivo,
             @Query("select") String select,
             @Query("limit") int limite);
 
+    // ===== 3. BUSCAR FUNCIONÁRIO SEM SENHA =====
     @GET("rest/v1/tb_funcionario")
-    Call<List<FuncionarioLoginResponse>> entrarComoFuncionario(
+    Call<List<FuncionarioLoginResponse>> buscarFuncionarioPorCpf(
             @Query("fk_cpf_func") String filtroCpf,
-            @Query("senha_funcionario") String filtroSenha,
             @Query("select") String select,
             @Query("limit") int limite);
 
@@ -66,8 +64,16 @@ public interface SupabaseService {
             @Query("limit") int limite,
             @Query("select") String select);
 
-    // O filtro de senha faz o próprio PATCH validar a senha atual:
-    // se ela estiver errada, nenhuma linha muda e a resposta vem como lista vazia.
+    // Novo método de troca de senha na tb_login (para a Frente 1)
+    @Headers("Prefer: return=representation")
+    @PATCH("rest/v1/tb_login")
+    Call<List<LoginResponse>> alterarSenhaLogin(
+            @Query("fk_cpf") String filtroCpf,
+            @Query("senha_hash") String filtroSenhaAtual,
+            @Query("select") String select,
+            @Body Map<String, Object> campos);
+
+    // Mantido temporariamente para não dar erro de compilação antes da Frente 1
     @Headers("Prefer: return=representation")
     @PATCH("rest/v1/tb_matricula")
     Call<List<MatriculaResponse>> alterarSenha(
@@ -84,7 +90,6 @@ public interface SupabaseService {
             @Body Map<String, String> campos);
 
     // ===== Editar dados do aluno =====
-    // Os PATCH devolvem as linhas alteradas: lista vazia quer dizer que nada mudou.
 
     @Headers("Prefer: return=representation")
     @PATCH("rest/v1/tb_email")
@@ -106,7 +111,6 @@ public interface SupabaseService {
     @POST("rest/v1/tb_telefone")
     Call<ResponseBody> inserirTelefone(@Body Map<String, String> campos);
 
-    // merge-duplicates: se o CEP já existir, atualiza a linha em vez de dar erro
     @Headers("Prefer: resolution=merge-duplicates")
     @POST("rest/v1/tb_cep")
     Call<ResponseBody> salvarCep(@Body Map<String, String> campos);
@@ -120,10 +124,11 @@ public interface SupabaseService {
     @POST("rest/v1/tb_endereco")
     Call<ResponseBody> inserirEndereco(@Body Map<String, String> campos);
 
-    // x-upsert "true" substitui a foto anterior do aluno, se ela já existir
     @POST("storage/v1/object/fotos_perfil/{arquivo}")
     Call<ResponseBody> enviarFotoPerfil(
             @Path("arquivo") String arquivo,
             @Header("x-upsert") String substituir,
             @Body RequestBody foto);
+
+
 }

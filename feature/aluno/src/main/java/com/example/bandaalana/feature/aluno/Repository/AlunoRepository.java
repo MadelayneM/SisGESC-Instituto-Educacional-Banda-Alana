@@ -10,6 +10,7 @@ import com.example.bandaalana.feature.aluno.DTOs.Aviso;
 import com.example.bandaalana.feature.aluno.DTOs.MatriculaResponse;
 import com.example.bandaalana.feature.aluno.Supabase.SupabaseClient;
 import com.example.bandaalana.feature.aluno.Supabase.SupabaseService;
+import com.example.navigation.model.LoginResponse;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -34,26 +35,29 @@ public class AlunoRepository {
 
     private static final String SELECT_PERFIL =
             "fk_cpf,"
-            + "tb_pessoa(primeiro_nome,sobrenome,imagem_perfil,tb_email(pk_email),tb_telefone(pk_ddd,pk_numero,tipo_telefone)),"
-            + "tb_aluno_responsavel(grau_parentesco,tb_responsavel(tb_pessoa(primeiro_nome,sobrenome,"
-            + "tb_telefone(pk_ddd,pk_numero,tipo_telefone))))";
+                    + "tb_pessoa(primeiro_nome, sobrenome, imagem_perfil, "
+                    + "tb_email(email), "
+                    + "tb_telefone(pk_ddd, pk_numero, tipo_telefone)), "
+                    + "tb_aluno_responsavel(grau_parentesco, "
+                    + "tb_responsavel(tb_pessoa(primeiro_nome, sobrenome, "
+                    + "tb_telefone(pk_ddd, pk_numero, tipo_telefone))))";
 
     private static final String SELECT_EDICAO =
-            "fk_cpf,tb_pessoa(tb_email(pk_email),tb_telefone(pk_ddd,pk_numero,tipo_telefone),"
-            + "tb_endereco(pk_cep,numero_endereco,complemento,tb_cep(logradouro,bairro,cidade,uf)))";
+            "fk_cpf,tb_pessoa(tb_email(email),tb_telefone(pk_ddd,pk_numero,tipo_telefone),"
+                    + "tb_endereco(pk_cep,numero_endereco,complemento,tb_cep(logradouro,bairro,cidade,uf)))";
 
     private static final String SELECT_FREQUENCIA =
             "id_matricula,tb_frequencia(data_aula,presenca,observacao_frequencia)";
 
     private static final String SELECT_TURMA =
             "id_matricula,ano,semestre,tb_curso(nome_curso),"
-            + "tb_turma(pk_nome_turma,qtd_alunos,data_da_aula,horario_inicio,horario_fim,"
-            + "tb_turma_funcionario(tb_tipo_monitor(tipo_monitor),tb_funcionario(tb_pessoa(primeiro_nome,sobrenome))),"
-            + "tb_matricula(fk_cpf,ano,semestre,status_matricula,tb_aluno(tb_pessoa(primeiro_nome,sobrenome))))";
+                    + "tb_turma(pk_nome_turma,qtd_alunos,data_da_aula,horario_inicio,horario_fim,"
+                    + "tb_turma_funcionario(tb_tipo_monitor(tipo_monitor),tb_funcionario(tb_pessoa(primeiro_nome,sobrenome))),"
+                    + "tb_matricula(fk_cpf,ano,semestre,status_matricula,tb_aluno(tb_pessoa(primeiro_nome,sobrenome))))";
 
     private static final String SELECT_DASHBOARD =
             SELECT_TURMA + ",tb_aluno(tb_pessoa(primeiro_nome,sobrenome,imagem_perfil)),"
-            + "tb_frequencia(data_aula,presenca,observacao_frequencia)";
+                    + "tb_frequencia(data_aula,presenca,observacao_frequencia)";
 
     private static final String SELECT_AVISOS = "pk_id_aviso,titulo_aviso,descricao_aviso,data_envio";
 
@@ -98,15 +102,22 @@ public class AlunoRepository {
     }
 
     // Botão "Alterar senha"
+    // Botão "Alterar senha" - Atualizado para a tabela centralizada tb_login
     public void alterarSenha(String cpf, String senhaAtual, String novaSenha, RepositoryCallback<Void> callback) {
         if (novaSenha == null || novaSenha.trim().isEmpty()) {
             callback.onErro("A nova senha não pode ficar em branco.");
             return;
         }
-        Map<String, String> campos = Collections.singletonMap("senha_login", novaSenha);
-        // O select pede só o id para a senha não voltar na resposta
-        Call<List<MatriculaResponse>> chamada =
-                service.alterarSenha("eq." + cpf, "eq." + senhaAtual, "id_matricula", campos);
+
+        // Mapeia os campos que serão alterados na tb_login
+        Map<String, Object> campos = new HashMap<>();
+        campos.put("senha_hash", novaSenha);
+        campos.put("trocar_senha", false); // Reseta a flag de troca obrigatória se houver
+
+        // O select pede só o fk_cpf para a senha não voltar na resposta
+        Call<List<LoginResponse>> chamada =
+                service.alterarSenhaLogin("eq." + cpf, "eq." + senhaAtual, "fk_cpf", campos);
+
         executar(chamada, callback, alteradas -> {
             if (alteradas.isEmpty()) {
                 callback.onErro("Senha atual incorreta ou alteração não permitida.");

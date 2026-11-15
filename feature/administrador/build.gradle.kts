@@ -21,10 +21,13 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:navigation"))
     implementation(libs.activity.ktx)
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
     implementation(libs.material)
+
+    //implementation("org.mindrot:jbcrypt:0.4")
 
     // Bibliotecas de Rede e Imagens (Retrofit, Gson e Glide)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")

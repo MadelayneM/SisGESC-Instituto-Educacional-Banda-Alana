@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:letterSpacing="0.04"
-                android:text="CPF OU USUÁRIO"
+                android:text="CPF"
                 android:textColor="#777777"
                 android:textSize="12sp" />
 
@@ -134,19 +134,7 @@
                 android:textSize="15sp"
                 app:backgroundTint="@null" />
 
-            <!-- RECUPERAÇÃO DE SENHA -->
-            <TextView
-                android:id="@+id/txtEsqueciSenha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Esqueci minha senha"
-                android:textColor="#B78B00"
-                android:textSize="13sp" />
+
 
             <!-- EMPURRA O "VOLTAR" PARA BAIXO -->
             <View
@@ -176,6 +164,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/btnVoltarPerfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Voltar à seleção de perfil"

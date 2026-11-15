@@ -9,6 +9,7 @@ import com.example.bandaalana.professor.DTOs.ProfessorTurma;
 import com.example.bandaalana.professor.DTOs.TurmaFrequencia;
 import com.example.bandaalana.professor.Supabase.SupabaseClient;
 import com.example.bandaalana.professor.Supabase.SupabaseService;
+import com.example.navigation.model.LoginResponse;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class ProfessorRepository {
 
     private static final String SELECT_TURMA =
             "pk_nome_turma,qtd_alunos,data_da_aula,horario_inicio,horario_fim,tb_curso(nome_curso),"
-            + "tb_matricula(id_matricula,status_matricula)";
+                    + "tb_matricula(id_matricula,status_matricula)";
 
     private static final String SELECT_TURMAS =
             "fk_cpf_func,tb_turma_funcionario(tb_tipo_monitor(tipo_monitor),tb_turma(" + SELECT_TURMA + "))";
@@ -42,21 +43,24 @@ public class ProfessorRepository {
 
     private static final String SELECT_ALUNOS =
             "fk_cpf_func,tb_turma_funcionario(tb_turma(pk_nome_turma,tb_curso(nome_curso),"
-            + "tb_matricula(id_matricula,fk_cpf,status_matricula,tb_aluno(tb_pessoa(primeiro_nome,sobrenome,imagem_perfil)))))";
+                    + "tb_matricula(id_matricula,fk_cpf,status_matricula,tb_aluno(tb_pessoa(primeiro_nome,sobrenome,imagem_perfil)))))";
 
     private static final String SELECT_FREQUENCIA =
             "fk_cpf_func,tb_turma_funcionario(tb_turma(pk_nome_turma,tb_curso(nome_curso),"
-            + "tb_matricula(id_matricula,tb_frequencia(data_aula,presenca))))";
+                    + "tb_matricula(id_matricula,tb_frequencia(data_aula,presenca))))";
 
+    // O que estava antes (gerando erro 400):
+// private static final String SELECT_PERFIL = "fk_cpf_func,tb_pessoa(primeiro_nome,sobrenome,imagem_perfil,tb_email(pk_email),tb_telefone(pk_ddd,pk_numero,tipo_telefone)),tb_funcionario_cargo(data_saida,tb_cargo(cargo)),tb_turma_funcionario(tb_tipo_monitor(tipo_monitor))";
+
+    // O correto (ajustado para a coluna 'email' na tabela tb_email):
     private static final String SELECT_PERFIL =
             "fk_cpf_func,"
-            + "tb_pessoa(primeiro_nome,sobrenome,imagem_perfil,tb_email(pk_email),tb_telefone(pk_ddd,pk_numero,tipo_telefone)),"
-            + "tb_funcionario_cargo(data_saida,tb_cargo(cargo)),"
-            + "tb_turma_funcionario(tb_tipo_monitor(tipo_monitor))";
-
+                    + "tb_pessoa(primeiro_nome,sobrenome,imagem_perfil,tb_email(email),tb_telefone(pk_ddd,pk_numero,tipo_telefone)),"
+                    + "tb_funcionario_cargo(data_saida,tb_cargo(cargo)),"
+                    + "tb_turma_funcionario(tb_tipo_monitor(tipo_monitor))";
     private static final String SELECT_CHAMADA =
             "id_matricula,tb_aluno(tb_pessoa(primeiro_nome,sobrenome,imagem_perfil)),"
-            + "tb_frequencia(id_frequencia,data_aula,presenca,observacao_frequencia)";
+                    + "tb_frequencia(id_frequencia,data_aula,presenca,observacao_frequencia)";
 
     // Campos gravados na chamada: com e sem id_frequencia (linha que já existe ou linha nova)
     private static final String COLUNAS_FREQUENCIA_NOVA = "id_matricula,data_aula,presenca,observacao_frequencia";
@@ -155,16 +159,21 @@ public class ProfessorRepository {
                         () -> callback.onSucesso(null)));
     }
 
-    // Botão "Alterar senha": o próprio PATCH confere a senha atual
+    // Botão "Alterar senha": atualizado para a tabela centralizada tb_login
     public void alterarSenha(String cpf, String senhaAtual, String novaSenha, RepositoryCallback<Void> callback) {
         if (estaVazio(novaSenha)) {
             callback.onErro("A nova senha não pode ficar em branco.");
             return;
         }
-        Map<String, String> campos = Collections.singletonMap("senha_funcionario", novaSenha);
-        // O select pede só o CPF para a senha não voltar na resposta
-        Call<List<FuncionarioResponse>> chamada =
-                service.alterarSenhaFuncionario("eq." + cpf, "eq." + senhaAtual, "fk_cpf_func", campos);
+
+        Map<String, Object> campos = new HashMap<>();
+        campos.put("senha_hash", novaSenha);
+        campos.put("trocar_senha", false);
+
+        // O select pede só o fk_cpf para a senha não voltar na resposta
+        Call<List<LoginResponse>> chamada =
+                service.alterarSenhaLogin("eq." + cpf, "eq." + senhaAtual, "fk_cpf", campos);
+
         executar(chamada, callback, alteradas -> {
             if (alteradas.isEmpty()) {
                 callback.onErro("Senha atual incorreta ou alteração não permitida.");
@@ -202,7 +211,7 @@ public class ProfessorRepository {
             callback.onErro("O e-mail não pode ficar em branco.");
             return;
         }
-        Map<String, String> campos = Collections.singletonMap("pk_email", novoEmail);
+        Map<String, String> campos = Collections.singletonMap("email", novoEmail);
         Map<String, String> novaLinha = new HashMap<>(campos);
         novaLinha.put("fk_cpf", cpf);
         executar(service.atualizarEmail("eq." + cpf, campos), callback, alteradas -> {

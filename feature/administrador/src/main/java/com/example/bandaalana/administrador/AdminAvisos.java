@@ -184,7 +184,8 @@ public class AdminAvisos extends AppCompatActivity {
                         @Override
                         public void onSucesso(Void resultado) {
                             Toast.makeText(AdminAvisos.this, "Aviso excluído com sucesso!", Toast.LENGTH_SHORT).show();
-                            carregarAvisos();
+                            //carregarAvisos();
+                            adapter.removerAviso(aviso);
                         }
 
                         @Override

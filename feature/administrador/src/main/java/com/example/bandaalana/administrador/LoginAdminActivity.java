@@ -52,6 +52,7 @@ public class LoginAdminActivity extends AppCompatActivity {
         authRepository = new AuthRepository();
 
         btnEntrar.setOnClickListener(v -> tentarEntrar());
+        findViewById(R.id.btnVoltarPerfil).setOnClickListener(v -> finish());
 
         findViewById(R.id.txtEsqueciSenhaAdmin).setOnClickListener(v -> {
             Intent intent = new Intent(LoginAdminActivity.this, RecuperarSenhaActivity.class);

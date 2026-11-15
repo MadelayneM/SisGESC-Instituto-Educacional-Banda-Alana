@@ -27,6 +27,8 @@ public class RecuperarSenhaActivity extends AppCompatActivity {
     private LinearLayout cardSucesso;
     private TextView txtMensagemSucesso;
 
+    private AuthRepository authRepository;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +51,17 @@ public class RecuperarSenhaActivity extends AppCompatActivity {
         txtMensagemSucesso = findViewById(R.id.txtMensagemSucesso);
 
 
-        //authRepository = new AuthRepository(); //
+        authRepository = new AuthRepository();
         findViewById(R.id.btnVoltarLogin).setOnClickListener(v -> finish());
 
 
-
-        //btnEnviarRecuperacao.setOnClickListener(v -> verificarCpfEAbrirRedefinicao());
+        findViewById(R.id.btnVoltarLogin).setOnClickListener(v -> finish());
+        btnEnviarRecuperacao.setOnClickListener(v -> verificarCpfEAbrirRedefinicao());
 
 
     }
 
-
-    /*private void verificarCpfEAbrirRedefinicao() {
+    private void verificarCpfEAbrirRedefinicao() {
         String cpf = edtCpf.getText().toString().replaceAll("\\D", "");
 
         if (cpf.length() != 11) {
@@ -71,7 +72,7 @@ public class RecuperarSenhaActivity extends AppCompatActivity {
         cardSucesso.setVisibility(View.GONE);
         btnEnviarRecuperacao.setEnabled(false);
 
-        authRepository.verificarCpfRecuperacao(cpf, new RepositoryCallback<Boolean>() {
+        authRepository.verificarCpfParaRecuperacao(cpf, new RepositoryCallback<Boolean>() {
             @Override
             public void onSucesso(Boolean existe) {
                 btnEnviarRecuperacao.setEnabled(true);
@@ -85,9 +86,9 @@ public class RecuperarSenhaActivity extends AppCompatActivity {
                 Toast.makeText(RecuperarSenhaActivity.this, mensagem, Toast.LENGTH_LONG).show();
             }
         });
-    }*/
+    }
 
-    /*private void abrirDialogNovaSenha(String cpf) {
+    private void abrirDialogNovaSenha(String cpf) {
         View view = getLayoutInflater().inflate(R.layout.dialog_redefinir_senha, null);
 
         EditText edtNovaSenha = view.findViewById(R.id.edtNovaSenhaDialog);
@@ -103,8 +104,8 @@ public class RecuperarSenhaActivity extends AppCompatActivity {
         btnCancelar.setOnClickListener(v -> dialog.dismiss());
 
         btnSalvar.setOnClickListener(v -> {
-            String novaSenha = edtNovaSenha.getText().toString();
-            String confirmar = edtConfirmarSenha.getText().toString();
+            String novaSenha = edtNovaSenha.getText().toString().trim();
+            String confirmar = edtConfirmarSenha.getText().toString().trim();
 
             if (novaSenha.length() < 4) {
                 edtNovaSenha.setError("A senha deve ter pelo menos 4 caracteres");
@@ -116,14 +117,14 @@ public class RecuperarSenhaActivity extends AppCompatActivity {
             }
 
             btnSalvar.setEnabled(false);
-            authRepository.redefinirSenhaPorCpf(cpf, novaSenha, new RepositoryCallback<String>() {
+            authRepository.redefinirSenha(cpf, novaSenha, new RepositoryCallback<Void>() {
                 @Override
-                public void onSucesso(String mensagem) {
+                public void onSucesso(Void resultado) {
                     dialog.dismiss();
                     cardSucesso.setVisibility(View.VISIBLE);
                     txtMensagemSucesso.setText("Senha alterada com sucesso! Você já pode voltar e entrar com a nova senha.");
                     edtCpf.setText("");
-                    Toast.makeText(RecuperarSenhaActivity.this, mensagem, Toast.LENGTH_LONG).show();
+                    Toast.makeText(RecuperarSenhaActivity.this, "Senha alterada com sucesso!", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
@@ -135,5 +136,9 @@ public class RecuperarSenhaActivity extends AppCompatActivity {
         });
 
         dialog.show();
-    }*/
+    }
+
+
+
+
 }

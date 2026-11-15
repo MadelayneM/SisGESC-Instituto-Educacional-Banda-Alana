@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:text="E-MAIL OU USUÁRIO"
+                android:text="CPF do aluno"
                 android:textColor="#777777"
                 android:textSize="12sp"
                 android:letterSpacing="0.04" />
@@ -86,7 +86,7 @@
                 android:background="@drawable/bg_card_acesso"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
-                android:hint="seu@email.com"
+                android:hint="Digite seu CPF"
                 android:textColor="#333333"
                 android:textColorHint="#999999"
                 android:textSize="14sp"
@@ -136,18 +136,7 @@
                 android:textSize="15sp"
                 app:backgroundTint="@null" />
 
-            <TextView
-                android:id="@+id/txtEsqueciSenha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:padding="8dp"
-                android:text="Esqueci minha senha"
-                android:textColor="#B78B00"
-                android:textSize="13sp"
-                android:gravity="center"
-                android:clickable="true"
-                android:focusable="true" />
+
 
             <!-- EMPURRA O "VOLTAR" PARA BAIXO -->
             <View

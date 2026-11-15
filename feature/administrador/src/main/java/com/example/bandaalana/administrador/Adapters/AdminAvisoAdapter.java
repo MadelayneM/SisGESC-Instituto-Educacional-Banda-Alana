@@ -82,4 +82,15 @@ public class AdminAvisoAdapter extends RecyclerView.Adapter<AdminAvisoAdapter.Av
             btnExcluir = itemView.findViewById(R.id.btnExcluirAvisoItem);
         }
     }
+
+
+    public void removerAviso(Aviso aviso) {
+        int posicao = lista.indexOf(aviso);
+        if (posicao != -1) {
+            lista.remove(posicao);
+            notifyItemRemoved(posicao);
+            notifyItemRangeChanged(posicao, lista.size());
+        }
+    }
+
 }

@@ -6,6 +6,7 @@ import com.example.bandaalana.administrador.DTOs.FuncionarioLoginResponse;
 import com.example.bandaalana.administrador.DTOs.MatriculaResponse;
 import com.example.bandaalana.administrador.DTOs.NovoAviso;
 import com.example.bandaalana.administrador.DTOs.Pessoa;
+import com.example.navigation.model.LoginResponse; // 1. NOVO IMPORT
 
 import java.util.List;
 import java.util.Map;
@@ -28,22 +29,22 @@ public interface SupabaseService {
     @GET("rest/v1/tb_pessoa")
     Call<List<Pessoa>> buscarPessoaPorCpf(@Query("pk_cpf") String filtroCpf);
 
-    // ===== Login =====
-    // O CPF e a senha vão como filtro: a resposta só traz linhas se os dois baterem,
-    // e a senha nunca volta do servidor.
-
-    @GET("rest/v1/tb_matricula")
-    Call<List<MatriculaResponse>> entrarComoAluno(
-            @Query("fk_cpf") String filtroCpf,
-            @Query("senha_login") String filtroSenha,
-            @Query("status_matricula") String filtroStatus,
-            @Query("select") String select,
+    // ===== 2. NOVO LOGIN CENTRALIZADO (tb_login) =====
+    // Mantém sua segurança: CPF, senha e ativo=eq.true vão como filtro na URL.
+    @GET("rest/v1/tb_login")
+    Call<List<LoginResponse>> realizarLogin(
+            @Query("fk_cpf") String filtroCpf,         // Ex: "eq.12345678901"
+            @Query("senha_hash") String filtroSenha,   // Ex: "eq.123456"
+            @Query("ativo") String filtroAtivo,        // Ex: "eq.true"
+            @Query("select") String select,            // Ex: "fk_cpf,trocar_senha,ativo"
             @Query("limit") int limite);
 
+    // ===== 3. VALIDAR PERFIL DE FUNCIONÁRIO / ADMIN =====
+    // Depois que realizarLogin() retornar sucesso, chama este método sem senha
+    // apenas para confirmar que esse CPF é funcionário e buscar o cargo dele.
     @GET("rest/v1/tb_funcionario")
-    Call<List<FuncionarioLoginResponse>> entrarComoFuncionario(
+    Call<List<FuncionarioLoginResponse>> buscarFuncionarioPorCpf(
             @Query("fk_cpf_func") String filtroCpf,
-            @Query("senha_funcionario") String filtroSenha,
             @Query("select") String select,
             @Query("limit") int limite);
 
@@ -68,15 +69,16 @@ public interface SupabaseService {
             @Query("limit") int limite,
             @Query("select") String select);
 
-    // O filtro de senha faz o próprio PATCH validar a senha atual:
-    // se ela estiver errada, nenhuma linha muda e a resposta vem como lista vazia.
+    // ===== 4. ALTERAR SENHA NA tb_login =====
+    // Filtra por fk_cpf e senha_hash atual.
+    // Usa Map<String, Object> para permitir mandar "senha_hash" (String) e "trocar_senha" (Boolean).
     @Headers("Prefer: return=representation")
-    @PATCH("rest/v1/tb_matricula")
-    Call<List<MatriculaResponse>> alterarSenha(
+    @PATCH("rest/v1/tb_login")
+    Call<List<LoginResponse>> alterarSenha(
             @Query("fk_cpf") String filtroCpf,
-            @Query("senha_login") String filtroSenhaAtual,
+            @Query("senha_hash") String filtroSenhaAtual,
             @Query("select") String select,
-            @Body Map<String, String> campos);
+            @Body Map<String, Object> campos);
 
     @Headers("Prefer: return=representation")
     @PATCH("rest/v1/tb_pessoa")
@@ -92,8 +94,6 @@ public interface SupabaseService {
             @Header("x-upsert") String substituir,
             @Body RequestBody foto);
 
-
-
     // 1. Listar todos os avisos do mais recente para o mais antigo
     @GET("rest/v1/tb_aviso?select=pk_id_aviso,titulo_aviso,descricao_aviso,data_envio&order=data_envio.desc")
     Call<List<Aviso>> listarAvisos();
@@ -107,11 +107,35 @@ public interface SupabaseService {
     @DELETE("rest/v1/tb_aviso")
     Call<Void> excluirAviso(@Query("pk_id_aviso") String filtroId);
 
-
     // 4. Editar um aviso existente pelo ID
     @Headers("Prefer: return=minimal")
     @PATCH("rest/v1/tb_aviso")
     Call<Void> editarAviso(
             @Query("pk_id_aviso") String filtroId,
             @Body java.util.Map<String, String> campos);
+
+    @Headers("Prefer: return=representation")
+    @PATCH("rest/v1/tb_login")
+    Call<List<LoginResponse>> alterarSenhaLogin(
+            @Query("fk_cpf") String filtroCpf,
+            @Query("senha_hash") String filtroSenhaAtual,
+            @Query("select") String select,
+            @Body Map<String, Object> campos);
+
+
+
+    // 1. Verifica se o CPF existe e está ativo na tb_login
+    @GET("rest/v1/tb_login")
+    Call<List<LoginResponse>> verificarCpfLogin(
+            @Query("fk_cpf") String cpfFiltro,
+            @Query("ativo") String ativoFiltro,
+            @Query("select") String select
+    );
+
+    // 2. Atualiza a senha_hash na tb_login
+    @PATCH("rest/v1/tb_login")
+    Call<Void> atualizarSenha(
+            @Query("fk_cpf") String cpfFiltro,       // Ex: "eq.12345678910"
+            @Body Map<String, Object> body           // Ex: {"senha_hash": "novaSenha", "trocar_senha": false}
+    );
 }

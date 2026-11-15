@@ -242,7 +242,7 @@ O documento completo do projeto (visão, casos de uso, requisitos, diagramas UML
 |--------|-------------|
 | **Líder** | Madelayne Mendoza Huanca |
 | **Analistas** | Izabel Linhares dos Santos, Vinicius Pereira de Oliveira |
-| **Desenvolvedores** | Lucas Fonseca Shiraoka, Izabel Linhares dos Santos, Hanan Ibrahim El Khatib Sleiman |
+| **Desenvolvedores** | Lucas Fonseca Shiraoka, Izabel Linhares dos Santos, Hanan Ibrahim El Khatib Sleiman, Beatriz Morais |
 | **Testadores** | Rebeca Vieira de Souza, Kauan Marques Turra |
 | **Projetistas de BD** | Laura Cristine Silva, Izabel Linhares dos Santos, Geovanna Silva Laurentino, Madelayne Mendoza Huanca |
 | **Documentadoras** | Geovanna Silva Laurentino, Júlia Fidelis de Santana |

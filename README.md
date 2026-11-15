@@ -1,12 +1,11 @@
 # SisGESC – ERP de Gestão Educacional
 
-Sistema de gestão escolar para a **Escola Banda Alana**, que oferece educação musical gratuita para crianças e adolescentes. O SisGESC centraliza alunos, responsáveis, funcionários, cursos, turmas, matrículas e frequência em um único aplicativo Android, com banco de dados PostgreSQL.
+Sistema de gestão escolar para a **Escola Banda Alana**, que oferece educação musical gratuita para crianças e adolescentes. O SisGESC centraliza alunos, responsáveis, funcionários, cursos, turmas, matrículas e frequência em um único aplicativo Android. Os dados ficam em um banco **PostgreSQL na nuvem, hospedado no Supabase**, então o app funciona em qualquer aparelho com internet, sem precisar instalar servidor ou banco local.
 
 [![Java](https://img.shields.io/badge/Java-17%2B-orange?logo=openjdk&logoColor=white)](https://www.java.com)
 [![Android](https://img.shields.io/badge/Android-Java%20%2B%20XML-3DDC84?logo=android&logoColor=white)](https://developer.android.com)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-API%20REST-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-banco%20de%20dados-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
-[![JWT](https://img.shields.io/badge/Auth-JWT-000000?logo=jsonwebtokens&logoColor=white)](https://jwt.io)
+[![Supabase](https://img.shields.io/badge/Supabase-nuvem-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-na%20nuvem-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
 
 <p align="center">
   <img src="docs/img/login.png" width="22%" alt="Seleção de perfil">
@@ -108,7 +107,7 @@ O sistema tem três perfis de acesso:
 
 ## Arquitetura
 
-O SisGESC é dividido em três camadas:
+O SisGESC é dividido em três camadas. O app Android conversa diretamente com o **Supabase**, que expõe o banco PostgreSQL na nuvem por uma API REST.
 
 ```mermaid
 flowchart TB
@@ -119,32 +118,35 @@ flowchart TB
         A3["Módulo Aluno"]
         A --- A1 & A2 & A3
     end
-    subgraph NEGOCIO["2. Lógica de negócio"]
-        B["API REST<br/>Controllers → Services → Repositories<br/>Segurança JWT por perfil"]
+    subgraph NEGOCIO["2. Lógica de negócio (no app)"]
+        B["Telas → Repository → Mapper → DTOs<br/>Retrofit"]
     end
-    subgraph DADOS["3. Dados"]
+    subgraph NUVEM["3. Dados na nuvem (Supabase)"]
+        S["API REST (PostgREST)"]
         C[("PostgreSQL<br/>21 tabelas")]
+        F["Storage<br/>fotos de perfil"]
+        S --- C
+        S --- F
     end
-    A -- "HTTP / JSON (Retrofit)" --> B
-    B --> C
+    A --> B
+    B -- "HTTPS / JSON" --> S
 ```
 
 - **Apresentação:** app Android em Java e XML, com três módulos (Administrador, Professor e Aluno).
-- **Lógica de negócio:** API REST com Spring Boot. Os *Controllers* recebem as requisições, os *Services* concentram as regras de negócio e os *Repositories* acessam os dados. A autenticação usa **JWT**.
-- **Dados:** banco PostgreSQL com 21 tabelas.
+- **Lógica de negócio:** dentro do app, cada módulo tem *Repository* (regras e acesso aos dados), *Mapper* (converte as respostas do banco) e *DTOs* (dados que as telas mostram). As chamadas HTTP são feitas com **Retrofit**.
+- **Dados:** **Supabase**, que fornece o banco **PostgreSQL na nuvem** (tabelas `tb_*`), a API REST para acessá-lo e o *Storage* para as fotos de perfil.
 
 ## Tecnologias
 
 - **App:** Java, XML Layouts, Android Studio, Retrofit
-- **API:** Java, Spring Boot, JWT (OAuth 2.0)
-- **Banco de dados:** PostgreSQL
+- **Banco de dados:** PostgreSQL na nuvem, hospedado no **Supabase** (API REST e Storage de fotos)
 - **Integrações:** API de CEP para preencher endereços
 - **Modelagem:** UML, DER (modelo conceitual, lógico e físico), dbdiagram.io
 - **Distribuição:** instalação direta do APK (sem publicação na Play Store)
 
 ## Banco de dados
 
-O banco tem **21 tabelas** organizadas em módulos:
+O banco é **PostgreSQL**, hospedado na nuvem pelo **Supabase**. Ele tem **21 tabelas** organizadas em módulos:
 
 | Módulo | Tabelas |
 |--------|---------|
@@ -180,6 +182,8 @@ Modelo lógico completo: [dbdiagram.io](https://dbdiagram.io/d/BandaAlana_DER_OF
 ## Como rodar
 
 Existem duas formas de executar o app: instalando o APK ou abrindo o projeto no Android Studio.
+
+> **Não é preciso instalar banco de dados nem servidor.** O PostgreSQL está na nuvem (Supabase), então basta o aparelho ou o emulador ter **conexão com a internet**.
 
 ### Opção 1: instalar o APK
 
@@ -223,7 +227,8 @@ Por ser uma instituição de aulas **100% gratuitas**, o app **não terá**:
 
 - Tratamento seguro de dados sensíveis de menores, responsáveis e autorizações de imagem (Lei nº 13.709/2018)
 - Senhas armazenadas como **hash** (`senha_hash`)
-- Controle de acesso por perfil (RBAC) com autenticação JWT
+- Controle de acesso por perfil (RBAC) e autenticação de usuários
+- Banco PostgreSQL hospedado na nuvem (Supabase)
 - Integridade referencial com chaves estrangeiras
 - Backups periódicos do banco de dados
 
@@ -244,6 +249,3 @@ O documento completo do projeto (visão, casos de uso, requisitos, diagramas UML
 
 Projeto desenvolvido no curso de **Análise e Desenvolvimento de Sistemas** da **Universidade Cidade de São Paulo (UNICID)**, sob orientação do professor **Jadir Custodio Mendonça Junior**.
 
-## Licença
-
-Distribuído sob a licença MIT. Veja o arquivo [`LICENSE`](LICENSE) para mais informações.

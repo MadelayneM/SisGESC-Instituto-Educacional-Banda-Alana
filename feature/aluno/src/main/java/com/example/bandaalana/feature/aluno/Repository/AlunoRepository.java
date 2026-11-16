@@ -161,15 +161,22 @@ public class AlunoRepository {
     }
 
     // Altera o e-mail, ou cadastra se o aluno ainda não tiver um
+    // Altera o e-mail de forma segura
     public void atualizarEmail(String cpf, String novoEmail, RepositoryCallback<Void> callback) {
         if (estaVazio(novoEmail)) {
             callback.onErro("O e-mail não pode ficar em branco.");
             return;
         }
-        Map<String, String> campos = Collections.singletonMap("pk_email", novoEmail);
+
+        Map<String, String> campos = Collections.singletonMap("email", novoEmail);
         Map<String, String> novaLinha = new HashMap<>(campos);
         novaLinha.put("fk_cpf", cpf);
-        atualizarOuInserir(service.atualizarEmail("eq." + cpf, campos), service.inserirEmail(novaLinha), callback);
+
+        atualizarOuInserir(
+                service.atualizarEmail("eq." + cpf, campos),
+                service.inserirEmail(novaLinha),
+                callback
+        );
     }
 
     // dddAtual e numeroAtual vêm de buscarDadosEdicao. Se forem null, cadastra um telefone novo.
@@ -203,6 +210,7 @@ public class AlunoRepository {
     }
 
     // Salva o CEP e depois liga esse CEP ao aluno. complemento pode ser null.
+    // Salva o CEP e atualiza/insere o endereço do aluno sem conflito
     public void atualizarEndereco(String cpf, String cep, String logradouro, String bairro, String cidade,
                                   String uf, String numero, String complemento,
                                   RepositoryCallback<Void> callback) {
@@ -211,23 +219,28 @@ public class AlunoRepository {
             callback.onErro("Preencha todos os campos do endereço.");
             return;
         }
+
+        // 1. Salva ou valida o CEP na tabela tb_cep
         Map<String, String> dadosCep = new HashMap<>();
-        dadosCep.put("pk_cep", cep);
+        dadosCep.put("pk_cep", cep.replaceAll("\\D", ""));
         dadosCep.put("logradouro", logradouro);
         dadosCep.put("bairro", bairro);
         dadosCep.put("cidade", cidade);
         dadosCep.put("uf", uf);
 
-        Map<String, String> campos = new HashMap<>();
-        campos.put("pk_cep", cep);
-        campos.put("numero_endereco", numero);
-        // Texto vazio, porque um valor null não seria enviado e o complemento antigo ficaria salvo
-        campos.put("complemento", complemento == null ? "" : complemento);
-        Map<String, String> novaLinha = new HashMap<>(campos);
-        novaLinha.put("pk_cpf", cpf);
+        // 2. Preenche os dados do endereço do aluno
+        Map<String, String> dadosEndereco = new HashMap<>();
+        dadosEndereco.put("pk_cpf", cpf);
+        dadosEndereco.put("pk_cep", cep.replaceAll("\\D", ""));
+        dadosEndereco.put("numero_endereco", numero);
+        dadosEndereco.put("complemento", complemento == null ? "" : complemento);
 
-        executar(service.salvarCep(dadosCep), callback, salvo -> atualizarOuInserir(
-                service.atualizarEndereco("eq." + cpf, campos), service.inserirEndereco(novaLinha), callback));
+        // Executa salvando o CEP e logo após fazendo o upsert/atualização do endereço do aluno
+        executar(service.salvarCep(dadosCep), callback, cepSalvo -> {
+            executar(service.atualizarEndereco("eq." + cpf, dadosEndereco), callback, enderecoAtualizado -> {
+                callback.onSucesso(null);
+            });
+        });
     }
 
     // Tenta alterar a linha do aluno. Se ela ainda não existir, cria.
@@ -260,20 +273,33 @@ public class AlunoRepository {
     }
 
     // Faz a chamada em segundo plano e trata os erros iguais para todos os métodos
-    private <T> void executar(Call<T> chamada, RepositoryCallback<?> callback, AoReceber<T> aoReceber) {
+    // Substitua o seu método executar atual por este:
+    private <T> void executar(Call<T> chamada, RepositoryCallback<?> callback,
+                              AoReceber<T> aoReceber) {
         chamada.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful()) {
                     aoReceber.tratar(response.body());
                 } else {
-                    callback.onErro("O servidor recusou a operação (HTTP " + response.code() + ").");
+                    String mensagem = "HTTP " + response.code();
+
+                    try {
+                        if (response.errorBody() != null) {
+                            mensagem += "\n" + response.errorBody().string();
+                        }
+                    } catch (Exception e) {
+                        mensagem += "\nErro ao ler resposta.";
+                    }
+
+                    android.util.Log.e("ERRO_EDITAR_ALUNO", mensagem);
+                    callback.onErro(mensagem);
                 }
             }
 
             @Override
             public void onFailure(Call<T> call, Throwable t) {
-                callback.onErro("Falha na comunicação com o servidor: " + t.getMessage());
+                callback.onErro(t.getMessage());
             }
         });
     }

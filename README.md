@@ -8,10 +8,7 @@ Sistema de gestão escolar para a **Escola Banda Alana**, que oferece educação
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-na%20nuvem-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
 
 <p align="center">
-  <img src="docs/img/login.png" width="22%" alt="Seleção de perfil">
-  <img src="docs/img/admin-dashboard.png" width="22%" alt="Painel do administrador">
-  <img src="docs/img/professor-chamada.png" width="22%" alt="Chamada do professor">
-  <img src="docs/img/aluno-frequencia.png" width="22%" alt="Frequência do aluno">
+<img width="2048" height="768" alt="image" src="https://github.com/user-attachments/assets/7089f05d-ee3e-46f7-bd0f-210ed3d1b63b" />
 </p>
 
 ---
@@ -93,12 +90,12 @@ O sistema tem três perfis de acesso:
 **Aluno / Responsável**
 
 <p>
-<img width="720" height="1600" alt="AlteraSenha" src="https://github.com/user-attachments/assets/dea0f9c1-3c9c-4a49-8127-4c9350c769d5" />
-<img width="720" height="1600" alt="MinhaTurma" src="https://github.com/user-attachments/assets/d9a85558-62b7-46da-b152-2fb8e7d7912f" />
-<img width="720" height="1600" alt="MinhaFrequecia" src="https://github.com/user-attachments/assets/6e770772-91b9-44fa-a25b-ea28e5ea1cda" />
-<img width="720" height="1600" alt="meuPerfil" src="https://github.com/user-attachments/assets/deca95aa-5252-4bc6-a759-32ede9eabcd5" />
-<img width="720" height="1600" alt="editarDados" src="https://github.com/user-attachments/assets/8a636d20-ec73-4209-953d-82878eb5aa79" />
-<img width="720" height="1600" alt="DashboardAluno" src="https://github.com/user-attachments/assets/21d54b2d-0a21-4e0c-86ce-312c132f9925" />
+<img width="18%" alt="AlteraSenha" src="https://github.com/user-attachments/assets/dea0f9c1-3c9c-4a49-8127-4c9350c769d5" />
+<img width="18%" alt="MinhaTurma" src="https://github.com/user-attachments/assets/d9a85558-62b7-46da-b152-2fb8e7d7912f" />
+<img width="18%" alt="MinhaFrequecia" src="https://github.com/user-attachments/assets/6e770772-91b9-44fa-a25b-ea28e5ea1cda" />
+<img width="18%" alt="meuPerfil" src="https://github.com/user-attachments/assets/deca95aa-5252-4bc6-a759-32ede9eabcd5" />
+<img width="18%" alt="editarDados" src="https://github.com/user-attachments/assets/8a636d20-ec73-4209-953d-82878eb5aa79" />
+<img width="18%" alt="DashboardAluno" src="https://github.com/user-attachments/assets/21d54b2d-0a21-4e0c-86ce-312c132f9925" />
 
 </p>
 
@@ -218,6 +215,7 @@ Existem duas formas de executar o app: instalando o APK ou abrindo o projeto no 
 1. Baixe o arquivo `.apk` do projeto no celular Android.
 2. Abra o arquivo. O Android vai pedir permissão para **instalar apps de fontes desconhecidas**, então autorize.
 3. Conclua a instalação e abra o app **SisGESC**.
+4. APK: https://acadcruzeirodosul-my.sharepoint.com/:v:/g/personal/madelayne_huanca_cs_unicid_edu_br/IQAuAPrSBLfETIHqeJm-pYkGAcEENB2eKEvoMflwozgf8Lw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=5VasPn
 
 ### Opção 2: abrir pelo Android Studio
 
@@ -262,7 +260,8 @@ Por ser uma instituição de aulas **100% gratuitas**, o app **não terá**:
 
 ## Documentação
 
-O documento completo do projeto (visão, casos de uso, requisitos, diagramas UML e DER, modelo físico, arquitetura, glossário e protótipos de interface) está em [`docs/`](docs).
+O documento completo do projeto (visão, casos de uso, requisitos, diagramas UML e DER, modelo físico, arquitetura, glossário e protótipos de interface). [Documento Banda Alana Corrigido.docx (1).pdf](https://github.com/user-attachments/files/34894176/Documento.Banda.Alana.Corrigido.docx.1.pdf)
+
 
 ## Equipe
 

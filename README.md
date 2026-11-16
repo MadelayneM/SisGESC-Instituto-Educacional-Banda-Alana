@@ -40,38 +40,66 @@ O sistema tem três perfis de acesso:
 **Acesso (todos os perfis)**
 
 <p>
-  <img width="720" height="1600" alt="Splashcrenn-Logo" src="https://github.com/user-attachments/assets/fbd482a9-d2a9-4731-9065-6fad1f8701fb" />
-  <img width="720" height="1600" alt="selecaoPerfil-telaIninical" src="https://github.com/user-attachments/assets/cc1990a8-1448-4e74-b2a3-173d9581be9e" />
-  <img width="720" height="1600" alt="loginAluno" src="https://github.com/user-attachments/assets/cceba369-ade2-4ff3-bf4f-ee8cd0387826" />
-  <img width="720" height="1600" alt="loginProfessor" src="https://github.com/user-attachments/assets/c54c264f-950b-4d3e-a1a0-f475961a5091" />
-  <img width="720" height="1600" alt="loginGESTOR" src="https://github.com/user-attachments/assets/608b565a-a11b-47f8-adf3-365907775365" />
-  <img width="720" height="1600" alt="redefinirSenha-adm" src="https://github.com/user-attachments/assets/025c0d3b-0e35-4611-b7c3-cbf65b59339e" />
-  <img width="720" height="1600" alt="solicitarRedefinicaSenha-Adm" src="https://github.com/user-attachments/assets/84680a2e-8167-4b0e-830c-ae8df0054c56" />
+  <img width="18%" alt="Splashcrenn-Logo" src="https://github.com/user-attachments/assets/fbd482a9-d2a9-4731-9065-6fad1f8701fb" />
+  <img width="18%" alt="selecaoPerfil-telaIninical" src="https://github.com/user-attachments/assets/cc1990a8-1448-4e74-b2a3-173d9581be9e" />
+  <img width="18%" alt="loginAluno" src="https://github.com/user-attachments/assets/cceba369-ade2-4ff3-bf4f-ee8cd0387826" />
+  <img width="18%" alt="loginProfessor" src="https://github.com/user-attachments/assets/c54c264f-950b-4d3e-a1a0-f475961a5091" />
+  <img width="18%" alt="loginGESTOR" src="https://github.com/user-attachments/assets/608b565a-a11b-47f8-adf3-365907775365" />
+  <img width="18%" alt="solicitarRedefinicaSenha-Adm" src="https://github.com/user-attachments/assets/84680a2e-8167-4b0e-830c-ae8df0054c56" />
+  <img width="18%" alt="redefinirSenha-adm" src="https://github.com/user-attachments/assets/025c0d3b-0e35-4611-b7c3-cbf65b59339e" />
 </p>
 
 **Administrador / Gestor**
 
 <p>
-  
+  <img width="18%" alt="Dashboard" src="https://github.com/user-attachments/assets/d90e859a-a42a-4ce3-bde4-f08472063ac4" />
+<img width="18%" alt="editarAluno" src="https://github.com/user-attachments/assets/b9c17854-06d9-4a24-9ac2-ef3135b38016" />
+<img width="18%" alt="EdicaoAvisos" src="https://github.com/user-attachments/assets/96aad6af-e659-454f-9a2a-c4795ecd827e" />
+<img width="18%" alt="ConsultarFrequencia" src="https://github.com/user-attachments/assets/4457cb43-b078-4000-b593-88016792efdd" />
+<img width="18%" alt="CadastrarAluno3" src="https://github.com/user-attachments/assets/e97944c0-c02c-4892-a081-d5df50074fd4" />
+<img width="18%" alt="CadastrarAluno" src="https://github.com/user-attachments/assets/521af67a-c111-4305-9df7-d464fe73a6eb" />
+<img width="18%" alt="CadastraAluno2" src="https://github.com/user-attachments/assets/6bd666a5-7726-41eb-810e-9fe99a741abf" />
+<img width="18%" alt="alterarSenhajpeg" src="https://github.com/user-attachments/assets/bf9646be-3504-4c07-a868-f722206c93a5" />
+<img width="18%" alt="telaTurmas" src="https://github.com/user-attachments/assets/4b946f41-6dec-4496-a0bc-b1546617946c" />
+<img width="18%" alt="telaEquipe" src="https://github.com/user-attachments/assets/2bf29932-56fe-40d7-8344-5b70e298ed7a" />
+<img width="18%" alt="telaAlunos" src="https://github.com/user-attachments/assets/3aa59816-5525-415e-81fb-6040d76c7cfd" />
+<img width="18%" alt="perfil-gestor" src="https://github.com/user-attachments/assets/8280f46e-a831-436a-a4cc-7c1bb34f6d72" />
+<img width="18%" alt="novoMembro" src="https://github.com/user-attachments/assets/52679ced-fa31-409a-8181-faf62fc0ebdb" />
+<img width="18%" alt="novaTurma" src="https://github.com/user-attachments/assets/91d6029b-646a-4af4-b75b-3f3f86981f67" />
+<img width="18%" alt="ListaAvisos" src="https://github.com/user-attachments/assets/27b2a30d-b8c2-441d-b71c-fd68059c3c39" />
+<img width="18%" alt="GerenciarAvisos" src="https://github.com/user-attachments/assets/50b85d6a-b1ae-4d1d-aff5-b3716f031dda" />
+<img width="18%" alt="editarTurmas" src="https://github.com/user-attachments/assets/4e644c48-903c-4531-a244-074572998429" />
+<img width="18%" alt="editarMembro" src="https://github.com/user-attachments/assets/432290e7-0fd4-4c65-97a3-de80882ea7ff" />
+<img width="18%" alt="editarDados" src="https://github.com/user-attachments/assets/2e38fd11-210b-4d74-b052-907a1552cb1f" />
+
 </p>
 
 **Professor / Monitor**
 
 <p>
-  <img src="docs/img/prof-inicio.png" width="18%" alt="Início">
-  <img src="docs/img/prof-chamada.png" width="18%" alt="Chamada">
-  <img src="docs/img/prof-alunos.png" width="18%" alt="Alunos">
-  <img src="docs/img/prof-turmas.png" width="18%" alt="Minhas turmas">
-  <img src="docs/img/prof-perfil.png" width="18%" alt="Perfil">
+  <img width="18%" alt="enviarAVISO-daturma" src="https://github.com/user-attachments/assets/492763be-4985-462c-a92d-82497b2a1842" />
+  <img width="18%" alt="EnviarAviso" src="https://github.com/user-attachments/assets/b4d993d5-9416-4ea9-93f7-b73cb91d65dc" />
+  <img width="18%" alt="editarDados" src="https://github.com/user-attachments/assets/55078477-2b23-41e0-9d1c-65a01d252768" />
+  <img width="18%" alt="alteraSENHA" src="https://github.com/user-attachments/assets/dbff7627-59b6-466e-a07a-741cc7bc716c" />
+  <img width="18%" alt="telaAlunos-navegacaodoInicio" src="https://github.com/user-attachments/assets/8248e6b5-9304-4b95-926a-03310090a56b" />
+  <img width="18%" alt="tela-alunos" src="https://github.com/user-attachments/assets/57362563-c130-4d25-8114-21019846643a" />
+  <img width="18%" alt="perfil-professor" src="https://github.com/user-attachments/assets/f721ec75-0785-44bc-ab02-dbdea6708034" />
+  <img width="18%" alt="MinhasTurmas" src="https://github.com/user-attachments/assets/81255f37-99c5-4ec9-8478-bc5b95c01856" />
+  <img width="18%" alt="Inicio-Professor" src="https://github.com/user-attachments/assets/d7df9cff-beef-4cd0-a9d3-5be46008e0ce" />
+  <img width="18%" alt="historicodeFrequecia" src="https://github.com/user-attachments/assets/361a65fd-671b-471d-8dca-23502da321d1" />
+  <img width="18%" alt="fazerChamada" src="https://github.com/user-attachments/assets/ca7f29d6-79b3-490d-8038-449f827fbf6e" />
 </p>
 
 **Aluno / Responsável**
 
 <p>
-  <img src="docs/img/aluno-dashboard.png" width="18%" alt="Dashboard">
-  <img src="docs/img/aluno-frequencia.png" width="18%" alt="Minha frequência">
-  <img src="docs/img/aluno-turma.png" width="18%" alt="Minha turma">
-  <img src="docs/img/aluno-perfil.png" width="18%" alt="Perfil">
+<img width="720" height="1600" alt="AlteraSenha" src="https://github.com/user-attachments/assets/dea0f9c1-3c9c-4a49-8127-4c9350c769d5" />
+<img width="720" height="1600" alt="MinhaTurma" src="https://github.com/user-attachments/assets/d9a85558-62b7-46da-b152-2fb8e7d7912f" />
+<img width="720" height="1600" alt="MinhaFrequecia" src="https://github.com/user-attachments/assets/6e770772-91b9-44fa-a25b-ea28e5ea1cda" />
+<img width="720" height="1600" alt="meuPerfil" src="https://github.com/user-attachments/assets/deca95aa-5252-4bc6-a759-32ede9eabcd5" />
+<img width="720" height="1600" alt="editarDados" src="https://github.com/user-attachments/assets/8a636d20-ec73-4209-953d-82878eb5aa79" />
+<img width="720" height="1600" alt="DashboardAluno" src="https://github.com/user-attachments/assets/21d54b2d-0a21-4e0c-86ce-312c132f9925" />
+
 </p>
 
 ## Funcionalidades

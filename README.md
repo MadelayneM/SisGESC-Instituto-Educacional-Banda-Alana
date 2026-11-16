@@ -40,19 +40,19 @@ O sistema tem três perfis de acesso:
 **Acesso (todos os perfis)**
 
 <p>
-  <img src="docs/img/login-perfil.png" width="18%" alt="Seleção do perfil de acesso">
-  <img src="docs/img/login-email.png" width="18%" alt="Login">
-  <img src="docs/img/recuperar-senha.png" width="18%" alt="Recuperar senha">
+  <img width="720" height="1600" alt="Splashcrenn-Logo" src="https://github.com/user-attachments/assets/fbd482a9-d2a9-4731-9065-6fad1f8701fb" />
+  <img width="720" height="1600" alt="selecaoPerfil-telaIninical" src="https://github.com/user-attachments/assets/cc1990a8-1448-4e74-b2a3-173d9581be9e" />
+  <img width="720" height="1600" alt="loginAluno" src="https://github.com/user-attachments/assets/cceba369-ade2-4ff3-bf4f-ee8cd0387826" />
+  <img width="720" height="1600" alt="loginProfessor" src="https://github.com/user-attachments/assets/c54c264f-950b-4d3e-a1a0-f475961a5091" />
+  <img width="720" height="1600" alt="loginGESTOR" src="https://github.com/user-attachments/assets/608b565a-a11b-47f8-adf3-365907775365" />
+  <img width="720" height="1600" alt="redefinirSenha-adm" src="https://github.com/user-attachments/assets/025c0d3b-0e35-4611-b7c3-cbf65b59339e" />
+  <img width="720" height="1600" alt="solicitarRedefinicaSenha-Adm" src="https://github.com/user-attachments/assets/84680a2e-8167-4b0e-830c-ae8df0054c56" />
 </p>
 
 **Administrador / Gestor**
 
 <p>
-  <img src="docs/img/admin-dashboard.png" width="18%" alt="Dashboard">
-  <img src="docs/img/admin-alunos.png" width="18%" alt="Lista de alunos">
-  <img src="docs/img/admin-cadastrar-aluno.png" width="18%" alt="Cadastrar aluno">
-  <img src="docs/img/admin-turmas.png" width="18%" alt="Turmas">
-  <img src="docs/img/admin-equipe.png" width="18%" alt="Equipe">
+  
 </p>
 
 **Professor / Monitor**

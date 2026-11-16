@@ -165,9 +165,11 @@ flowchart TB
 
 - **App:** Java, XML Layouts, Android Studio, Retrofit
 - **Banco de dados:** PostgreSQL na nuvem, hospedado no **Supabase** (API REST e Storage de fotos)
-- **Integrações:** API
 - **Modelagem:** UML, DER (modelo conceitual, lógico e físico), dbdiagram.io
 - **Distribuição:** instalação direta do APK (sem publicação na Play Store)
+
+## Possíveis melhorias
+- **Integrações:** API de CEP (no projeto atual são utilizados CEPs fictícios)
 
 ## Banco de dados
 

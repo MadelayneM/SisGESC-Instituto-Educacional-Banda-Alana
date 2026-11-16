@@ -171,6 +171,16 @@ flowchart TB
 ## Possíveis melhorias
 - **Integrações:** API de CEP (no projeto atual são utilizados CEPs fictícios)
 
+## Logins para teste (tipos de usuário)
+
+Há 3 tipos de usuário na aplicação, caso queira ver os perfis de cada um acesse:
+
+| Usuário | CPF | Senha |
+|--------|---------|---------|
+| **Aluno/Responsável** | 11111111111 | 123456 |
+| **Professor/Monitor** | 33333333333 | 1234567 |
+| **Administrador** | 44444444444 | 123789 |
+
 ## Banco de dados
 
 O banco é **PostgreSQL**, hospedado na nuvem pelo **Supabase**. Ele tem **21 tabelas** organizadas em módulos:
